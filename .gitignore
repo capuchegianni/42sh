@@ -1,0 +1,13 @@
+*~
+*#
+*.log
+*.gcda
+*.gcno
+*.gcov
+*.o
+*.a
+*.pdf
+.vscode
+test*
+obj*
+42sh
