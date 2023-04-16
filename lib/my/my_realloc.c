@@ -20,7 +20,7 @@ void *my_realloc(void *pointer, size_t new_size)
     new_pointer = malloc(new_size);
     if (new_pointer == NULL)
         return (NULL);
-    new_pointer = my_memcpy(new_pointer, pointer, new_size);
+    new_pointer = my_memcpy(new_pointer, pointer, new_size - 1);
     free(pointer);
     return (new_pointer);
 }

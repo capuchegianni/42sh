@@ -8,6 +8,12 @@
 NAME = 42sh
 
 SRC = 	src/main.c							\
+		src/sh42.c							\
+		src/prompt.c 						\
+		src/special_chars/newline.c 		\
+		src/special_chars/delete.c 			\
+		src/special_chars/keys.c 			\
+		src/special_chars/scan_input.c 		\
 
 OBJ_DIR = ./obj/
 
@@ -17,7 +23,7 @@ WARNING_FLAGS := -Wall -Wextra -W -g -g3 -ggdb
 
 NCURSES_FLAGS := -lncurses
 
-LIB_FLAGS := -I include/ -L ./lib -lmy
+LIB_FLAGS := -I include/ -L ./lib -lmy -lncurses
 
 all: $(OBJ_DIR) $(NAME)
 
