@@ -28,8 +28,10 @@ void open_terminal(shell_t *my_shell)
 
     if (start_window(my_shell) == 84)
         return;
+    my_shell->col = my_shell->prompt_len;
     while ((c = wgetch(my_shell->win)) != 4) {
-        my_shell->buffer = my_realloc(my_shell->buffer, my_shell->col - 72 + 2);
+        my_shell->buffer = my_realloc(my_shell->buffer, \
+        my_shell->col - my_shell->prompt_len + 2);
         if (my_shell->buffer == NULL) {
             my_shell->return_val = 84;
             return;
@@ -37,8 +39,8 @@ void open_terminal(shell_t *my_shell)
         if (scan_input(c, my_shell) == 1)
             continue;
         waddch(my_shell->win, c);
-        my_shell->buffer[my_shell->col - 72] = c;
-        my_shell->buffer[my_shell->col - 71] = '\0';
+        my_shell->buffer[my_shell->col - my_shell->prompt_len] = c;
+        my_shell->buffer[my_shell->col - my_shell->prompt_len - 1] = '\0';
         my_shell->col++;
         wrefresh(my_shell->win);
     }

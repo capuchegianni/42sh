@@ -16,6 +16,7 @@
         int col;
         int cursor_y;
         int cursor_x;
+        int prompt_len;
         int return_val;
     } shell_t;
 

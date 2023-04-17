@@ -16,7 +16,7 @@ int my_newline(int c, shell_t *my_shell)
         my_shell->buffer = malloc(sizeof(char) * 1);
         my_shell->buffer[0] = '\0';
         my_shell->row++;
-        my_shell->col = 72;
+        my_shell->col = my_shell->prompt_len;
         return 1;
     }
     return 0;

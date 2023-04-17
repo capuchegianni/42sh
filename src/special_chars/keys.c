@@ -9,8 +9,8 @@
 
 int my_left(int c, shell_t *my_shell)
 {
-    if (c == KEY_LEFT && my_shell->col >= 72) {
-        if (my_shell->col == 72)
+    if (c == KEY_LEFT && my_shell->col >= my_shell->prompt_len) {
+        if (my_shell->col == my_shell->prompt_len)
             return 1;
         my_shell->col--;
         wmove(my_shell->win, my_shell->row, my_shell->col);

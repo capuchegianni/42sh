@@ -13,7 +13,6 @@ shell_t *init_shell(shell_t *my_shell)
     my_shell->env = NULL;
     my_shell->buffer = NULL;
     my_shell->row = 0;
-    my_shell->col = 72;
     my_shell->return_val = 0;
     return (my_shell);
 }

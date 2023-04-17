@@ -20,10 +20,12 @@ void print_usr(shell_t *my_shell)
     wattroff(my_shell->win, COLOR_PAIR(3));
     wattron(my_shell->win, COLOR_PAIR(4));
     wprintw(my_shell->win, ") | ");
+    my_shell->prompt_len += my_strlen(usr) + 5;
 }
 
 void is_error(int val_ret, char *str, shell_t *my_shell)
 {
+    my_shell->prompt_len = my_strlen(str) + 3;
     if (isatty(0) == 1) {
         wattron(my_shell->win, A_BOLD);
         print_usr(my_shell);
