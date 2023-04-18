@@ -33,6 +33,8 @@ void my_putnbrerr(long long nb)
 
 void disp_stdarge(const char *s, va_list *ap, int i)
 {
+    if (s[i + 1] == 'c')
+        my_putcharerr(va_arg(*ap, int));
     if (s[i + 1] == 's')
         my_puterror(va_arg(*ap, char *));
     if (s[i + 1] == 'i' || s[i + 1] == 'd')

@@ -12,7 +12,7 @@ char *my_strdup(char *src)
     int i = 0;
     char *my_dest = malloc(sizeof(char) * (my_strlen(src) + 1));
 
-    if (my_dest == NULL)
+    if (!my_dest)
         return NULL;
     for (; src[i]; i++)
         my_dest[i] = src[i];

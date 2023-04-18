@@ -37,7 +37,9 @@ char *my_casesensitive(char *str, char *my_case)
 {
     char *str2 = malloc(sizeof(char) * (my_strlen(str) + 1));
 
-    if (str == NULL)
+    if (!str)
+        return (NULL);
+    if (!str2)
         return (NULL);
     str2 = my_strcpy(str2, str);
     if (my_cmp(my_case, "up") != 0 && my_cmp(my_case, "low") != 0)

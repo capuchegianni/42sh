@@ -15,8 +15,6 @@ void disp_stdarg(const char *s, va_list *ap, int i)
         my_putnbr(va_arg(*ap, int));
     if (s[i + 1] == 'c')
         my_putchar(va_arg(*ap, int));
-    if (s[i + 1] == 'f')
-        my_putfloat(va_arg(*ap, double));
     if (s[i + 1] == '%')
         my_putchar('%');
 }

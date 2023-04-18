@@ -22,7 +22,7 @@ char *convert(int x, int cop, int nb)
     int power = 0;
     char *result = malloc(sizeof(char) * 100);
 
-    if (result == NULL)
+    if (!result)
         return (NULL);
     if (cop == 0) {
         result[x] = '0';
@@ -47,7 +47,7 @@ char *my_tostr(int nb)
     char *neg = malloc(sizeof(char) * 2);
     char *result = NULL;
 
-    if (neg == NULL)
+    if (!neg)
         return (NULL);
     neg[x] = '\0';
     if (cop < 0) {

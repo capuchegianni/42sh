@@ -144,14 +144,6 @@
     void my_printerr(const char *format, ...);
 
     /*
-    *  @function my_putfloat
-    *
-    *  @brief Print a float
-    *  @param nb number to print
-    */
-    void my_putfloat(double nb);
-
-    /*
     *  @function my_putnbr
     *
     *  @brief Print an int
@@ -184,16 +176,7 @@
     *  @param filepath path to the file
     *  @return char *buffer
     */
-    char *my_readfile_stat(char *filepath);
-
-    /*
-    *  @function my_readfile_gl
-    *
-    *  @brief Put the content of a file in a buffer with getline
-    *  @param filepath path to the file
-    *  @return char *buffer
-    */
-    char *my_readfile_gl(char *filepath);
+    char *my_readfile(char *filepath);
 
     /*
     *  @function my_revstr

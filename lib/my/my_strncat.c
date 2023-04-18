@@ -13,13 +13,12 @@ char *my_strncat(char *dest, char *src, int n)
     int j = my_strlen(dest);
     char *tmp = malloc(sizeof(char) * (j + n) + 1);
 
-    if (tmp == NULL)
+    if (!tmp)
         return (NULL);
     for (int j = 0 ; dest[j] ; j++)
         tmp[j] = dest[j];
-    for (; i < n ; i++) {
+    for (; i < n ; i++)
         tmp[i + j] = src[i];
-    }
     tmp[i + j] = '\0';
     return tmp;
 }

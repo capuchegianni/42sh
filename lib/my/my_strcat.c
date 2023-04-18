@@ -14,7 +14,7 @@ char *my_strcat(char *dest, char *src)
     int j = my_strlen(dest) + my_strlen(src);
     char *tmp = malloc(sizeof(char) * (j + 1));
 
-    if (tmp == NULL)
+    if (!tmp)
         return (NULL);
     for (; dest[k]; k++)
         tmp[k] = dest[k];
