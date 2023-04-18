@@ -14,11 +14,10 @@ char *my_strncpy(char *dest, char *src, int n)
     if (n > my_strlen(src))
         n = my_strlen(src);
     dest = malloc(sizeof(char) * n + 1);
-    if (dest == NULL)
+    if (!dest)
         return (NULL);
-    for (; i < n ; i++) {
+    for (; i < n ; i++)
         dest[i] = src[i];
-    }
     dest[i] = '\0';
     return dest;
 }

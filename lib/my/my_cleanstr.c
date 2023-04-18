@@ -20,7 +20,7 @@ char *my_cleanstr(char *str)
         str2[k] = str[i];
     str2[k] = '\0';
     str3 = malloc(sizeof(char) * my_strlen(str2) + 1);
-    if (str3 == NULL)
+    if (!str3)
         return (NULL);
     j = my_strlen(str2);
     for (; !str[j] || str[j] == ' ' || str[j] == '\t' || str[j] == '\n'; j--);

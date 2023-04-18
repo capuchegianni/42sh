@@ -13,7 +13,9 @@ char *my_strstr(char *str, char *to_find)
     int j = 0;
     char *dest = malloc(sizeof(char) * my_strlen(to_find) + 1);
 
-    if (dest == NULL)
+    if (!dest)
+        return (NULL);
+    if (!to_find)
         return (NULL);
     for (; str[i] ; i++) {
         while (to_find[j] == str[i]) {

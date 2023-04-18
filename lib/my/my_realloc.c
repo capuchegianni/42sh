@@ -11,14 +11,14 @@ void *my_realloc(void *pointer, size_t new_size)
 {
     void *new_pointer;
 
-    if (pointer == NULL)
+    if (!pointer)
         return (malloc(new_size));
     if (new_size == 0) {
         free(pointer);
         return (NULL);
     }
     new_pointer = malloc(new_size);
-    if (new_pointer == NULL)
+    if (!new_pointer)
         return (NULL);
     new_pointer = my_memcpy(new_pointer, pointer, new_size - 1);
     free(pointer);

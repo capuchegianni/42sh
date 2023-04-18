@@ -20,7 +20,6 @@ SRC = 	my_casesensitive.c 				\
 		my_printerr.c 					\
 		my_printf.c 					\
 		my_putchar.c 					\
-		my_putfloat.c 					\
 		my_putnbr.c 					\
 		my_putstr.c 					\
 		my_readfile.c 					\

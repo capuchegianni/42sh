@@ -13,7 +13,7 @@ char *my_revstr(char *str)
     char *str2 = malloc(sizeof(char) * total + 1);
     int i = 0;
 
-    if (str2 == NULL)
+    if (!str2)
         return (NULL);
     for (; total > 0 ; total--) {
         str2[i] = str[total - 1];
