@@ -19,7 +19,7 @@ WARNING_FLAGS := -Wall -Wextra -W -g -g3 -ggdb
 
 NCURSES_FLAGS := -lncurses
 
-LIB_FLAGS := -I include/ -L ./lib -lmy -lncurses
+LIB_FLAGS := -I include/ -L ./lib/my -l:libmy.a
 
 all: $(OBJ_DIR) build_lib $(NAME)
 

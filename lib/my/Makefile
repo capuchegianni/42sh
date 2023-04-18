@@ -52,7 +52,7 @@ WARNING_FLAGS := -Wall -Wextra -W -g -g3 -ggdb
 all: $(NAME)
 
 $(NAME): $(OBJ)
-	ar rc ../$(NAME) $(OBJ)
+	ar rc $(NAME) $(OBJ)
 	@echo -n "[ "
 	@echo -n "\e[1;34mOK\e[0m"
 	@echo -n " ] "
@@ -65,7 +65,7 @@ clean:
 	rm -f $(OBJ)
 
 fclean: clean
-	rm -f ../$(NAME)
+	rm -f $(NAME)
 
 re: fclean all
 
