@@ -5,16 +5,16 @@
 ** prompt
 */
 
-#include "../include/project.h"
+#include "project.h"
 
-void print_usr(shell_t *my_shell)
+void print_usr(shell_t *my_shell, char *str)
 {
     char *usr = getenv("USER");
 
     if (usr == NULL)
         usr = "";
-    printf("%s(%s", BLUE, CLOSE);
-    printf("%s%s%s", YELLOW, usr, CLOSE);
+    printf("%s(%s%s%s%s", BLUE, CLOSE, YELLOW, usr, CLOSE);
+    printf("%s) | %s%s ", BLUE, str, CLOSE);
     my_shell->prompt_len += my_strlen(usr) + 5;
 }
 
@@ -22,8 +22,7 @@ void is_error(int val_ret, char *str, shell_t *my_shell)
 {
     my_shell->prompt_len = my_strlen(str) + 3;
     if (isatty(0) == 1) {
-        print_usr(my_shell);
-        printf("%s) | %s%s ", BLUE, str, CLOSE);
+        print_usr(my_shell, str);
         if (val_ret == 0) {
             printf("%s$%s ", GREEN, CLOSE);
         } else {
