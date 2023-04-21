@@ -13,6 +13,7 @@ int my_delete(int c, shell_t *my_shell)
         if (my_shell->col == my_shell->prompt_len)
             return 1;
         my_shell->col--;
+        my_shell->buffer[my_shell->col - my_shell->prompt_len] = '\0';
         move(my_shell->row, my_shell->col);
         delch();
         return 1;

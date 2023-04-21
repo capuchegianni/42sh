@@ -21,7 +21,10 @@ int my_left(int c, shell_t *my_shell)
 
 int my_right(int c, shell_t *my_shell)
 {
-    if (c == KEY_RIGHT) {
+    if (!my_shell->buffer)
+        return 1;
+    if (c == KEY_RIGHT &&
+    my_shell->col < my_shell->prompt_len + my_strlen(my_shell->buffer)) {
         my_shell->col++;
         move(my_shell->row, my_shell->col);
         return 1;
