@@ -70,13 +70,11 @@ int my_shell(shell_t *my_shell, char **env)
 {
     my_shell->env = init_env(env);
 
-    if (my_shell->env == NULL) {
-        my_free_wordarray(my_shell->env);
+    if (my_shell->env == NULL)
         return (84);
-    }
     init_colors();
     open_terminal(my_shell);
-    my_free_wordarray(my_shell->env);
+    free_struct_shell(my_shell);
     endwin();
     return (my_shell->return_val);
 }
