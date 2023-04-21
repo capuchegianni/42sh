@@ -59,7 +59,7 @@ $(NAME): $(OBJ)
 	@echo "\e[1;32mSuccessfully compiled libmy\e[0m"
 
 $(OBJ_DIR)%.o: %.c
-	gcc -c $< -o $@
+	gcc -c $< -o $@ $(WARNING_FLAGS)
 
 clean:
 	rm -f $(OBJ)
