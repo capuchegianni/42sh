@@ -10,6 +10,10 @@ NAME = 42sh
 SRC = 	src/main.c							\
 		src/sh42.c							\
 		src/prompt.c 						\
+		src/special_chars/newline.c 		\
+		src/special_chars/delete.c 			\
+		src/special_chars/keys.c 			\
+		src/special_chars/scan_input.c 		\
 
 OBJ_DIR = ./obj/
 
@@ -21,12 +25,13 @@ NCURSES_FLAGS := -lncurses
 
 LIB_FLAGS := -I include/ -L ./lib/my -l:libmy.a
 
-all: $(OBJ_DIR) build_lib $(NAME)
+all: $(OBJ_DIR) $(NAME)
 
 build_lib:
 	make -C lib/my/
 
 $(NAME): $(OBJ)
+	make build_lib
 	gcc $(SRC) $(WARNING_FLAGS) -o $(NAME) $(LIB_FLAGS) $(NCURSES_FLAGS)
 	@echo -n "[ "
 	@echo -n "\e[1;34mOK\e[0m"

@@ -8,16 +8,13 @@
 #ifndef STRUCT_H_
     #define STRUCT_H_
 
-    typedef struct commands_s {
-        int i;
-        char *last_command;
-        char **coms;
-    } commands_t;
-
     typedef struct shell_s {
         char **env;
         char *buffer;
-        commands_t *coms;
+        int row;
+        int col;
+        int cursor_y;
+        int cursor_x;
         int prompt_len;
         int return_val;
     } shell_t;
