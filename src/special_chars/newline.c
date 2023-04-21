@@ -10,7 +10,7 @@
 int my_newline(int c, shell_t *my_shell)
 {
     if (c == '\n') {
-        wprintw(my_shell->win, "\n");
+        printw("\n");
         display_prompt(my_shell);
         free(my_shell->buffer);
         my_shell->buffer = malloc(sizeof(char) * 1);

@@ -13,7 +13,7 @@ int my_left(int c, shell_t *my_shell)
         if (my_shell->col == my_shell->prompt_len)
             return 1;
         my_shell->col--;
-        wmove(my_shell->win, my_shell->row, my_shell->col);
+        move(my_shell->row, my_shell->col);
         return 1;
     }
     return 0;
@@ -23,7 +23,7 @@ int my_right(int c, shell_t *my_shell)
 {
     if (c == KEY_RIGHT) {
         my_shell->col++;
-        wmove(my_shell->win, my_shell->row, my_shell->col);
+        move(my_shell->row, my_shell->col);
         return 1;
     }
     return 0;
