@@ -60,8 +60,8 @@ jobs:
           do \
           LIBU=$(echo $Line | cut -d' ' -f9); \
           FUNC=$(echo $Line | cut -d' ' -f10); \
-          LIBC=${LIBU:1:5} \
-          LIBN=${LIBU:1:7} \
+          LIBC=${LIBU:1:5}; \
+          LIBN=${LIBU:1:7}; \
           if [ "$LIBC" != "GLIBC" ]; then
             if [ "$LIBN" != "NCURSES" ]; then
               echo "::error:: $FUNC is a banned function";
