@@ -11,10 +11,14 @@ int my_newline(int c, shell_t *my_shell)
 {
     if (c == '\n') {
         printw("\n");
+        if (my_shell->buffer == NULL) {
+            display_prompt(my_shell);
+            return 1;
+        }
+        printw("%s\n", my_shell->buffer);
         display_prompt(my_shell);
         free(my_shell->buffer);
-        my_shell->buffer = malloc(sizeof(char) * 1);
-        my_shell->buffer[0] = '\0';
+        my_shell->buffer = NULL;
         my_shell->row++;
         my_shell->col = my_shell->prompt_len;
         return 1;

@@ -17,9 +17,14 @@ int scan_input(int c, shell_t *my_shell)
         return 1;
     if (my_delete(c, my_shell) == 1)
         return 1;
-    if (my_left(c, my_shell) == 1)
+    if (c >= 258 && c <= 261) {
+        if (my_left(c, my_shell) == 1)
+            return 1;
+        if (my_right(c, my_shell) == 1)
+            return 1;
         return 1;
-    if (my_right(c, my_shell) == 1)
+    }
+    if (c == 409 || c == 410)
         return 1;
     return 0;
 }
