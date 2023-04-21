@@ -10,6 +10,7 @@
 
     #include "../lib/my/my.h"
     #include "struct.h"
+    #include <time.h>
 
     // Initiation the terminal
     int my_shell(shell_t *shell_struct, char **env);
@@ -24,5 +25,10 @@
     int my_delete(int c, shell_t *my_shell);
     int my_left(int c, shell_t *my_shell);
     int my_right(int c, shell_t *my_shell);
+    
+    // History handling
+    void add_command_history(shell_t *shell);
+    void print_history(shell_t *shell);
+    void init_history(shell_t *shell);
 
 #endif /* !PROJECT_H_ */
