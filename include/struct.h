@@ -9,7 +9,6 @@
     #define STRUCT_H_
 
     typedef struct shell_s {
-        WINDOW *win;
         char **env;
         char *buffer;
         int row;

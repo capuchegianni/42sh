@@ -11,9 +11,8 @@ int start_window(shell_t *my_shell)
 {
     mousemask(ALL_MOUSE_EVENTS, NULL);
     noecho();
-    my_shell->win = newwin(1920, 1080, 0, 0);
-    keypad(my_shell->win, TRUE);
-    scrollok(my_shell->win, TRUE);
+    keypad(stdscr, TRUE);
+    scrollok(stdscr, TRUE);
     display_prompt(my_shell);
     my_shell->buffer = malloc(sizeof(char) * 2);
     if (my_shell->buffer == NULL)
@@ -29,7 +28,7 @@ void open_terminal(shell_t *my_shell)
     if (start_window(my_shell) == 84)
         return;
     my_shell->col = my_shell->prompt_len;
-    while ((c = wgetch(my_shell->win)) != 4) {
+    while ((c = getch()) != 4) {
         my_shell->buffer = my_realloc(my_shell->buffer, \
         my_shell->col - my_shell->prompt_len + 2);
         if (my_shell->buffer == NULL) {
@@ -38,11 +37,11 @@ void open_terminal(shell_t *my_shell)
         }
         if (scan_input(c, my_shell) == 1)
             continue;
-        waddch(my_shell->win, c);
+        addch(c);
         my_shell->buffer[my_shell->col - my_shell->prompt_len] = c;
         my_shell->buffer[my_shell->col - my_shell->prompt_len - 1] = '\0';
         my_shell->col++;
-        wrefresh(my_shell->win);
+        refresh();
     }
 }
 
@@ -82,7 +81,6 @@ int my_shell(shell_t *my_shell, char **env)
     init_colors();
     open_terminal(my_shell);
     my_free_wordarray(my_shell->env);
-    delwin(my_shell->win);
     endwin();
     return (my_shell->return_val);
 }

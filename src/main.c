@@ -23,9 +23,9 @@ int main(int ac, char **av, char **env)
     int return_val = 0;
 
     shell_struct = init_shell(shell_struct);
-    if (shell_struct == NULL)
+    if (!shell_struct)
         return (84);
-    if (ac != 1 && av[1] == NULL) {
+    if (ac != 1 && !av[1]) {
         my_printerr("Usage: ./42sh");
         return (84);
     }
@@ -33,7 +33,7 @@ int main(int ac, char **av, char **env)
         my_printerr("No environment found.\n");
         return (84);
     }
-    if (initscr() == NULL)
+    if (!initscr())
         return (84);
     return_val = my_shell(shell_struct, env);
     free(shell_struct);
