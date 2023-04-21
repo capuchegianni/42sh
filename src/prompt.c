@@ -5,16 +5,21 @@
 ** prompt
 */
 
-#include "project.h"
+#include "../include/project.h"
 
-void print_usr(shell_t *my_shell, char *str)
+void print_usr(shell_t *my_shell)
 {
     char *usr = getenv("USER");
 
     if (usr == NULL)
         usr = "";
-    printf("%s(%s%s%s%s", BLUE, CLOSE, YELLOW, usr, CLOSE);
-    printf("%s) | %s%s ", BLUE, str, CLOSE);
+    wattron(my_shell->win, COLOR_PAIR(4));
+    wprintw(my_shell->win, "(");
+    wattron(my_shell->win, COLOR_PAIR(3));
+    wprintw(my_shell->win, "%s", usr);
+    wattroff(my_shell->win, COLOR_PAIR(3));
+    wattron(my_shell->win, COLOR_PAIR(4));
+    wprintw(my_shell->win, ") | ");
     my_shell->prompt_len += my_strlen(usr) + 5;
 }
 
@@ -22,13 +27,21 @@ void is_error(int val_ret, char *str, shell_t *my_shell)
 {
     my_shell->prompt_len = my_strlen(str) + 3;
     if (isatty(0) == 1) {
-        print_usr(my_shell, str);
+        wattron(my_shell->win, A_BOLD);
+        print_usr(my_shell);
+        wprintw(my_shell->win, "%s ", str);
+        wattroff(my_shell->win, COLOR_PAIR(4));
         if (val_ret == 0) {
-            printf("%s$%s ", GREEN, CLOSE);
+            wattron(my_shell->win, COLOR_PAIR(1));
+            wprintw(my_shell->win, "$ ");
+            wattroff(my_shell->win, COLOR_PAIR(1));
         } else {
-            printf("%s$%s ", RED, CLOSE);
+            wattron(my_shell->win, COLOR_PAIR(2));
+            wprintw(my_shell->win, "$ ");
+            wattroff(my_shell->win, COLOR_PAIR(2));
         }
     }
+    wattroff(my_shell->win, A_BOLD);
 }
 
 void display_prompt(shell_t *my_shell)
@@ -49,8 +62,8 @@ void display_prompt(shell_t *my_shell)
         str = my_strcat("~/", pwd + i);
         is_error(my_shell->return_val, str, my_shell);
         free(str);
-    } else {
+    } else
         is_error(my_shell->return_val, pwd, my_shell);
-    }
+    wrefresh(my_shell->win);
     free(pwd);
 }
