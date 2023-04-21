@@ -9,40 +9,36 @@
 
 int start_window(shell_t *my_shell)
 {
-    mousemask(ALL_MOUSE_EVENTS, NULL);
     noecho();
     keypad(stdscr, TRUE);
+    mousemask(ALL_MOUSE_EVENTS, NULL);
     scrollok(stdscr, TRUE);
     display_prompt(my_shell);
-    my_shell->buffer = malloc(sizeof(char) * 2);
-    if (my_shell->buffer == NULL)
-        return my_shell->return_val = 84;
-    my_shell->buffer[0] = '\0';
+    my_shell->buffer = NULL;
     return 0;
 }
 
-void open_terminal(shell_t *my_shell)
+int open_terminal(shell_t *my_shell)
 {
     int c;
 
-    if (start_window(my_shell) == 84)
-        return;
+    start_window(my_shell);
     my_shell->col = my_shell->prompt_len;
     while ((c = getch()) != 4) {
-        my_shell->buffer = my_realloc(my_shell->buffer, \
-        my_shell->col - my_shell->prompt_len + 2);
-        if (my_shell->buffer == NULL) {
-            my_shell->return_val = 84;
-            return;
-        }
         if (scan_input(c, my_shell) == 1)
             continue;
-        addch(c);
+        my_shell->buffer = my_realloc(my_shell->buffer, \
+        my_shell->col - my_shell->prompt_len + 2);
+        if (my_shell->buffer == NULL)
+            return my_shell->return_val = 84;
         my_shell->buffer[my_shell->col - my_shell->prompt_len] = c;
-        my_shell->buffer[my_shell->col - my_shell->prompt_len - 1] = '\0';
+        my_shell->buffer[my_shell->col - my_shell->prompt_len + 1] = '\0';
         my_shell->col++;
+        addch(c);
         refresh();
     }
+    free(my_shell->buffer);
+    return my_shell->return_val;
 }
 
 char **init_env(char **env)
