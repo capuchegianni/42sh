@@ -19,7 +19,7 @@
 
     // Special chars handling
     int scan_input(int c, shell_t *my_shell);
-    int navigate(int c, shell_t *my_shell);
+    int navigate(shell_t *my_shell);
     int my_newline(int c, shell_t *my_shell);
     int my_delete(int c, shell_t *my_shell);
     int my_left(int c, shell_t *my_shell);
