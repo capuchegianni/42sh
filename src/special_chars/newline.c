@@ -15,7 +15,6 @@ int my_newline(int c, shell_t *my_shell)
             display_prompt(my_shell);
             return 1;
         }
-        printw("%s\n", my_shell->buffer);
         display_prompt(my_shell);
         free(my_shell->buffer);
         my_shell->buffer = NULL;
