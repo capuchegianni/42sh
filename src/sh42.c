@@ -9,9 +9,9 @@
 
 int start_window(shell_t *my_shell)
 {
-    mousemask(ALL_MOUSE_EVENTS, NULL);
     noecho();
     keypad(stdscr, TRUE);
+    mousemask(ALL_MOUSE_EVENTS, NULL);
     scrollok(stdscr, TRUE);
     display_prompt(my_shell);
     my_shell->buffer = NULL;

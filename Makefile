@@ -14,6 +14,7 @@ SRC = 	src/main.c							\
 		src/special_chars/delete.c 			\
 		src/special_chars/keys.c 			\
 		src/special_chars/scan_input.c 		\
+		src/special_chars/navigation.c 		\
 
 OBJ_DIR = ./obj/
 
