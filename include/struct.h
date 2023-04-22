@@ -16,6 +16,12 @@
         struct history_s *prev;
     } history_t;
 
+    typedef struct alias_s {
+        char *name;
+        char *command;
+        struct alias_s *next;
+    } alias_t;
+
     typedef struct shell_s {
         char **env;
         char *buffer;
@@ -26,6 +32,7 @@
         int prompt_len;
         int return_val;
         history_t *history;
+        alias_t *alias;
     } shell_t;
 
 #endif /* !STRUCT_H_ */

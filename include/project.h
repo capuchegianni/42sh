@@ -35,4 +35,8 @@
     // Parsing
     void separate_all_commands(shell_t *shell);
 
+    // Alias
+    void add_alias(shell_t *shell, char *name, char *command);
+    void free_alias(shell_t *shell);
+
 #endif /* !PROJECT_H_ */

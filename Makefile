@@ -18,6 +18,7 @@ SRC = 	src/main.c							\
 		src/special_chars/navigation.c 		\
 		src/free_struct_shell.c 			\
 		src/parsing/parsing.c 				\
+		src/alias/alias.c 					\
 
 OBJ_DIR = ./obj/
 
