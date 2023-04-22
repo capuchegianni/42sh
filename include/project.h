@@ -10,12 +10,14 @@
 
     #include "../lib/my/my.h"
     #include "struct.h"
+    #include <time.h>
 
     // Initiation the terminal
     int my_shell(shell_t *shell_struct, char **env);
 
     // Utils
     void display_prompt(shell_t *my_shell);
+    void free_struct_shell(shell_t *shell);
 
     // Special chars handling
     int scan_input(int c, shell_t *my_shell);
@@ -24,5 +26,17 @@
     int my_delete(int c, shell_t *my_shell);
     int my_left(int c, shell_t *my_shell);
     int my_right(int c, shell_t *my_shell);
+
+    // History handling
+    void add_command_history(shell_t *shell);
+    void print_history(shell_t *shell);
+    void free_history(shell_t *shell);
+
+    // Parsing
+    void separate_all_commands(shell_t *shell);
+
+    // Alias
+    void add_alias(shell_t *shell, char *name, char *command);
+    void free_alias(shell_t *shell);
 
 #endif /* !PROJECT_H_ */
