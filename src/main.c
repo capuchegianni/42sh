@@ -14,6 +14,7 @@ shell_t *init_shell(shell_t *my_shell)
     my_shell->buffer = NULL;
     my_shell->row = 0;
     my_shell->return_val = 0;
+    my_shell->history = NULL;
     return (my_shell);
 }
 
