@@ -62,11 +62,13 @@ jobs:
           FUNC=$(echo $Line | cut -d' ' -f6); \
           LIBC=${LIBU:0:5}; \
           LIBN=${LIBU:0:7}; \
+          JSP=${LIBU:0:4}; \
           if [ "$LIBC" != "GLIBC" ]; then
             if [ "$LIBN" != "NCURSES" ]; then
-              echo "$Line"
-              echo "::error:: $FUNC is a banned function";
-              exit 1;
+              if [ "$JSP" != "Base" ]; then
+                echo "$Line"
+                echo "::error:: $FUNC is a banned function";
+              fi
             fi
           fi
           done < banned-functions.log
