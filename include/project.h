@@ -32,4 +32,7 @@
     void print_history(shell_t *shell);
     void free_history(shell_t *shell);
 
+    // Parsing
+    void separate_all_commands(shell_t *shell);
+
 #endif /* !PROJECT_H_ */
