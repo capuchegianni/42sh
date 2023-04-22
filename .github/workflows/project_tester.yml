@@ -63,7 +63,9 @@ jobs:
           LIBC=${LIBU:1:5}; \
           LIBN=${LIBU:1:7}; \
           if [ "$LIBC" != "GLIBC" ]; then
+            echo "$LIBC";
             if [ "$LIBN" != "NCURSES" ]; then
+              echo "$LIBN";
               echo "::error:: $FUNC is a banned function";
               exit 1;
             fi
