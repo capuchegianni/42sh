@@ -15,5 +15,7 @@ shell_t *init_shell(shell_t *my_shell)
     my_shell->row = 0;
     my_shell->return_val = 0;
     my_shell->history = NULL;
+    my_shell->alias = NULL;
+    my_shell->cmd = NULL;
     return (my_shell);
 }
