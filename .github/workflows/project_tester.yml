@@ -66,8 +66,8 @@ jobs:
           if [ "$LIBC" != "GLIBC" ]; then
             if [ "$LIBN" != "NCURSES" ]; then
               if [ "$JSP" != "Base" ]; then
-                echo "$Line"
                 echo "::error:: $FUNC is a banned function";
+                exit 1;
               fi
             fi
           fi
