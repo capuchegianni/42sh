@@ -15,6 +15,7 @@ int my_newline(int c, shell_t *my_shell)
             display_prompt(my_shell);
             return 1;
         }
+        separate_all_commands(my_shell);
         add_command_history(my_shell);
         if (strcmp(my_shell->buffer, "history") == 0 ||
         strcmp(my_shell->buffer, "!") == 0)
