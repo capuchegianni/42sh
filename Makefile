@@ -22,9 +22,9 @@ SRC = 	src/main.c							\
 		src/special_chars/navigation.c 		\
 		src/free_struct_shell.c 			\
 		src/parsing/parsing.c 				\
-		src/alias/alias.c 					\						\
-		src/cd/change_pwd.c							\
-		src/cd/cd_cmd.c 							\
+		src/alias/alias.c 					\
+		src/cd/change_pwd.c					\
+		src/cd/cd_cmd.c 					\
 
 OBJ_DIR = ./obj/
 
