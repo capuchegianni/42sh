@@ -7,24 +7,29 @@
 
 NAME = 42sh
 
-SRC = 	src/main.c							\
-		src/sh42.c							\
-		src/prompt.c 						\
-		src/inits/init_shell.c 				\
-		src/inits/init_colors.c 			\
-		src/inits/init_env.c 				\
-		src/inits/init_history.c 			\
-		src/special_chars/newline.c 		\
-		src/special_chars/delete.c 			\
-		src/special_chars/keys.c 			\
-		src/special_chars/scan_input.c 		\
-		src/history/history.c 				\
-		src/special_chars/navigation.c 		\
-		src/free_struct_shell.c 			\
-		src/parsing/parsing.c 				\
-		src/alias/alias.c 					\
-		src/cd/change_pwd.c					\
-		src/cd/cd_cmd.c 					\
+SRC = 	src/main.c										\
+		src/sh42.c										\
+		src/prompt.c 									\
+		src/inits/init_shell.c 							\
+		src/inits/init_colors.c 						\
+		src/inits/init_env.c 							\
+		src/inits/init_history.c 						\
+		src/special_chars/newline.c 					\
+		src/special_chars/delete.c 						\
+		src/special_chars/keys.c 						\
+		src/special_chars/scan_input.c 					\
+		src/special_chars/navigation.c 					\
+		src/free_struct_shell.c 						\
+		src/parsing/parsing.c 							\
+		src/alias/alias.c 								\
+		src/commands/history/history.c 					\
+		src/commands/history/history_error_handling.c 	\
+		src/commands/history/print_history.c 			\
+		src/commands/cd/change_pwd.c					\
+		src/commands/cd/cd_cmd.c 						\
+		src/commands/env_cmds/env.c 					\
+		src/commands/env_cmds/setenv.c 					\
+		src/commands/env_cmds/unsetenv.c 				\
 
 OBJ_DIR = ./obj/
 
