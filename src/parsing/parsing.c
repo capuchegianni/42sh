@@ -9,16 +9,25 @@
 
 char *getcmd(char *src, int s, int e)
 {
-    int i = s;
     int n = 0;
     char *cmd = malloc(sizeof(char) * (e - s + 1));
 
     if (!cmd)
         return (NULL);
-    for (; i < e ; i++, n++)
-        cmd[n] = src[i];
+    for (; s < e ; s++, n++)
+        cmd[n] = src[s];
     cmd[n] = '\0';
     return (cmd);
+}
+
+void stock_cmd(char *cmd, shell_t *shell)
+{
+    if (shell->cmd)
+        my_free_wordarray(shell->cmd);
+    shell->cmd = my_wordarray(cmd, " \t\n");
+    for (int i = 0; shell->cmd[i]; i++)
+        printw("%s ", shell->cmd[i]);
+    printw("\n");
 }
 
 void parse_pipes(char *cmd, shell_t *shell)
@@ -34,7 +43,7 @@ void parse_pipes(char *cmd, shell_t *shell)
         if (i == my_strlen(cmd) - 1)
             p_cmd = getcmd(cmd, s, i + 1);
         if (p_cmd) {
-            printw("'%s'\n", p_cmd);
+            stock_cmd(p_cmd, shell);
             free(p_cmd);
             p_cmd = NULL;
         }
