@@ -56,17 +56,14 @@ jobs:
       - name: Banned function checker
         run: |
           objdump -T $EXECUTABLES | grep '      DF' > banned-functions.log
-          cat banned-functions.log;
           while read Line; \
           do \
-          LIBU=$(echo $Line | cut -d' ' -f9); \
-          FUNC=$(echo $Line | cut -d' ' -f10); \
-          LIBC=${LIBU:1:5}; \
-          LIBN=${LIBU:1:7}; \
+          LIBU=$(echo $Line | cut -d' ' -f5); \
+          FUNC=$(echo $Line | cut -d' ' -f6); \
+          LIBC=${LIBU:0:5}; \
+          LIBN=${LIBU:0:7}; \
           if [ "$LIBC" != "GLIBC" ]; then
-            echo "$LIBC";
             if [ "$LIBN" != "NCURSES" ]; then
-              echo "$LIBN";
               echo "::error:: $FUNC is a banned function";
               exit 1;
             fi
