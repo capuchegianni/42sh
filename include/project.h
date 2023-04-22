@@ -51,4 +51,9 @@
     char **change_pwd(char **my_env, char *pwd);
     char **change_oldpwd(char **my_env, char *pwd);
 
+    // env cmds
+    int my_setenv(shell_t *shell);
+    int my_unsetenv(shell_t *shell);
+    void print_env(shell_t *shell);
+
 #endif /* !PROJECT_H_ */
