@@ -30,6 +30,8 @@ NCURSES_FLAGS := -lncurses
 
 LIB_FLAGS := -I include/ -L ./lib/my -l:libmy.a
 
+FILE = coding-style.sh
+
 all: $(OBJ_DIR) $(NAME)
 
 build_lib:
@@ -58,10 +60,24 @@ clean:
 	@echo -n " ] "
 	@echo "\e[1;32mSuccessfully removed .o & .log files\e[0m"
 
-cstyle:
-	make fclean
-	../coding-style-checker/coding-style.sh . .
-	../coding-style-checker/print_infos.sh
+cstyle: fclean
+	FILE=$$(find ~/ -name "$(FILE)" -print -quit); \
+	if [ -z "$$FILE" ]; then \
+		echo "[ \e[1;93mWARNING\e[0m ]" \
+		"\e[1;31mFile $(FILE) not found.\e[0m"; \
+		exit 69; \
+	else \
+		bash $$FILE . .; \
+	fi
+	if [ -s coding-style-reports.log ]; then \
+		echo "[ \e[1;93mWARNING\e[0m ]" \
+		"\e[1;31mFound coding style errors in coding-style-reports.log\e[0m"; \
+		cat coding-style-reports.log; \
+	else \
+		echo "[ \e[1;34mOK\e[0m ]" \
+		"\e[1;32mNo coding style error found\e[0m"; \
+		rm -f coding-style-reports.log; \
+	fi
 
 fclean: clean
 	make fclean -C lib/my/
