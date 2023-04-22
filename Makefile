@@ -10,6 +10,10 @@ NAME = 42sh
 SRC = 	src/main.c							\
 		src/sh42.c							\
 		src/prompt.c 						\
+		src/inits/init_shell.c 				\
+		src/inits/init_colors.c 			\
+		src/inits/init_env.c 				\
+		src/inits/init_history.c 			\
 		src/special_chars/newline.c 		\
 		src/special_chars/delete.c 			\
 		src/special_chars/keys.c 			\
