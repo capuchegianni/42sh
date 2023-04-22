@@ -11,12 +11,14 @@ char *get_date(void)
 {
     time_t now = time(NULL);
     struct tm *tm_struct = localtime(&now);
-    char *date = malloc(sizeof(char) * 6);
+    char *date = NULL;
+    char *hour = malloc(sizeof(char) * 3);
+    char *min = malloc(sizeof(char) * 3);
 
-    if (!date)
-        return (NULL);
-    date = strcat(my_tostr(tm_struct->tm_hour), ":");
-    date = strcat(date, my_tostr(tm_struct->tm_min));
+    sprintf(hour, "%d", tm_struct->tm_hour);
+    sprintf(min, "%d", tm_struct->tm_min);
+    date = my_strcat(hour, ":");
+    date = my_strcat(date, min);
     return (date);
 }
 
