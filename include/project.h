@@ -39,4 +39,9 @@
     void add_alias(shell_t *shell, char *name, char *command);
     void free_alias(shell_t *shell);
 
+    // cd
+    void cd_cmd(shell_t *shell);
+    char **change_pwd(char **my_env, char *pwd);
+    char **change_oldpwd(char **my_env, char *pwd);
+
 #endif /* !PROJECT_H_ */

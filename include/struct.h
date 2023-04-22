@@ -31,6 +31,7 @@
         int cursor_x;
         int prompt_len;
         int return_val;
+        char **cmd;
         history_t *history;
         alias_t *alias;
     } shell_t;
