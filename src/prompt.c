@@ -23,7 +23,7 @@ void print_usr(shell_t *my_shell)
     my_shell->prompt_len += my_strlen(usr) + 5;
 }
 
-void is_error(int val_ret, char *str, shell_t *my_shell)
+void find_val(int val_ret, char *str, shell_t *my_shell)
 {
     my_shell->prompt_len = my_strlen(str) + 3;
     if (isatty(0) == 1) {
@@ -60,10 +60,10 @@ void display_prompt(shell_t *my_shell)
             slash++;
     if (slash >= 3) {
         str = my_strcat("~/", pwd + i);
-        is_error(my_shell->return_val, str, my_shell);
+        find_val(my_shell->return_val, str, my_shell);
         free(str);
     } else
-        is_error(my_shell->return_val, pwd, my_shell);
+        find_val(my_shell->return_val, pwd, my_shell);
     refresh();
     free(pwd);
 }

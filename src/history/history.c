@@ -12,13 +12,13 @@ char *get_date(void)
     time_t now = time(NULL);
     struct tm *tm_struct = localtime(&now);
     char *date = NULL;
-    char *hour = malloc(sizeof(char) * 3);
-    char *min = malloc(sizeof(char) * 3);
+    char *hour = malloc(sizeof(char) * 6);
+    char *min = malloc(sizeof(char) * 6);
 
     sprintf(hour, "%d", tm_struct->tm_hour);
     sprintf(min, "%d", tm_struct->tm_min);
-    date = my_strcat(hour, ":");
-    date = my_strcat(date, min);
+    date = strcat(hour, ":");
+    date = strcat(date, min);
     return (date);
 }
 
@@ -34,18 +34,6 @@ void free_history(shell_t *shell)
         free(current);
         current = next;
     }
-}
-
-void init_history(shell_t *shell)
-{
-    shell->history = malloc(sizeof(history_t));
-    if (!shell->history)
-        return;
-    shell->history->id = 1;
-    shell->history->command = strdup(shell->buffer);
-    shell->history->date = get_date();
-    shell->history->next = NULL;
-    shell->history->prev = NULL;
 }
 
 void add_command_history(shell_t *shell)

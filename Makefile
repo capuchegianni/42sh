@@ -7,20 +7,22 @@
 
 NAME = 42sh
 
-SRC = 	src/main.c									\
-		src/sh42.c									\
-		src/prompt.c 								\
-		src/special_chars/newline.c 				\
-		src/special_chars/delete.c 					\
-		src/special_chars/keys.c 					\
-		src/special_chars/scan_input.c 				\
-		src/history/history_error_handling.c		\
-		src/history/history.c 						\
-		src/history/print_history.c 				\
-		src/special_chars/navigation.c 				\
-		src/free_struct_shell.c 					\
-		src/parsing/parsing.c 						\
-		src/alias/alias.c 							\
+SRC = 	src/main.c							\
+		src/sh42.c							\
+		src/prompt.c 						\
+		src/inits/init_shell.c 				\
+		src/inits/init_colors.c 			\
+		src/inits/init_env.c 				\
+		src/inits/init_history.c 			\
+		src/special_chars/newline.c 		\
+		src/special_chars/delete.c 			\
+		src/special_chars/keys.c 			\
+		src/special_chars/scan_input.c 		\
+		src/history/history.c 				\
+		src/special_chars/navigation.c 		\
+		src/free_struct_shell.c 			\
+		src/parsing/parsing.c 				\
+		src/alias/alias.c 					\						\
 		src/cd/change_pwd.c							\
 		src/cd/cd_cmd.c 							\
 
