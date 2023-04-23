@@ -12,11 +12,11 @@ int main(int ac, char **av, char **env)
     int return_val = 0;
 
     if (ac != 1 && !av[1]) {
-        my_printerr("Usage: ./42sh");
+        dprintf(2, "Usage: ./42sh");
         return (84);
     }
     if (!env) {
-        my_printerr("No environment found.\n");
+        dprintf(2, "No environment found.\n");
         return (84);
     }
     if (!initscr())

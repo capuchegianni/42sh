@@ -10,6 +10,7 @@
 int start_window(shell_t *shell)
 {
     noecho();
+    intrflush(stdscr, FALSE);
     keypad(stdscr, TRUE);
     mousemask(ALL_MOUSE_EVENTS, NULL);
     scrollok(stdscr, TRUE);
@@ -24,10 +25,12 @@ int open_terminal(shell_t *shell)
     int c;
 
     start_window(shell);
-    while ((c = getch()) != 4) {
+    while ((c = getch())) {
+        if (c == 4)
+            return shell->return_val;
         if (scan_input(c, shell) == 1)
             continue;
-        shell->buffer = my_realloc(shell->buffer, \
+        shell->buffer = realloc(shell->buffer, \
         shell->col - shell->prompt_len + 2);
         if (shell->buffer == NULL)
             return shell->return_val = 84;
