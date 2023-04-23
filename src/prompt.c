@@ -7,9 +7,9 @@
 
 #include "../include/project.h"
 
-void print_usr(shell_t *my_shell)
+void print_usr(shell_t *shell)
 {
-    char *usr = getenv("USER");
+    char *usr = my_getenv(shell->env, "USER");
 
     if (usr == NULL)
         usr = "";
@@ -20,15 +20,16 @@ void print_usr(shell_t *my_shell)
     attroff(COLOR_PAIR(3));
     attron(COLOR_PAIR(4));
     printw(") | ");
-    my_shell->prompt_len += my_strlen(usr) + 5;
+    shell->prompt_len += my_strlen(usr) + 5;
+    free(usr);
 }
 
-void find_val(int val_ret, char *str, shell_t *my_shell)
+void find_val(int val_ret, char *str, shell_t *shell)
 {
-    my_shell->prompt_len = my_strlen(str) + 3;
+    shell->prompt_len = my_strlen(str) + 3;
     if (isatty(0) == 1) {
         attron(A_BOLD);
-        print_usr(my_shell);
+        print_usr(shell);
         printw("%s ", str);
         attroff(COLOR_PAIR(4));
         if (val_ret == 0) {
@@ -44,7 +45,7 @@ void find_val(int val_ret, char *str, shell_t *my_shell)
     attroff(A_BOLD);
 }
 
-void display_prompt(shell_t *my_shell)
+void display_prompt(shell_t *shell)
 {
     char *str = NULL;
     char *pwd = getcwd(NULL, 0);
@@ -60,10 +61,10 @@ void display_prompt(shell_t *my_shell)
             slash++;
     if (slash >= 3) {
         str = my_strcat("~/", pwd + i);
-        find_val(my_shell->return_val, str, my_shell);
+        find_val(shell->return_val, str, shell);
         free(str);
     } else
-        find_val(my_shell->return_val, pwd, my_shell);
+        find_val(shell->return_val, pwd, shell);
     refresh();
     free(pwd);
 }

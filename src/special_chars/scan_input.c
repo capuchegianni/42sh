@@ -7,23 +7,23 @@
 
 #include "project.h"
 
-int scan_input(int c, shell_t *my_shell)
+int scan_input(int c, shell_t *shell)
 {
-    my_shell->cursor_y = getcury(stdscr);
-    my_shell->cursor_x = getcurx(stdscr);
-    if (my_shell->cursor_y != my_shell->row)
-        my_shell->row = my_shell->cursor_y;
-    if (my_newline(c, my_shell) == 1)
+    shell->cursor_y = getcury(stdscr);
+    shell->cursor_x = getcurx(stdscr);
+    if (shell->cursor_y != shell->row)
+        shell->row = shell->cursor_y;
+    if (my_newline(c, shell) == 1)
         return 1;
-    if (my_delete(c, my_shell) == 1)
+    if (my_delete(c, shell) == 1)
         return 1;
     if (c >= 258 && c <= 261) {
-        my_left(c, my_shell);
-        my_right(c, my_shell);
+        my_left(c, shell);
+        my_right(c, shell);
         return 1;
     }
     if (c == 409 || c == 410) {
-        navigate(my_shell);
+        navigate(shell);
         return 1;
     }
     return 0;

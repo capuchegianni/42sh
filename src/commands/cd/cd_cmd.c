@@ -9,7 +9,7 @@
 
 void cd_home(shell_t *shell)
 {
-    char *home = getenv("HOME");
+    char *home = my_getenv(shell->env, "HOME");
 
     shell->env = change_oldpwd(shell->env, getcwd(NULL, 0));
     chdir(home);
@@ -21,7 +21,7 @@ void cd_home(shell_t *shell)
 void cd_back(shell_t *shell)
 {
     char *temp = getcwd(NULL, 0);
-    char *oldpwd = getenv("OLDPWD");
+    char *oldpwd = my_getenv(shell->env, "OLDPWD");
 
     chdir(oldpwd);
     shell->env = change_oldpwd(shell->env, temp);

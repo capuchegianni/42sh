@@ -7,14 +7,14 @@
 
 #include "project.h"
 
-int my_delete(int c, shell_t *my_shell)
+int my_delete(int c, shell_t *shell)
 {
-    if (c == KEY_BACKSPACE && my_shell->col >= my_shell->prompt_len) {
-        if (my_shell->col == my_shell->prompt_len)
+    if (c == KEY_BACKSPACE && shell->col >= shell->prompt_len) {
+        if (shell->col == shell->prompt_len)
             return 1;
-        my_shell->col--;
-        my_shell->buffer[my_shell->col - my_shell->prompt_len] = '\0';
-        move(my_shell->row, my_shell->col);
+        shell->col--;
+        shell->buffer[shell->col - shell->prompt_len] = '\0';
+        move(shell->row, shell->col);
         delch();
         return 1;
     }
