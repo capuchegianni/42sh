@@ -52,7 +52,7 @@ void display_prompt(shell_t *my_shell)
     int i = 0;
 
     if (pwd == NULL) {
-        my_printerr("getcwd: %s.\n", strerror(errno));
+        dprintf(2, "getcwd: %s.\n", strerror(errno));
         return;
     }
     for (; pwd[i] && slash < 3; i++)

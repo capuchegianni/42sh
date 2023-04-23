@@ -7,19 +7,19 @@
 
 #include "project.h"
 
-int navigate(shell_t *my_shell)
+int navigate(shell_t *shell)
 {
     MEVENT event;
 
     if (getmouse(&event) == OK) {
         if (event.bstate & BUTTON4_PRESSED) {
-            my_shell->row++;
-            move(my_shell->row, my_shell->col);
+            shell->row++;
+            move(shell->row, shell->col);
             wscrl(stdscr, -1);
         }
         if (event.bstate & BUTTON5_PRESSED) {
-            my_shell->row--;
-            move(my_shell->row, my_shell->col);
+            shell->row--;
+            move(shell->row, shell->col);
             wscrl(stdscr, 1);
         }
     }

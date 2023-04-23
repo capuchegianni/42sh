@@ -9,7 +9,6 @@ NAME = 42sh
 
 SRC = 	src/main.c										\
 		src/sh42.c										\
-		src/prompt.c 									\
 		src/inits/init_shell.c 							\
 		src/inits/init_colors.c 						\
 		src/inits/init_env.c 							\
@@ -19,9 +18,10 @@ SRC = 	src/main.c										\
 		src/special_chars/keys.c 						\
 		src/special_chars/scan_input.c 					\
 		src/special_chars/navigation.c 					\
-		src/free_struct_shell.c 						\
 		src/parsing/parsing.c 							\
 		src/alias/alias.c 								\
+		src/utils/free_struct_shell.c 					\
+		src/utils/prompt.c 								\
 		src/commands/history/history.c 					\
 		src/commands/history/history_error_handling.c 	\
 		src/commands/history/print_history.c 			\

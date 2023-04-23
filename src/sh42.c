@@ -7,54 +7,57 @@
 
 #include "project.h"
 
-int start_window(shell_t *my_shell)
+int start_window(shell_t *shell)
 {
     noecho();
+    intrflush(stdscr, FALSE);
     keypad(stdscr, TRUE);
     mousemask(ALL_MOUSE_EVENTS, NULL);
     scrollok(stdscr, TRUE);
-    display_prompt(my_shell);
-    my_shell->buffer = NULL;
-    my_shell->col = my_shell->prompt_len;
+    display_prompt(shell);
+    shell->buffer = NULL;
+    shell->col = shell->prompt_len;
     return 0;
 }
 
-int open_terminal(shell_t *my_shell)
+int open_terminal(shell_t *shell)
 {
     int c;
 
-    start_window(my_shell);
-    while ((c = getch()) != 4) {
-        if (scan_input(c, my_shell) == 1)
+    start_window(shell);
+    while ((c = getch())) {
+        if (c == 4)
+            return shell->return_val;
+        if (scan_input(c, shell) == 1)
             continue;
-        my_shell->buffer = my_realloc(my_shell->buffer, \
-        my_shell->col - my_shell->prompt_len + 2);
-        if (my_shell->buffer == NULL)
-            return my_shell->return_val = 84;
-        my_shell->buffer[my_shell->col - my_shell->prompt_len] = c;
-        my_shell->buffer[my_shell->col - my_shell->prompt_len + 1] = '\0';
-        my_shell->col++;
+        shell->buffer = realloc(shell->buffer, \
+        shell->col - shell->prompt_len + 2);
+        if (shell->buffer == NULL)
+            return shell->return_val = 84;
+        shell->buffer[shell->col - shell->prompt_len] = c;
+        shell->buffer[shell->col - shell->prompt_len + 1] = '\0';
+        shell->col++;
         addch(c);
         refresh();
     }
-    return my_shell->return_val;
+    return shell->return_val;
 }
 
 int my_shell(char **env)
 {
-    shell_t *my_shell = NULL;
+    shell_t *shell = NULL;
     int return_val = 0;
 
-    my_shell = init_shell(my_shell);
-    if (!my_shell)
+    shell = init_shell(shell);
+    if (!shell)
         return (84);
-    my_shell->env = init_env(env);
-    if (my_shell->env == NULL)
+    shell->env = init_env(env);
+    if (shell->env == NULL)
         return (84);
     init_colors();
-    open_terminal(my_shell);
-    return_val = my_shell->return_val;
-    free_struct_shell(my_shell);
+    open_terminal(shell);
+    return_val = shell->return_val;
+    free_struct_shell(shell);
     endwin();
     return (return_val);
 }

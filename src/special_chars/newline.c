@@ -7,21 +7,21 @@
 
 #include "project.h"
 
-int my_newline(int c, shell_t *my_shell)
+int my_newline(int c, shell_t *shell)
 {
     if (c == '\n') {
         printw("\n");
-        if (my_shell->buffer == NULL) {
-            display_prompt(my_shell);
+        if (shell->buffer == NULL) {
+            display_prompt(shell);
             return 1;
         }
-        separate_all_commands(my_shell);
-        add_command_history(my_shell);
-        display_prompt(my_shell);
-        free(my_shell->buffer);
-        my_shell->buffer = NULL;
-        my_shell->row++;
-        my_shell->col = my_shell->prompt_len;
+        separate_all_commands(shell);
+        add_command_history(shell);
+        display_prompt(shell);
+        free(shell->buffer);
+        shell->buffer = NULL;
+        shell->row++;
+        shell->col = shell->prompt_len;
         return 1;
     }
     return 0;

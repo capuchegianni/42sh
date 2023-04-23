@@ -7,26 +7,26 @@
 
 #include "project.h"
 
-int my_left(int c, shell_t *my_shell)
+int my_left(int c, shell_t *shell)
 {
-    if (c == KEY_LEFT && my_shell->col >= my_shell->prompt_len) {
-        if (my_shell->col == my_shell->prompt_len)
+    if (c == KEY_LEFT && shell->col >= shell->prompt_len) {
+        if (shell->col == shell->prompt_len)
             return 1;
-        my_shell->col--;
-        move(my_shell->row, my_shell->col);
+        shell->col--;
+        move(shell->row, shell->col);
         return 1;
     }
     return 0;
 }
 
-int my_right(int c, shell_t *my_shell)
+int my_right(int c, shell_t *shell)
 {
-    if (!my_shell->buffer)
+    if (!shell->buffer)
         return 1;
     if (c == KEY_RIGHT &&
-    my_shell->col < my_shell->prompt_len + my_strlen(my_shell->buffer)) {
-        my_shell->col++;
-        move(my_shell->row, my_shell->col);
+    shell->col < shell->prompt_len + my_strlen(shell->buffer)) {
+        shell->col++;
+        move(shell->row, shell->col);
         return 1;
     }
     return 0;
