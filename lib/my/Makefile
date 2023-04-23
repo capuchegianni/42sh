@@ -11,6 +11,7 @@ SRC = 	my_casesensitive.c 				\
 		my_cleanstr.c 					\
 		my_findprimesup.c 				\
 		my_free_wordarray.c 			\
+		my_getenv.c 					\
 		my_getnbr.c 					\
 		my_isneg.c 						\
 		my_isnum.c 						\
@@ -26,6 +27,7 @@ SRC = 	my_casesensitive.c 				\
 		my_realloc.c 					\
 		my_revstr.c 					\
 		my_rmtabline.c 					\
+		my_searchintab.c 				\
 		my_sortintarray.c 				\
 		my_sqrt.c 						\
 		my_strcat.c 					\

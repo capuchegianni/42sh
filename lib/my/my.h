@@ -352,4 +352,7 @@
     */
     char **my_wordarray(char *str, char *characters);
 
+    char *my_getenv(char **my_env, char *str);
+    int my_searchintab(char **tab, char *str);
+
 #endif /* MY_H_ */
