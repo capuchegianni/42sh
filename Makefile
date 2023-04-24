@@ -18,7 +18,9 @@ SRC = 	src/main.c										\
 		src/special_chars/keys.c 						\
 		src/special_chars/scan_input.c 					\
 		src/special_chars/navigation.c 					\
+		src/special_chars/tab.c 						\
 		src/parsing/parsing.c 							\
+		src/parsing/check_cmd.c 						\
 		src/alias/alias.c 								\
 		src/utils/free_struct_shell.c 					\
 		src/utils/prompt.c 								\

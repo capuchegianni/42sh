@@ -35,7 +35,8 @@ void cd_path(shell_t *shell)
     char *temp = getcwd(NULL, 0);
 
     if (chdir(shell->cmd[1]) == -1) {
-        dprintf(2, "%s: %s.\n", shell->cmd[1], strerror(errno));
+        printw("\n");
+        dprintf(2, "\r\n%s: %s.\n", shell->cmd[1], strerror(errno));
         shell->return_val = 1;
         free(temp);
     } else {
@@ -45,23 +46,34 @@ void cd_path(shell_t *shell)
     }
 }
 
-void cd_cmd(shell_t *shell)
+int check_args_nbr(shell_t *shell)
 {
     if (my_tablen(shell->cmd) >= 3) {
-        dprintf(2, "cd: Too many arguments.\n");
+        printw("\n");
+        dprintf(2, "\r\ncd: Too many arguments.\n");
         shell->return_val = 1;
-        return;
+        return (1);
     }
-    if (my_tablen(shell->cmd) < 3 &&
-    (shell->cmd[1] == NULL || strcmp(shell->cmd[1],"~") == 0)) {
-        cd_home(shell);
-        return;
+    return (0);
+}
+
+int cd_cmd(shell_t *shell)
+{
+    if (my_cmp(shell->cmd[0], "cd") == 0) {
+        if (check_args_nbr(shell) == 1)
+            return (1);
+        if ((shell->cmd[1] == NULL || strcmp(shell->cmd[1],"~") == 0)) {
+            cd_home(shell);
+            return (1);
+        }
+        if (strcmp(shell->cmd[1], "-") == 0) {
+            cd_back(shell);
+            return (1);
+        }
+        if (shell->cmd[1] != NULL) {
+            cd_path(shell);
+            return (1);
+        }
     }
-    if (my_tablen(shell->cmd) < 3 && strcmp(shell->cmd[1], "-") == 0) {
-        cd_back(shell);
-        return;
-    }
-    if (my_tablen(shell->cmd) < 3 && shell->cmd[1] != NULL) {
-        cd_path(shell);
-    }
+    return (0);
 }

@@ -17,6 +17,8 @@ int scan_input(int c, shell_t *shell)
         return 1;
     if (my_delete(c, shell) == 1)
         return 1;
+    if (my_tab(c, shell) == 1)
+        return 1;
     if (c >= 258 && c <= 261) {
         my_left(c, shell);
         my_right(c, shell);

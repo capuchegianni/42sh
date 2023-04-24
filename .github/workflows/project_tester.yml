@@ -43,6 +43,12 @@ jobs:
         timeout-minutes: 2
       - name: Clean the useless files
         run: make clean
+      - name: Put the binary file in an artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: 42sh
+          path: 42sh
+          retention-days: 1
       - name: Check each executables
         run: |
           IFS=','
@@ -53,6 +59,17 @@ jobs:
               exit 1
             fi
           done
+
+  check_program_banned_functions:
+    runs-on: ubuntu-latest
+    needs: check_program_compilation
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Download the binary file artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: 42sh
       - name: Banned function checker
         run: |
           objdump -T $EXECUTABLES | grep '    DF ' > banned-functions.log

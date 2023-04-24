@@ -27,6 +27,7 @@
 
     // Parsing
     void separate_all_commands(shell_t *shell);
+    int check_cmd(shell_t *shell);
 
     // Special chars handling
     int scan_input(int c, shell_t *shell);
@@ -35,6 +36,7 @@
     int my_delete(int c, shell_t *shell);
     int my_left(int c, shell_t *shell);
     int my_right(int c, shell_t *shell);
+    int my_tab(int c, shell_t *shell);
 
     // History handling
     void add_command_history(shell_t *shell);
@@ -47,7 +49,7 @@
     void free_alias(shell_t *shell);
 
     // cd
-    void cd_cmd(shell_t *shell);
+    int cd_cmd(shell_t *shell);
     char **change_pwd(char **my_env, char *pwd);
     char **change_oldpwd(char **my_env, char *pwd);
 
