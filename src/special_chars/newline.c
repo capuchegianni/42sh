@@ -17,6 +17,7 @@ int my_newline(int c, shell_t *shell)
         }
         separate_all_commands(shell);
         add_command_history(shell);
+        check_cmd(shell);
         display_prompt(shell);
         free(shell->buffer);
         shell->buffer = NULL;
