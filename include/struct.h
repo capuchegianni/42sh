@@ -29,7 +29,7 @@
         int col;
         int cursor_y;
         int cursor_x;
-        int prompt_len;
+        int p_len;
         int return_val;
         char **cmd;
         history_t *history;

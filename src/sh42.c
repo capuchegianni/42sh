@@ -16,26 +16,27 @@ int start_window(shell_t *shell)
     scrollok(stdscr, TRUE);
     display_prompt(shell);
     shell->buffer = NULL;
-    shell->col = shell->prompt_len;
+    shell->col = shell->p_len;
     return 0;
 }
 
 int open_terminal(shell_t *shell)
 {
-    int c;
+    int c = 0;
 
     start_window(shell);
     while ((c = getch())) {
         if (c == 4)
             return shell->return_val;
+        if (shell->return_val == 84)
+            return shell->return_val;
         if (scan_input(c, shell) == 1)
             continue;
-        shell->buffer = realloc(shell->buffer, \
-        shell->col - shell->prompt_len + 2);
+        shell->buffer = realloc(shell->buffer, shell->col - shell->p_len + 2);
         if (shell->buffer == NULL)
             return shell->return_val = 84;
-        shell->buffer[shell->col - shell->prompt_len] = c;
-        shell->buffer[shell->col - shell->prompt_len + 1] = '\0';
+        shell->buffer[shell->col - shell->p_len] = c;
+        shell->buffer[shell->col - shell->p_len + 1] = '\0';
         shell->col++;
         addch(c);
         refresh();

@@ -38,6 +38,9 @@
     int my_right(int c, shell_t *shell);
     int my_tab(int c, shell_t *shell);
 
+    // Execve handling
+    int execve_handling(shell_t *shell);
+
     // History handling
     void add_command_history(shell_t *shell);
     void print_history(shell_t *shell);

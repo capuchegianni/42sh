@@ -20,13 +20,13 @@ void print_usr(shell_t *shell)
     attroff(COLOR_PAIR(3));
     attron(COLOR_PAIR(4));
     printw(") | ");
-    shell->prompt_len += my_strlen(usr) + 5;
+    shell->p_len += my_strlen(usr) + 5;
     free(usr);
 }
 
 void find_val(int val_ret, char *str, shell_t *shell)
 {
-    shell->prompt_len = my_strlen(str) + 3;
+    shell->p_len = my_strlen(str) + 3;
     if (isatty(0) == 1) {
         attron(A_BOLD);
         print_usr(shell);
