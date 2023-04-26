@@ -34,6 +34,7 @@
         char *a_down;
         char *a_right;
         char *a_left;
+        int cursor_pos;
         history_t *history;
         alias_t *alias;
     } shell_t;

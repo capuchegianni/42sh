@@ -24,8 +24,8 @@ char **change_pwd(char **my_env, char *pwd)
     free(my_env[i]);
     my_env[i] = malloc(sizeof(char) * (my_strlen(pwd) + 6));
     my_env[i][0] = '\0';
-    my_env[i] = my_strcat(my_env[i], "PWD=\0");
-    my_env[i] = my_strcat(my_env[i], pwd);
+    my_env[i] = strcat(my_env[i], "PWD=");
+    my_env[i] = strcat(my_env[i], pwd);
     free(pwd);
     return (my_env);
 }
@@ -37,8 +37,8 @@ char **change_oldpwd(char **my_env, char *pwd)
     free(my_env[i]);
     my_env[i] = malloc(sizeof(char) * (my_strlen(pwd) + 9));
     my_env[i][0] = '\0';
-    my_env[i] = my_strcat(my_env[i], "OLDPWD=\0");
-    my_env[i] = my_strcat(my_env[i], pwd);
+    my_env[i] = strcat(my_env[i], "OLDPWD=");
+    my_env[i] = strcat(my_env[i], pwd);
     free(pwd);
     return (my_env);
 }

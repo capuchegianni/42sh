@@ -16,12 +16,13 @@ int scan_input(int c, shell_t *shell)
     if (my_tab(c, shell) == 1)
         return (1);
     if (c == 'A' && shell->last_char == '[')
-        return (1);
+        return (0);
     if (c == 'B' && shell->last_char == '[')
-        return (1);
+        return (0);
     if (c == 'C' && shell->last_char == '[')
-        return (1);
+        return (0);
     if (c == 'D' && shell->last_char == '[')
-        return (1);
+        return (0);
+    shell->last_char = c;
     return (0);
 }

@@ -14,25 +14,48 @@ int start_window(shell_t *shell)
     return (0);
 }
 
+int exclude_arrow(shell_t *shell, int c)
+{
+    if (c == 27 && shell->last_char == 27)
+        return (1);
+    if (c == 1 && shell->last_char == 91)
+        return (1);
+    if (c == 91 && shell->last_char == 91)
+        return (1);
+    if ((c == 'A' || c == 'B' || c == 'C' || c == 'D')
+    && shell->last_char == '[') {
+        if (c == 'D' && shell->cursor_pos > 0) {
+            printf("\b");
+            shell->cursor_pos--;
+        }
+        if (c == 'C' && shell->cursor_pos < shell->len) {
+            printf("\033[C");
+            shell->cursor_pos++;
+        }
+        return (1);
+    }
+    return (0);
+}
+
 int open_terminal(shell_t *shell)
 {
-    int c = 0;
-
     start_window(shell);
-    while ((c = getchar())) {
+    for (int c = 0; (c = getchar());) {
         if (c == 4)
             break;
         if (shell->return_val == 84)
             return (shell->return_val);
-        if (scan_input(c, shell) == 1)
+        if (scan_input(c, shell))
+            continue;
+        if (exclude_arrow(shell, c))
             continue;
         shell->buffer = realloc(shell->buffer, shell->len + 2);
         if (shell->buffer == NULL)
-            return (shell->return_val) = 84;
+            return (shell->return_val = 84);
         shell->buffer[shell->len++] = c;
         shell->buffer[shell->len] = '\0';
         printf("%c", c);
-        shell->last_char = c;
+        shell->cursor_pos++;
     }
     printf("exit\n");
     return (shell->return_val);
