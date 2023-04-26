@@ -9,8 +9,13 @@
 
 int main(int ac, char **av, char **env)
 {
+    shell_t *shell = NULL;
     int return_val = 0;
+    struct termios old_term;
 
+    shell = init_shell(shell, old_term);
+    if (!shell)
+        return (84);
     if (ac != 1 && !av[1]) {
         dprintf(2, "Usage: ./42sh");
         return (84);
@@ -19,8 +24,9 @@ int main(int ac, char **av, char **env)
         dprintf(2, "No environment found.\n");
         return (84);
     }
-    if (!initscr())
-        return (84);
-    return_val = my_shell(env);
+    if (isatty(0) == 1)
+        return_val = my_shell(env, shell);
+    else
+        printf("caca\n");
     return (return_val);
 }

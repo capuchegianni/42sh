@@ -9,13 +9,10 @@
 
 int my_delete(int c, shell_t *shell)
 {
-    if (c == KEY_BACKSPACE && shell->col >= shell->p_len) {
-        if (shell->col == shell->p_len)
-            return 1;
-        shell->col--;
-        shell->buffer[shell->col - shell->p_len] = '\0';
-        move(shell->row, shell->col);
-        delch();
+    if ((c == 8 || c == 127) && shell->len > 0) {
+        printf("\b \b");
+        shell->buffer[shell->len] = '\0';
+        shell->len--;
         return 1;
     }
     return 0;

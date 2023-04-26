@@ -10,20 +10,20 @@
 int my_newline(int c, shell_t *shell)
 {
     if (c == '\n') {
-        printw("\n");
-        if (shell->buffer == NULL) {
+        printf("\n");
+        if (!shell->buffer[0]) {
             display_prompt(shell);
             return 1;
         }
         separate_all_commands(shell);
+        printf("\"%c\"\n", shell->cmd[0][0]);
         add_command_history(shell);
-        check_cmd(shell);
-        execve_handling(shell);
-        display_prompt(shell);
+        if (check_cmd(shell) != 1)
+            execve_handling(shell);
         free(shell->buffer);
-        shell->buffer = NULL;
-        shell->row++;
-        shell->col = shell->p_len;
+        display_prompt(shell);
+        shell->buffer = calloc(1, 1);
+        shell->len = 0;
         return 1;
     }
     return 0;

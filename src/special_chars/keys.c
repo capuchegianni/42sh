@@ -7,27 +7,26 @@
 
 #include "project.h"
 
-int my_left(int c, shell_t *shell)
+int my_left(int c, shell_t *shell, char str[3])
 {
-    if (c == KEY_LEFT && shell->col >= shell->p_len) {
-        if (shell->col == shell->p_len)
+    if (str[0] == '[' && str[2] == 'D') {
+        if (shell->len > 0) {
+            shell->len--;
+            printf("\033[D");
             return 1;
-        shell->col--;
-        move(shell->row, shell->col);
-        return 1;
+        }
     }
     return 0;
 }
 
-int my_right(int c, shell_t *shell)
+int my_right(int c, shell_t *shell, char str[3])
 {
-    if (!shell->buffer)
-        return 1;
-    if (c == KEY_RIGHT &&
-    shell->col < shell->p_len + my_strlen(shell->buffer)) {
-        shell->col++;
-        move(shell->row, shell->col);
-        return 1;
+    if (str[0] == '[' && str[2] == 'C') {
+        if (shell->len > 0) {
+            shell->len++;
+            printf("\033[C");
+            return 1;
+        }
     }
     return 0;
 }

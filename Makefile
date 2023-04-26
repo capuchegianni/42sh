@@ -10,7 +10,6 @@ NAME = 42sh
 SRC = 	src/main.c										\
 		src/sh42.c										\
 		src/inits/init_shell.c 							\
-		src/inits/init_colors.c 						\
 		src/inits/init_env.c 							\
 		src/inits/init_history.c 						\
 		src/special_chars/newline.c 					\
@@ -38,9 +37,7 @@ OBJ_DIR = ./obj/
 
 OBJ = $(addprefix $(OBJ_DIR), $(subst src/,,$(SRC:.c=.o)))
 
-WARNING_FLAGS := -Wall -Wextra -W -g -g3 -ggdb
-
-NCURSES_FLAGS := -lncurses
+WARNING_FLAGS := -Wall -Wextra -W -g -g3 -ggdb -Wno-unused-parameter
 
 LIB_FLAGS := -I include/ -L ./lib/my -l:libmy.a
 
@@ -53,7 +50,7 @@ build_lib:
 
 $(NAME): $(OBJ)
 	make build_lib
-	gcc $(SRC) $(WARNING_FLAGS) -o $(NAME) $(LIB_FLAGS) $(NCURSES_FLAGS)
+	gcc $(SRC) $(WARNING_FLAGS) -o $(NAME) $(LIB_FLAGS)
 	@echo -n "[ "
 	@echo -n "\e[1;34mOK\e[0m"
 	@echo -n " ] "

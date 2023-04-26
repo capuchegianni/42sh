@@ -10,11 +10,9 @@
 int my_tab(int c, shell_t *shell)
 {
     if (c == '\t') {
-        addstr("    ");
-        shell->buffer = realloc(shell->buffer,
-        shell->col - shell->p_len + 5);
+        shell->buffer = realloc(shell->buffer, shell->len + 5);
         shell->buffer = my_strcat(shell->buffer, "    ");
-        shell->col += 4;
+        shell->len += 4;
         return 1;
     }
     return 0;

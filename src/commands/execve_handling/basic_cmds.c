@@ -36,6 +36,19 @@ int slash_cmd(shell_t *shell)
     return 0;
 }
 
+int get_valid_path(shell_t *shell, char **tab)
+{
+    for (int i = 1; tab[i]; i++) {
+        strcat(tab[i], "/");
+        strcat(tab[i], shell->cmd[0]);
+        if (access(tab[i], X_OK) != -1) {
+            shell->return_val = execve(tab[i], shell->cmd, shell->env);
+            return shell->return_val;
+        }
+    }
+    return 0;
+}
+
 int check_all_paths(shell_t *shell)
 {
     char *buff = NULL;
@@ -53,17 +66,11 @@ int check_all_paths(shell_t *shell)
     tab = my_wordarray(buff, ":=");
     if (!tab)
         return shell->return_val = 1;
-    for (int i = 1; tab[i]; i++) {
-        strcat(tab[i], "/");
-        strcat(tab[i], shell->cmd[0]);
-        printw("%s\n", tab[i]);
-        if (access(tab[i], X_OK) != -1) {
-            printw("\n\r");
-            shell->return_val = execve(tab[i], shell->cmd, shell->env);
-            return 1;
-        }
+    if (get_valid_path(shell, tab) == 0) {
+        print_exec_errs(shell);
+        return shell->return_val = 1;
     }
-    return 0;
+    return shell->return_val = 1;
 }
 
 int execve_handling(shell_t *shell)
@@ -71,16 +78,16 @@ int execve_handling(shell_t *shell)
     pid_t pid = fork();
 
     if (pid == -1) {
-        printw("\n");
-        dprintf(2, "\r\nfork: %s.\n", strerror(errno));
+        dprintf(2, "fork: %s.\n", strerror(errno));
         return shell->return_val = 84;
     }
     if (pid == 0) {
         check_all_paths(shell);
+        if (shell->return_val != 0)
+            exit(shell->return_val);
     } else {
         if (wait(&pid) == -1) {
-            printw("\n");
-            dprintf(2, "\r\nwait: %s.\n", strerror(errno));
+            dprintf(2, "wait: %s.\n", strerror(errno));
             return shell->return_val = 84;
         }
         shell->return_val = WEXITSTATUS(pid);

@@ -23,13 +23,10 @@
     } alias_t;
 
     typedef struct shell_s {
+        struct termios term;
         char **env;
         char *buffer;
-        int row;
-        int col;
-        int cursor_y;
-        int cursor_x;
-        int p_len;
+        int len;
         int return_val;
         char **cmd;
         history_t *history;

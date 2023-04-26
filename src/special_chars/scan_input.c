@@ -9,24 +9,20 @@
 
 int scan_input(int c, shell_t *shell)
 {
-    shell->cursor_y = getcury(stdscr);
-    shell->cursor_x = getcurx(stdscr);
-    if (shell->cursor_y != shell->row)
-        shell->row = shell->cursor_y;
+    char str[3];
+
     if (my_newline(c, shell) == 1)
         return 1;
     if (my_delete(c, shell) == 1)
         return 1;
     if (my_tab(c, shell) == 1)
         return 1;
-    if (c >= 258 && c <= 261) {
-        my_left(c, shell);
-        my_right(c, shell);
-        return 1;
-    }
-    if (c == 409 || c == 410) {
-        navigate(shell);
-        return 1;
+    if (c == 27) {
+        if (read(0, str, 3) == 3) {
+            // my_left(c, shell, str);
+            // my_right(c, shell, str);
+            return 1;
+        }
     }
     return 0;
 }
