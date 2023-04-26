@@ -41,8 +41,8 @@
     int navigate(shell_t *shell);
     int my_newline(int c, shell_t *shell);
     int my_delete(int c, shell_t *shell);
-    int my_left(int c, shell_t *shell, char str[3]);
-    int my_right(int c, shell_t *shell, char str[3]);
+    int my_left(int c, shell_t *shell);
+    int my_right(int c, shell_t *shell);
     int my_tab(int c, shell_t *shell);
 
     // Execve handling

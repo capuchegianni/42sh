@@ -23,5 +23,5 @@ int navigate(shell_t *shell)
     //         wscrl(stdscr, 1);
     //     }
     // }
-    return 0;
+    return (0);
 }

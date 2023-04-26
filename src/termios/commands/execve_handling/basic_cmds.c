@@ -29,11 +29,11 @@ int slash_cmd(shell_t *shell)
 {
     if (shell->cmd[0][0] == '.' || shell->cmd[0][0] == '/') {
         if (access(shell->cmd[0], X_OK) == 0)
-            return 1;
+            return (1);
         print_exec_errs(shell);
-        return 2;
+        return (2);
     }
-    return 0;
+    return (0);
 }
 
 int get_valid_path(shell_t *shell, char **tab)
@@ -43,10 +43,10 @@ int get_valid_path(shell_t *shell, char **tab)
         strcat(tab[i], shell->cmd[0]);
         if (access(tab[i], X_OK) != -1) {
             shell->return_val = execve(tab[i], shell->cmd, shell->env);
-            return shell->return_val;
+            return (shell->return_val);
         }
     }
-    return 0;
+    return (0);
 }
 
 int check_all_paths(shell_t *shell)
@@ -55,22 +55,22 @@ int check_all_paths(shell_t *shell)
     char **tab = NULL;
 
     if (slash_cmd(shell) == 2)
-        return shell->return_val = 1;
+        return (shell->return_val = 1);
     if (slash_cmd(shell) == 1) {
         shell->return_val = execve(shell->cmd[0], shell->cmd, shell->env);
         return shell->return_val;
     }
     buff = my_getenv(shell->env, "PATH");
     if (!buff)
-        return shell->return_val = 1;
+        return (shell->return_val = 1);
     tab = my_wordarray(buff, ":=");
     if (!tab)
-        return shell->return_val = 1;
+        return (shell->return_val = 1);
     if (get_valid_path(shell, tab) == 0) {
         print_exec_errs(shell);
-        return shell->return_val = 1;
+        return (shell->return_val = 1);
     }
-    return shell->return_val = 1;
+    return (shell->return_val = 1);
 }
 
 int execve_handling(shell_t *shell)
@@ -79,7 +79,7 @@ int execve_handling(shell_t *shell)
 
     if (pid == -1) {
         dprintf(2, "fork: %s.\n", strerror(errno));
-        return shell->return_val = 84;
+        return (shell->return_val) = 84;
     }
     if (pid == 0) {
         check_all_paths(shell);
@@ -88,9 +88,9 @@ int execve_handling(shell_t *shell)
     } else {
         if (wait(&pid) == -1) {
             dprintf(2, "wait: %s.\n", strerror(errno));
-            return shell->return_val = 84;
+            return (shell->return_val = 84);
         }
         shell->return_val = WEXITSTATUS(pid);
     }
-    return shell->return_val;
+    return (shell->return_val);
 }

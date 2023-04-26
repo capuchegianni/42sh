@@ -29,6 +29,11 @@
         int len;
         int return_val;
         char **cmd;
+        char last_char;
+        char *a_up ;
+        char *a_down;
+        char *a_right;
+        char *a_left;
         history_t *history;
         alias_t *alias;
     } shell_t;

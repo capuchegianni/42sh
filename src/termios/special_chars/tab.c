@@ -13,7 +13,7 @@ int my_tab(int c, shell_t *shell)
         shell->buffer = realloc(shell->buffer, shell->len + 5);
         shell->buffer = my_strcat(shell->buffer, "    ");
         shell->len += 4;
-        return 1;
+        return (1);
     }
-    return 0;
+    return (0);
 }

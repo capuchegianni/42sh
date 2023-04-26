@@ -11,7 +11,7 @@ int start_window(shell_t *shell)
 {
     display_prompt(shell);
     shell->buffer = calloc(1, 1);
-    return 0;
+    return (0);
 }
 
 int open_terminal(shell_t *shell)
@@ -23,18 +23,19 @@ int open_terminal(shell_t *shell)
         if (c == 4)
             break;
         if (shell->return_val == 84)
-            return shell->return_val;
+            return (shell->return_val);
         if (scan_input(c, shell) == 1)
             continue;
         shell->buffer = realloc(shell->buffer, shell->len + 2);
         if (shell->buffer == NULL)
-            return shell->return_val = 84;
+            return (shell->return_val) = 84;
         shell->buffer[shell->len++] = c;
         shell->buffer[shell->len] = '\0';
         printf("%c", c);
+        shell->last_char = c;
     }
     printf("exit\n");
-    return shell->return_val;
+    return (shell->return_val);
 }
 
 int my_shell(char **env, shell_t *shell)

@@ -13,7 +13,7 @@ int my_delete(int c, shell_t *shell)
         printf("\b \b");
         shell->buffer[shell->len] = '\0';
         shell->len--;
-        return 1;
+        return (1);
     }
-    return 0;
+    return (0);
 }

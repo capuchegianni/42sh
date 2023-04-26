@@ -17,6 +17,7 @@ shell_t *init_shell(shell_t *shell, struct termios old_term)
     shell->history = NULL;
     shell->alias = NULL;
     shell->cmd = NULL;
+    shell->last_char = 0;
     tcgetattr(0, &old_term);
     shell->term = old_term;
     shell->term.c_lflag &= ~(ICANON | ECHO | ISIG);
