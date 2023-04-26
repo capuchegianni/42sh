@@ -38,7 +38,6 @@
 
     // Special chars handling
     int scan_input(int c, shell_t *shell);
-    int navigate(shell_t *shell);
     int my_newline(int c, shell_t *shell);
     int my_delete(int c, shell_t *shell);
     int my_left(int c, shell_t *shell);
