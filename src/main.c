@@ -6,6 +6,7 @@
 */
 
 #include "project.h"
+#include "base_term.h"
 
 int main(int ac, char **av, char **env)
 {
@@ -27,6 +28,6 @@ int main(int ac, char **av, char **env)
     if (isatty(0) == 1)
         return_val = my_shell(env, shell);
     else
-        printf("caca\n");
+        b_my_shell(env, shell);
     return (return_val);
 }

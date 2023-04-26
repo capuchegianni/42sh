@@ -5,9 +5,9 @@
 ** alias
 */
 
-#include "project.h"
+#include "base_term.h"
 
-void free_alias(shell_t *shell)
+void b_free_alias(shell_t *shell)
 {
     alias_t *current = shell->alias;
     alias_t *next = NULL;
@@ -21,13 +21,13 @@ void free_alias(shell_t *shell)
     }
 }
 
-void add_alias(shell_t *shell, char *name, char *command)
+void b_add_alias(shell_t *shell, char *name, char *command)
 {
     alias_t *current = shell->alias;
     alias_t *prev_alias = NULL;
 
     if (!shell->alias) {
-        init_alias(shell, name, command);
+        b_init_alias(shell, name, command);
     } else {
         while (current) {
             prev_alias = current;

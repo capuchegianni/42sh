@@ -24,6 +24,7 @@
     shell_t *init_shell(shell_t *shell, struct termios old_term);
     char **init_env(char **env);
     void init_history(shell_t *shell);
+    void init_alias(shell_t *shell, char *name, char *command);
 
     // Starting the terminal
     int my_shell(char **env, shell_t *shell);
@@ -38,7 +39,6 @@
 
     // Special chars handling
     int scan_input(int c, shell_t *shell);
-    int navigate(shell_t *shell);
     int my_newline(int c, shell_t *shell);
     int my_delete(int c, shell_t *shell);
     int my_left(int c, shell_t *shell);
