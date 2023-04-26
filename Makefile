@@ -7,39 +7,36 @@
 
 NAME = 42sh
 
-SRC = 	src/main.c										\
-		src/sh42.c										\
-		src/inits/init_shell.c 							\
-		src/inits/init_colors.c 						\
-		src/inits/init_env.c 							\
-		src/inits/init_history.c 						\
-		src/special_chars/newline.c 					\
-		src/special_chars/delete.c 						\
-		src/special_chars/keys.c 						\
-		src/special_chars/scan_input.c 					\
-		src/special_chars/navigation.c 					\
-		src/special_chars/tab.c 						\
-		src/parsing/parsing.c 							\
-		src/parsing/check_cmd.c 						\
-		src/alias/alias.c 								\
-		src/utils/free_struct_shell.c 					\
-		src/utils/prompt.c 								\
-		src/commands/history/history.c 					\
-		src/commands/history/history_error_handling.c 	\
-		src/commands/history/print_history.c 			\
-		src/commands/cd/change_pwd.c					\
-		src/commands/cd/cd_cmd.c 						\
-		src/commands/env_cmds/env.c 					\
-		src/commands/env_cmds/setenv.c 					\
-		src/commands/env_cmds/unsetenv.c 				\
+SRC = 	src/main.c												\
+		src/termios/sh42.c										\
+		src/termios/inits/init_shell.c 							\
+		src/termios/inits/init_env.c 							\
+		src/termios/inits/init_history.c 						\
+		src/termios/special_chars/newline.c 					\
+		src/termios/special_chars/delete.c 						\
+		src/termios/special_chars/keys.c 						\
+		src/termios/special_chars/scan_input.c 					\
+		src/termios/special_chars/tab.c 						\
+		src/termios/parsing/parsing.c 							\
+		src/termios/parsing/check_cmd.c 						\
+		src/termios/utils/free_struct_shell.c 					\
+		src/termios/utils/prompt.c 								\
+		src/termios/commands/alias/alias.c						\
+		src/termios/commands/history/history.c 					\
+		src/termios/commands/history/history_error_handling.c 	\
+		src/termios/commands/history/print_history.c 			\
+		src/termios/commands/cd/change_pwd.c					\
+		src/termios/commands/cd/cd_cmd.c 						\
+		src/termios/commands/env_cmds/env.c 					\
+		src/termios/commands/env_cmds/setenv.c 					\
+		src/termios/commands/env_cmds/unsetenv.c 				\
+		src/termios/commands/execve_handling/basic_cmds.c 		\
 
 OBJ_DIR = ./obj/
 
 OBJ = $(addprefix $(OBJ_DIR), $(subst src/,,$(SRC:.c=.o)))
 
-WARNING_FLAGS := -Wall -Wextra -W -g -g3 -ggdb
-
-NCURSES_FLAGS := -lncurses
+WARNING_FLAGS := -Wall -Wextra -W -g -g3 -ggdb -Wno-unused-parameter
 
 LIB_FLAGS := -I include/ -L ./lib/my -l:libmy.a
 
@@ -52,7 +49,7 @@ build_lib:
 
 $(NAME): $(OBJ)
 	make build_lib
-	gcc $(SRC) $(WARNING_FLAGS) -o $(NAME) $(LIB_FLAGS) $(NCURSES_FLAGS)
+	gcc $(SRC) $(WARNING_FLAGS) -o $(NAME) $(LIB_FLAGS)
 	@echo -n "[ "
 	@echo -n "\e[1;34mOK\e[0m"
 	@echo -n " ] "

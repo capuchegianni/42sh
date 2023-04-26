@@ -10,5 +10,5 @@
 void print_env(shell_t *shell)
 {
     for (int i = 0; shell->env[i]; i++)
-        printw("%s\n", shell->env[i]);
+        printf("%s\n", shell->env[i]);
 }

@@ -9,17 +9,24 @@
     #define PROJECT_H_
 
     #include "../lib/my/my.h"
-    #include "struct.h"
     #include <time.h>
+    #include <termios.h>
+    #include "struct.h"
+
+    // defines
+    #define RED "\033[1;31m"
+    #define GREEN "\033[1;32m"
+    #define YELLOW "\033[1;33m"
+    #define BLUE "\033[1;34m"
+    #define RESET "\033[0m"
 
     // Initers
-    shell_t *init_shell(shell_t *shell);
-    void init_colors(void);
+    shell_t *init_shell(shell_t *shell, struct termios old_term);
     char **init_env(char **env);
     void init_history(shell_t *shell);
 
     // Starting the terminal
-    int my_shell(char **env);
+    int my_shell(char **env, shell_t *shell);
 
     // Utils
     void display_prompt(shell_t *shell);
@@ -37,6 +44,9 @@
     int my_left(int c, shell_t *shell);
     int my_right(int c, shell_t *shell);
     int my_tab(int c, shell_t *shell);
+
+    // Execve handling
+    int execve_handling(shell_t *shell);
 
     // History handling
     void add_command_history(shell_t *shell);

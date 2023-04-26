@@ -18,7 +18,6 @@
     #include <stdarg.h>
     #include <string.h>
     #include <errno.h>
-    #include <ncurses.h>
     #include <sys/types.h>
     #include <sys/wait.h>
     #include <sys/stat.h>
