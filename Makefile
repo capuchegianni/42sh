@@ -16,7 +16,6 @@ SRC = 	src/main.c												\
 		src/termios/special_chars/delete.c 						\
 		src/termios/special_chars/keys.c 						\
 		src/termios/special_chars/scan_input.c 					\
-		src/termios/special_chars/navigation.c 					\
 		src/termios/special_chars/tab.c 						\
 		src/termios/parsing/parsing.c 							\
 		src/termios/parsing/check_cmd.c 						\
