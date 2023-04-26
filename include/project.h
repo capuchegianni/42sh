@@ -24,6 +24,7 @@
     shell_t *init_shell(shell_t *shell, struct termios old_term);
     char **init_env(char **env);
     void init_history(shell_t *shell);
+    void init_alias(shell_t *shell, char *name, char *command);
 
     // Starting the terminal
     int my_shell(char **env, shell_t *shell);

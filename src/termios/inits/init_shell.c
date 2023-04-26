@@ -19,11 +19,13 @@ shell_t *init_shell(shell_t *shell, struct termios old_term)
     shell->cmd = NULL;
     shell->last_char = 0;
     shell->cursor_pos = 0;
-    tcgetattr(0, &old_term);
-    shell->term = old_term;
-    shell->term.c_lflag &= ~(ICANON | ECHO | ISIG);
-    shell->term.c_cc[VMIN] = 1;
-    shell->term.c_cc[VTIME] = 0;
-    tcsetattr(0, TCSANOW, &shell->term);
+    if (isatty(0)) {
+        tcgetattr(0, &old_term);
+        shell->term = old_term;
+        shell->term.c_lflag &= ~(ICANON | ECHO | ISIG);
+        shell->term.c_cc[VMIN] = 1;
+        shell->term.c_cc[VTIME] = 0;
+        tcsetattr(0, TCSANOW, &shell->term);
+    }
     return (shell);
 }
