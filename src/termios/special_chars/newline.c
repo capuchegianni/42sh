@@ -21,6 +21,7 @@ int my_newline(int c, shell_t *shell)
         display_prompt(shell);
         shell->buffer = calloc(1, 1);
         shell->len = 0;
+        shell->cursor_pos = 0;
         return (1);
     }
     return (0);
