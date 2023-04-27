@@ -28,6 +28,7 @@
 
     // Starting the terminal
     int my_shell(char **env, shell_t *shell);
+    int b_my_shell(char **env, shell_t *shell);
 
     // Utils
     void display_prompt(shell_t *shell);
@@ -47,6 +48,8 @@
 
     // Execve handling
     int execve_handling(shell_t *shell);
+    void get_exceptions(int p, shell_t *shell);
+    void print_exec_errs(shell_t *shell);
 
     // History handling
     void add_command_history(shell_t *shell);

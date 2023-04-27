@@ -5,9 +5,9 @@
 ** init_env
 */
 
-#include "base_term.h"
+#include "project.h"
 
-char **b_init_env(char **env)
+char **init_env(char **env)
 {
     char **new_env = malloc(sizeof(char *) * (my_tablen(env) + 1));
     int i = 0;
