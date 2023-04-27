@@ -5,47 +5,34 @@
 ** prompt
 */
 
-#include "../include/project.h"
+#include "project.h"
 
-void print_usr(shell_t *shell)
+void print_usr(shell_t *shell, int n)
 {
     char *usr = my_getenv(shell->env, "USER");
 
     if (usr == NULL)
         usr = "";
-    attron(COLOR_PAIR(4));
-    printw("(");
-    attron(COLOR_PAIR(3));
-    printw("%s", usr);
-    attroff(COLOR_PAIR(3));
-    attron(COLOR_PAIR(4));
-    printw(") | ");
-    shell->prompt_len += my_strlen(usr) + 5;
+    if (n == 1)
+        printf("\n");
+    printf("┌──(%s%s%s)-%s[%s", BLUE, usr, RESET, YELLOW, RESET);
     free(usr);
 }
 
-void find_val(int val_ret, char *str, shell_t *shell)
+void find_val(int val_ret, char *str, shell_t *shell, int n)
 {
-    shell->prompt_len = my_strlen(str) + 3;
     if (isatty(0) == 1) {
-        attron(A_BOLD);
-        print_usr(shell);
-        printw("%s ", str);
-        attroff(COLOR_PAIR(4));
+        print_usr(shell, n);
+        printf("%s%s%s%s]%s\n", WHITE, str, RESET, YELLOW, RESET);
         if (val_ret == 0) {
-            attron(COLOR_PAIR(1));
-            printw("$ ");
-            attroff(COLOR_PAIR(1));
+            printf("└─%s$ %s", GREEN, RESET);
         } else {
-            attron(COLOR_PAIR(2));
-            printw("$ ");
-            attroff(COLOR_PAIR(2));
+            printf("└─%s$ %s", RED, RESET);
         }
     }
-    attroff(A_BOLD);
 }
 
-void display_prompt(shell_t *shell)
+void display_prompt(shell_t *shell, int n)
 {
     char *str = NULL;
     char *pwd = getcwd(NULL, 0);
@@ -61,10 +48,9 @@ void display_prompt(shell_t *shell)
             slash++;
     if (slash >= 3) {
         str = my_strcat("~/", pwd + i);
-        find_val(shell->return_val, str, shell);
+        find_val(shell->return_val, str, shell, n);
         free(str);
     } else
-        find_val(shell->return_val, pwd, shell);
-    refresh();
+        find_val(shell->return_val, pwd, shell, n);
     free(pwd);
 }

@@ -9,13 +9,18 @@
 
 int my_tab(int c, shell_t *shell)
 {
-    if (c == '\t') {
-        addstr("    ");
-        shell->buffer = realloc(shell->buffer,
-        shell->col - shell->prompt_len + 5);
+    if (c == 9) {
+        if (shell->len == 0) {
+            printf("\n");
+            system("ls");
+            display_prompt(shell, 1);
+            return (1);
+        }
+        shell->buffer = realloc(shell->buffer, shell->len + 5);
         shell->buffer = my_strcat(shell->buffer, "    ");
-        shell->col += 4;
-        return 1;
+        shell->len += 4;
+        printf("    ");
+        return (1);
     }
-    return 0;
+    return (0);
 }

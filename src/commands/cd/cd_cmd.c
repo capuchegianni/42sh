@@ -35,8 +35,7 @@ void cd_path(shell_t *shell)
     char *temp = getcwd(NULL, 0);
 
     if (chdir(shell->cmd[1]) == -1) {
-        printw("\n");
-        dprintf(2, "\r\n%s: %s.\n", shell->cmd[1], strerror(errno));
+        dprintf(2, "%s: %s.\n", shell->cmd[1], strerror(errno));
         shell->return_val = 1;
         free(temp);
     } else {
@@ -49,8 +48,7 @@ void cd_path(shell_t *shell)
 int check_args_nbr(shell_t *shell)
 {
     if (my_tablen(shell->cmd) >= 3) {
-        printw("\n");
-        dprintf(2, "\r\ncd: Too many arguments.\n");
+        dprintf(2, "cd: Too many arguments.\n");
         shell->return_val = 1;
         return (1);
     }

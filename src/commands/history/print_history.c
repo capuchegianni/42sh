@@ -12,7 +12,7 @@ void print_history(shell_t *shell)
     history_t *c = shell->history;
 
     while (c) {
-        printw("     %d  %s   %s\n", c->id, c->date, c->command);
+        printf("     %d  %s   %s\n", c->id, c->date, c->command);
         c = c->next;
     }
 }
