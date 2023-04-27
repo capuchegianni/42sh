@@ -30,7 +30,7 @@
     int my_shell(char **env, shell_t *shell);
 
     // Utils
-    void display_prompt(shell_t *shell);
+    void display_prompt(shell_t *shell, int n);
     void free_struct_shell(shell_t *shell);
 
     // Parsing

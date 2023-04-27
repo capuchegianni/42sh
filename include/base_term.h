@@ -19,6 +19,7 @@
     #define YELLOW "\033[1;33m"
     #define BLUE "\033[1;34m"
     #define RESET "\033[0m"
+    #define WHITE "\033[1;37m"
 
     // Initers
     shell_t *b_init_shell(shell_t *shell, struct termios old_term);

@@ -9,7 +9,7 @@
 
 int start_window(shell_t *shell)
 {
-    display_prompt(shell);
+    display_prompt(shell, 0);
     shell->buffer = calloc(1, 1);
     return (0);
 }

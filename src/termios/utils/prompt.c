@@ -6,31 +6,34 @@
 */
 
 #include "../include/project.h"
+#include "base_term.h"
 
-void print_usr(shell_t *shell)
+void print_usr(shell_t *shell, int n)
 {
     char *usr = my_getenv(shell->env, "USER");
 
     if (usr == NULL)
         usr = "";
-    printf("%s(%s%s%s) | %s", BLUE, YELLOW, usr, BLUE, RESET);
+    if (n == 1)
+        printf("\n");
+    printf("┌──(\033[1;36m%s\033[0m)-\033[1;33m[\033[0m", usr);
     free(usr);
 }
 
-void find_val(int val_ret, char *str, shell_t *shell)
+void find_val(int val_ret, char *str, shell_t *shell, int n)
 {
     if (isatty(0) == 1) {
-        print_usr(shell);
-        printf("%s%s%s ", BLUE, str, RESET);
+        print_usr(shell, n);
+        printf("%s%s%s%s]%s\n", WHITE, str, RESET, YELLOW, RESET);
         if (val_ret == 0) {
-            printf("%s$ %s", GREEN, RESET);
+            printf("└─\033[1;32m$ \033[0m");
         } else {
-            printf("%s$ %s", RED, RESET);
+            printf("└─\033[1;31m$ \033[0m");
         }
     }
 }
 
-void display_prompt(shell_t *shell)
+void display_prompt(shell_t *shell, int n)
 {
     char *str = NULL;
     char *pwd = getcwd(NULL, 0);
@@ -46,9 +49,9 @@ void display_prompt(shell_t *shell)
             slash++;
     if (slash >= 3) {
         str = my_strcat("~/", pwd + i);
-        find_val(shell->return_val, str, shell);
+        find_val(shell->return_val, str, shell, n);
         free(str);
     } else
-        find_val(shell->return_val, pwd, shell);
+        find_val(shell->return_val, pwd, shell, n);
     free(pwd);
 }
