@@ -13,7 +13,7 @@ int my_tab(int c, shell_t *shell)
         if (shell->len == 0) {
             printf("\n");
             system("ls");
-            display_prompt(shell);
+            display_prompt(shell, 1);
             return (1);
         }
         shell->buffer = realloc(shell->buffer, shell->len + 5);
