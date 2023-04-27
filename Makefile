@@ -26,6 +26,7 @@ SRC = 	src/main.c													\
 		src/base_term/commands/env_cmds/b_setenv.c 					\
 		src/base_term/commands/env_cmds/b_unsetenv.c 				\
 		src/base_term/commands/execve_handling/b_basic_cmds.c 		\
+		src/base_term/commands/execve_handling/b_errors_printing.c 	\
 		src/termios/sh42.c											\
 		src/termios/inits/init_shell.c 								\
 		src/termios/inits/init_env.c 								\
@@ -112,6 +113,7 @@ fclean: clean
 	make fclean -C lib/my/
 	rm -rf $(OBJ_DIR)
 	rm -f $(NAME)
+	rm -f *.log
 	@echo -n "[ "
 	@echo -n "\e[1;34mOK\e[0m"
 	@echo -n " ] "

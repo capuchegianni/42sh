@@ -38,6 +38,8 @@
 
     // Execve handling
     int b_execve_handling(shell_t *shell);
+    void b_print_exec_errs(shell_t *shell);
+    void get_exceptions(int p, shell_t *shell);
 
     // History handling
     void b_add_command_history(shell_t *shell);

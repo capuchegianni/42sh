@@ -7,24 +7,6 @@
 
 #include "base_term.h"
 
-void b_print_exec_errs(shell_t *shell)
-{
-    if (errno == ENOENT) {
-        dprintf(2, "%s: Command not found.\n", shell->cmd[0]);
-        return;
-    }
-    if (errno == ENOTDIR) {
-        dprintf(2, "%s: Permission denied.\n", shell->cmd[0]);
-        return;
-    }
-    if (errno == ENOEXEC) {
-        dprintf(2, "%s: Exec format error. Wrong Architecture.\n",
-        shell->cmd[0]);
-        return;
-    }
-    dprintf(2, "%s: %s.\n", shell->cmd[0], strerror(errno));
-}
-
 int b_slash_cmd(shell_t *shell)
 {
     if (shell->cmd[0][0] == '.' || shell->cmd[0][0] == '/') {
@@ -38,6 +20,8 @@ int b_slash_cmd(shell_t *shell)
 
 int b_get_valid_path(shell_t *shell, char **tab)
 {
+    char *cmd = strdup(shell->cmd[0]);
+
     for (int i = 0; tab[i]; i++) {
         strcat(tab[i], "/");
         strcat(tab[i], shell->cmd[0]);
@@ -46,6 +30,8 @@ int b_get_valid_path(shell_t *shell, char **tab)
             return (shell->return_val);
         }
     }
+    shell->cmd[0] = strdup(cmd);
+    free(cmd);
     return (0);
 }
 
@@ -56,20 +42,17 @@ int b_check_all_paths(shell_t *shell)
 
     if (b_slash_cmd(shell) == 2)
         return (shell->return_val = 1);
-    if (b_slash_cmd(shell) == 1) {
+    if (b_slash_cmd(shell) == 1)
         shell->return_val = execve(shell->cmd[0], shell->cmd, shell->env);
-        return shell->return_val;
-    }
     buff = my_getenv(shell->env, "PATH");
     if (!buff)
         return (shell->return_val = 1);
     tab = my_wordarray(buff, ":=");
     if (!tab)
         return (shell->return_val = 1);
-    if (b_get_valid_path(shell, tab) == 0) {
-        b_print_exec_errs(shell);
-        return (shell->return_val = 1);
-    }
+    if (b_get_valid_path(shell, tab) == 0)
+        shell->return_val = execve(shell->cmd[0], shell->cmd, shell->env);
+    b_print_exec_errs(shell);
     return (shell->return_val = 1);
 }
 
@@ -91,6 +74,7 @@ int b_execve_handling(shell_t *shell)
             return (shell->return_val = 84);
         }
         shell->return_val = WEXITSTATUS(pid);
+        get_exceptions(pid, shell);
     }
     return (shell->return_val);
 }
