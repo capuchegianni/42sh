@@ -69,6 +69,6 @@
     // env cmds
     int my_setenv(shell_t *shell);
     int my_unsetenv(shell_t *shell);
-    void print_env(shell_t *shell);
+    int print_env(shell_t *shell);
 
 #endif /* !PROJECT_H_ */
