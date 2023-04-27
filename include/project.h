@@ -17,7 +17,8 @@
     #define RED "\033[1;31m"
     #define GREEN "\033[1;32m"
     #define YELLOW "\033[1;33m"
-    #define BLUE "\033[1;34m"
+    #define BLUE "\033[1;36m"
+    #define WHITE "\033[1;37m"
     #define RESET "\033[0m"
 
     // Initers
@@ -31,7 +32,7 @@
     int b_my_shell(char **env, shell_t *shell);
 
     // Utils
-    void display_prompt(shell_t *shell);
+    void display_prompt(shell_t *shell, int n);
     void free_struct_shell(shell_t *shell);
 
     // Parsing
