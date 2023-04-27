@@ -5,7 +5,7 @@
 ** sh42
 */
 
-#include "base_term.h"
+#include "project.h"
 
 int b_open_terminal(shell_t *shell)
 {
@@ -15,8 +15,8 @@ int b_open_terminal(shell_t *shell)
         if (shell->buffer[0] == '\n' || !shell->buffer[0]) {
             continue;
         }
-        b_add_command_history(shell);
-        b_separate_all_commands(shell);
+        add_command_history(shell);
+        separate_all_commands(shell);
     }
     return (shell->return_val);
 }
@@ -25,11 +25,11 @@ int b_my_shell(char **env, shell_t *shell)
 {
     int return_val = 0;
 
-    shell->env = b_init_env(env);
+    shell->env = init_env(env);
     if (shell->env == NULL)
         return (84);
     b_open_terminal(shell);
     return_val = shell->return_val;
-    b_free_struct_shell(shell);
+    free_struct_shell(shell);
     return (return_val);
 }

@@ -6,7 +6,6 @@
 */
 
 #include "project.h"
-#include "base_term.h"
 
 int main(int ac, char **av, char **env)
 {

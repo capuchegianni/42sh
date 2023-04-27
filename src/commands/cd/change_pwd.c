@@ -5,9 +5,9 @@
 ** change_pwd
 */
 
-#include "base_term.h"
+#include "project.h"
 
-char **b_change_pwd(char **my_env, char *pwd)
+char **change_pwd(char **my_env, char *pwd)
 {
     int i = my_searchintab(my_env, "PWD=");
 
@@ -19,7 +19,7 @@ char **b_change_pwd(char **my_env, char *pwd)
     return (my_env);
 }
 
-char **b_change_oldpwd(char **my_env, char *pwd)
+char **change_oldpwd(char **my_env, char *pwd)
 {
     int i = my_searchintab(my_env, "OLDPWD=");
 

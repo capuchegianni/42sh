@@ -5,20 +5,20 @@
 ** basic_cmds
 */
 
-#include "base_term.h"
+#include "project.h"
 
-int b_slash_cmd(shell_t *shell)
+int slash_cmd(shell_t *shell)
 {
     if (shell->cmd[0][0] == '.' || shell->cmd[0][0] == '/') {
         if (access(shell->cmd[0], X_OK) == 0)
             return (1);
-        b_print_exec_errs(shell);
+        print_exec_errs(shell);
         return (2);
     }
     return (0);
 }
 
-int b_get_valid_path(shell_t *shell, char **tab)
+int get_valid_path(shell_t *shell, char **tab)
 {
     char *cmd = strdup(shell->cmd[0]);
 
@@ -35,14 +35,14 @@ int b_get_valid_path(shell_t *shell, char **tab)
     return (0);
 }
 
-int b_check_all_paths(shell_t *shell)
+int check_all_paths(shell_t *shell)
 {
     char *buff = NULL;
     char **tab = NULL;
 
-    if (b_slash_cmd(shell) == 2)
+    if (slash_cmd(shell) == 2)
         return (shell->return_val = 1);
-    if (b_slash_cmd(shell) == 1)
+    if (slash_cmd(shell) == 1)
         shell->return_val = execve(shell->cmd[0], shell->cmd, shell->env);
     buff = my_getenv(shell->env, "PATH");
     if (!buff)
@@ -50,13 +50,13 @@ int b_check_all_paths(shell_t *shell)
     tab = my_wordarray(buff, ":=");
     if (!tab)
         return (shell->return_val = 1);
-    if (b_get_valid_path(shell, tab) == 0)
+    if (get_valid_path(shell, tab) == 0)
         shell->return_val = execve(shell->cmd[0], shell->cmd, shell->env);
-    b_print_exec_errs(shell);
+    print_exec_errs(shell);
     return (shell->return_val = 1);
 }
 
-int b_execve_handling(shell_t *shell)
+int execve_handling(shell_t *shell)
 {
     pid_t pid = fork();
 
@@ -65,7 +65,7 @@ int b_execve_handling(shell_t *shell)
         return (shell->return_val) = 84;
     }
     if (pid == 0) {
-        b_check_all_paths(shell);
+        check_all_paths(shell);
         if (shell->return_val != 0)
             exit(shell->return_val);
     } else {

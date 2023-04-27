@@ -5,9 +5,9 @@
 ** errors_printing
 */
 
-#include "base_term.h"
+#include "project.h"
 
-void b_print_exec_errs(shell_t *shell)
+void print_exec_errs(shell_t *shell)
 {
     if (errno == ENOENT) {
         dprintf(2, "%s: Command not found.\n", shell->cmd[0]);

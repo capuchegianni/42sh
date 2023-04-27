@@ -7,50 +7,33 @@
 
 NAME = 42sh
 
-SRC = 	src/main.c													\
-		src/base_term/b_sh42.c										\
-		src/base_term/utils/b_free_struct_shell.c 					\
-		src/base_term/inits/b_init_shell.c 							\
-		src/base_term/inits/b_init_env.c 							\
-		src/base_term/inits/b_init_history.c 						\
-		src/base_term/inits/b_init_alias.c 							\
-		src/base_term/parsing/b_parsing.c 							\
-		src/base_term/parsing/b_check_cmd.c 						\
-		src/base_term/commands/alias/b_alias.c						\
-		src/base_term/commands/history/b_history.c 					\
-		src/base_term/commands/history/b_history_error_handling.c 	\
-		src/base_term/commands/history/b_print_history.c 			\
-		src/base_term/commands/cd/b_change_pwd.c					\
-		src/base_term/commands/cd/b_cd_cmd.c 						\
-		src/base_term/commands/env_cmds/b_env.c 					\
-		src/base_term/commands/env_cmds/b_setenv.c 					\
-		src/base_term/commands/env_cmds/b_unsetenv.c 				\
-		src/base_term/commands/execve_handling/b_basic_cmds.c 		\
-		src/base_term/commands/execve_handling/b_errors_printing.c 	\
-		src/termios/sh42.c											\
-		src/termios/inits/init_shell.c 								\
-		src/termios/inits/init_env.c 								\
-		src/termios/inits/init_history.c 							\
-		src/termios/inits/init_alias.c 								\
-		src/termios/special_chars/newline.c 						\
-		src/termios/special_chars/delete.c 							\
-		src/termios/special_chars/keys.c 							\
-		src/termios/special_chars/scan_input.c 						\
-		src/termios/special_chars/tab.c 							\
-		src/termios/parsing/parsing.c 								\
-		src/termios/parsing/check_cmd.c 							\
-		src/termios/utils/free_struct_shell.c 						\
-		src/termios/utils/prompt.c 									\
-		src/termios/commands/alias/alias.c							\
-		src/termios/commands/history/history.c 						\
-		src/termios/commands/history/history_error_handling.c 		\
-		src/termios/commands/history/print_history.c 				\
-		src/termios/commands/cd/change_pwd.c						\
-		src/termios/commands/cd/cd_cmd.c 							\
-		src/termios/commands/env_cmds/env.c 						\
-		src/termios/commands/env_cmds/setenv.c 						\
-		src/termios/commands/env_cmds/unsetenv.c 					\
-		src/termios/commands/execve_handling/basic_cmds.c 			\
+SRC = 	src/main.c											\
+		src/b_sh42.c										\
+		src/t_sh42.c										\
+		src/inits/init_shell.c 								\
+		src/inits/init_env.c 								\
+		src/inits/init_history.c 							\
+		src/inits/init_alias.c 								\
+		src/special_chars/newline.c 						\
+		src/special_chars/delete.c 							\
+		src/special_chars/keys.c 							\
+		src/special_chars/scan_input.c 						\
+		src/special_chars/tab.c 							\
+		src/parsing/parsing.c 								\
+		src/parsing/check_cmd.c 							\
+		src/utils/free_struct_shell.c 						\
+		src/utils/prompt.c 									\
+		src/commands/alias/alias.c							\
+		src/commands/history/history.c 						\
+		src/commands/history/history_error_handling.c 		\
+		src/commands/history/print_history.c 				\
+		src/commands/cd/change_pwd.c						\
+		src/commands/cd/cd_cmd.c 							\
+		src/commands/env_cmds/env.c 						\
+		src/commands/env_cmds/setenv.c 						\
+		src/commands/env_cmds/unsetenv.c 					\
+		src/commands/execve_handling/basic_cmds.c 			\
+		src/commands/execve_handling/errors_printing.c 		\
 
 OBJ_DIR = ./obj/
 
