@@ -5,8 +5,7 @@
 ** prompt
 */
 
-#include "../include/project.h"
-#include "base_term.h"
+#include "project.h"
 
 void print_usr(shell_t *shell, int n)
 {
@@ -16,7 +15,7 @@ void print_usr(shell_t *shell, int n)
         usr = "";
     if (n == 1)
         printf("\n");
-    printf("┌──(\033[1;36m%s\033[0m)-\033[1;33m[\033[0m", usr);
+    printf("┌──(%s%s%s)-%s[%s", BLUE, usr, RESET, YELLOW, RESET);
     free(usr);
 }
 
@@ -26,9 +25,9 @@ void find_val(int val_ret, char *str, shell_t *shell, int n)
         print_usr(shell, n);
         printf("%s%s%s%s]%s\n", WHITE, str, RESET, YELLOW, RESET);
         if (val_ret == 0) {
-            printf("└─\033[1;32m$ \033[0m");
+            printf("└─%s$ %s", GREEN, RESET);
         } else {
-            printf("└─\033[1;31m$ \033[0m");
+            printf("└─%s$ %s", RED, RESET);
         }
     }
 }
