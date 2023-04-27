@@ -28,6 +28,6 @@ int main(int ac, char **av, char **env)
     if (isatty(0) == 1)
         return_val = my_shell(env, shell);
     else
-        b_my_shell(env, shell);
+        return_val = b_my_shell(env, shell);
     return (return_val);
 }

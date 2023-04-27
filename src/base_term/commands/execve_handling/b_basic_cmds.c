@@ -38,7 +38,7 @@ int b_slash_cmd(shell_t *shell)
 
 int b_get_valid_path(shell_t *shell, char **tab)
 {
-    for (int i = 1; tab[i]; i++) {
+    for (int i = 0; tab[i]; i++) {
         strcat(tab[i], "/");
         strcat(tab[i], shell->cmd[0]);
         if (access(tab[i], X_OK) != -1) {

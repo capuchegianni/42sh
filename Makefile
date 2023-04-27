@@ -9,13 +9,13 @@ NAME = 42sh
 
 SRC = 	src/main.c													\
 		src/base_term/b_sh42.c										\
+		src/base_term/utils/b_free_struct_shell.c 					\
 		src/base_term/inits/b_init_shell.c 							\
 		src/base_term/inits/b_init_env.c 							\
 		src/base_term/inits/b_init_history.c 						\
 		src/base_term/inits/b_init_alias.c 							\
 		src/base_term/parsing/b_parsing.c 							\
 		src/base_term/parsing/b_check_cmd.c 						\
-		src/base_term/utils/b_free_struct_shell.c 					\
 		src/base_term/commands/alias/b_alias.c						\
 		src/base_term/commands/history/b_history.c 					\
 		src/base_term/commands/history/b_history_error_handling.c 	\

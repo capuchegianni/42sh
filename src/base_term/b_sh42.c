@@ -11,8 +11,10 @@ int b_open_terminal(shell_t *shell)
 {
     size_t len;
 
-    shell->buffer = calloc(1, 1);
     while (getline(&shell->buffer, &len, stdin) != -1) {
+        if (shell->buffer[0] == '\n' || !shell->buffer[0]) {
+            continue;
+        }
         b_add_command_history(shell);
         b_separate_all_commands(shell);
     }
