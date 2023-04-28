@@ -9,8 +9,9 @@
     #define PROJECT_H_
 
     #include "../lib/my/my.h"
-    #include <time.h>
     #include <termios.h>
+    #include <dirent.h>
+    #include <time.h>
     #include "struct.h"
 
     // defines
