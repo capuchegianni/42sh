@@ -53,6 +53,8 @@ int check_all_paths(shell_t *shell)
     if (get_valid_path(shell, tab) == 0)
         shell->return_val = execve(shell->cmd[0], shell->cmd, shell->env);
     print_exec_errs(shell);
+    free(buff);
+    my_free_wordarray(tab);
     return (shell->return_val = 1);
 }
 

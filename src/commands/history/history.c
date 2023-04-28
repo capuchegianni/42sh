@@ -19,6 +19,7 @@ char *get_date(void)
     sprintf(min, "%d", tm_struct->tm_min);
     date = strcat(hour, ":");
     date = strcat(date, min);
+    free(min);
     return (date);
 }
 

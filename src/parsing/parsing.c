@@ -72,18 +72,18 @@ void parse_or(char *cmd, shell_t *shell)
 void separate_all_commands(shell_t *shell)
 {
     char *s_cmd = NULL;
-    char *cmd = strdup(shell->buffer);
 
-    for (int i = 0, s = 0; cmd[i]; i++) {
-        if (cmd[i] == ';')
-            s_cmd = getcmd(cmd, s, i);
-        for (; cmd[i] == ';'; i++);
-        if (cmd[i + 1] && cmd[i] == '&' && cmd[i + 1] == '&') {
-            s_cmd = getcmd(cmd, s, i);
+    for (int i = 0, s = 0; shell->buffer[i]; i++) {
+        if (shell->buffer[i] == ';')
+            s_cmd = getcmd(shell->buffer, s, i);
+        for (; shell->buffer[i] == ';'; i++);
+        if (shell->buffer[i + 1] && shell->buffer[i] == '&' &&
+        shell->buffer[i + 1] == '&') {
+            s_cmd = getcmd(shell->buffer, s, i);
             i += 2;
         }
-        if (i == my_strlen(cmd) - 1)
-            s_cmd = getcmd(cmd, s, i + 1);
+        if (i == my_strlen(shell->buffer) - 1)
+            s_cmd = getcmd(shell->buffer, s, i + 1);
         if (s_cmd) {
             parse_or(s_cmd, shell);
             free(s_cmd);

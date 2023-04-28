@@ -11,6 +11,8 @@ void free_struct_shell(shell_t *shell)
 {
     free_history(shell);
     my_free_wordarray(shell->env);
+    if (shell->cmd)
+        my_free_wordarray(shell->cmd);
     free(shell->buffer);
     free(shell);
 }

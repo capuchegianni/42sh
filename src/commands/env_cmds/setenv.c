@@ -19,7 +19,8 @@ int is_alphanum(char *str)
 
     while (str[i]) {
         if ((str[i] < 'a' || str[i] > 'z') &&
-        (str[i] < 'A' || str[i] > 'Z') && (str[i] < '0' || str[i] > '9'))
+        (str[i] < 'A' || str[i] > 'Z') && (str[i] < '0' || str[i] > '9') &&
+        str[i] != '_')
             return 0;
         i++;
     }
