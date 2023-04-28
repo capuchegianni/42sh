@@ -1,0 +1,199 @@
+[1]
+NAME="Nothing"
+SETUP="export PATH='/bin:/usr/bin'"
+CLEAN=""
+TESTS=
+  echo ''
+[1-END]
+
+[2]
+NAME="Print multiple space characters"
+SETUP=""
+CLEAN=""
+TESTS=
+  echo '         '
+[2-END]
+
+[3]
+NAME="Print multiple tab characters"
+SETUP=""
+CLEAN=""
+TESTS=
+  echo -e '\t\t\t\t'
+[3-END]
+
+[4]
+NAME="Print both tab and space characters"
+SETUP=""
+CLEAN=""
+TESTS=
+  echo -e '\t\t     \t \t\t   \t '
+[4-END]
+
+[5]
+NAME="Run a simple command"
+SETUP="export PATH='/bin'"
+CLEAN=""
+TESTS=
+  echo 'ls'
+  echo 'pwd'
+[5-END]
+
+[6]
+NAME="Run a command with no PATH"
+SETUP="export PATH=''"
+CLEAN=""
+TESTS=
+  echo 'ls'
+[6-END]
+
+[7]
+NAME="Run a command with an invalid PATH"
+SETUP="export PATH='/lalala'"
+CLEAN=""
+TESTS=
+  echo 'ls'
+  echo 'pwd'
+[7-END]
+
+[8]
+NAME="Run a command with arguments"
+SETUP=""
+CLEAN=""
+TESTS=
+  echo "ls -l -a"
+[8-END]
+
+[9]
+NAME="Run multiple commands"
+SETUP=""
+CLEAN=""
+TESTS=
+  echo -e "ls\npwd -P"
+[9-END]
+
+[10]
+NAME="Run command with spaces and tabs"
+SETUP=""
+CLEAN=""
+TESTS=
+  echo -e "ls \t\t\t-l            -a\npwd      \t\t    \t-P"
+[10-END]
+
+[11]
+NAME="Run a command with ./"
+SETUP=""
+CLEAN=""
+TESTS=
+  echo "./ls"
+  echo "/bin/pwd"
+[11-END]
+
+[12]
+NAME="Builtin command cd"
+SETUP=""
+CLEAN=""
+TESTS=
+  echo 'cd ..'
+  echo 'pwd'
+  echo 'cd /bin'
+  echo 'pwd'
+  echo 'cd -'
+  echo 'ls'
+[12-END]
+
+[13]
+NAME="Builtin command cd error handling"
+SETUP=""
+CLEAN=""
+TESTS=
+  echo 'cd .. /'
+  echo 'cd iezvf'
+  echo 'cd Makefile'
+[13-END]
+
+[14]
+NAME="Builtin command env"
+SETUP="/usr/bin/env > .lstenv ; while read varenv ; do unset $varenv ; done < <(/bin/cat .lstenv | /usr/bin/cut -f1 -d=) ; export PATH=/bin:/usr/bin ; export _=ls ; export LS_COLORS=RID ; export MYBG=4 ; export LVL=4 ; export NOTE=2"
+CLEAN="while read varenv ; do export "$varenv" 2>/dev/null ; done  < <(/bin/cat .lstenv) ; /bin/rm -f .lstenv"
+TESTS=
+  echo 'unsetenv HOSTTYPE'
+  echo 'unsetenv VENDOR'
+  echo 'unsetenv OSTYPE'
+  echo 'unsetenv MACHTYPE'
+  echo 'unsetenv LOGNAME'
+  echo 'unsetenv USER'
+  echo 'unsetenv GROUP'
+  echo 'unsetenv HOST'
+  echo 'unsetenv _'
+  echo 'unsetenv SHLVL'
+  echo 'env'
+[14-END]
+
+[15]
+NAME="Builtin commands setenv & unsetenv"
+SETUP="/usr/bin/env > .lstenv ; while read varenv ; do unset $varenv ; done < <(/bin/cat .lstenv | /usr/bin/cut -f1 -d=) ; export PATH=/bin:/usr/bin ; export _=ls ; export LS_COLORS=RID ; export MYBG=4 ; export LVL=4 ; export NOTE=2"
+CLEAN="while read varenv ; do export "$varenv" 2>/dev/null ; done  < <(/bin/cat .lstenv) ; /bin/rm -f .lstenv"
+TESTS=
+  echo 'unsetenv HOSTTYPE'
+  echo 'unsetenv VENDOR'
+  echo 'unsetenv OSTYPE'
+  echo 'unsetenv MACHTYPE'
+  echo 'unsetenv LOGNAME'
+  echo 'unsetenv USER'
+  echo 'unsetenv GROUP'
+  echo 'unsetenv HOST'
+  echo 'setenv _ quelle_beaute'
+  echo 'setenv SHLVL coucou'
+  echo 'setenv TERM xterm'
+  echo 'env'
+  echo 'setenv'
+[15-END]
+
+[16]
+NAME="Builtin commands setenv & unsetenv error handling"
+SETUP="/usr/bin/env > .lstenv ; while read varenv ; do unset $varenv ; done < <(/bin/cat .lstenv | /usr/bin/cut -f1 -d=) ; export PATH=/bin:/usr/bin ; export _=ls ; export LS_COLORS=RID ; export MYBG=4 ; export LVL=4 ; export NOTE=2"
+CLEAN="while read varenv ; do export "$varenv" 2>/dev/null ; done  < <(/bin/cat .lstenv) ; /bin/rm -f .lstenv"
+TESTS=
+  echo 'setenv cè-biez'
+  echo 'setenv ç_è-'
+  echo 'unsetenv'
+[16-END]
+
+[17]
+NAME="Builtin command alias"
+SETUP=""
+CLEAN=""
+TESTS=
+  echo 'alias new_ls ls'
+  echo 'new_ls -l'
+[17-END]
+
+[18]
+NAME="Builtin command alias error handling"
+SETUP=""
+CLEAN=""
+TESTS=
+  echo 'alias new_ls ls'
+  echo 'alias ls new_ls'
+  echo 'ls'
+[18-END]
+
+[19]
+NAME="Builtin command history"
+SETUP=""
+CLEAN=""
+TESTS=
+  echo 'ls'
+  echo 'pwd'
+  echo 'cd ..; cd -'
+  echo 'history'
+[19-END]
+
+[20]
+NAME="Builtin command history error handling"
+SETUP=""
+CLEAN=""
+TESTS=
+  echo 'history ozgiurg'
+[20-END]
