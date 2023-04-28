@@ -15,4 +15,5 @@ void init_alias(shell_t *shell, char *name, char *command)
     shell->alias->name = strdup(name);
     shell->alias->command = strdup(command);
     shell->alias->next = NULL;
+    shell->first_alias = NULL;
 }

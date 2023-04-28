@@ -59,8 +59,10 @@
     char *get_date(void);
 
     // Alias
-    void add_alias(shell_t *shell, char *name, char *command);
+    void add_alias(shell_t *shell, char *name);
     void free_alias(shell_t *shell);
+    void print_alias(shell_t *shell);
+    void print_specify_alias(shell_t *shell);
 
     // cd
     int cd_cmd(shell_t *shell);

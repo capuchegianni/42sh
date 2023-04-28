@@ -24,6 +24,7 @@ SRC = 	src/main.c											\
 		src/utils/free_struct_shell.c 						\
 		src/utils/prompt.c 									\
 		src/commands/alias/alias.c							\
+		src/commands/alias/display_alias.c					\
 		src/commands/history/history.c 						\
 		src/commands/history/history_error_handling.c 		\
 		src/commands/history/print_history.c 				\
