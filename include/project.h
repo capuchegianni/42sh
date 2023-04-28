@@ -64,6 +64,7 @@
     void free_alias(shell_t *shell);
     void print_alias(shell_t *shell);
     void print_specify_alias(shell_t *shell);
+    int exec_alias(shell_t *shell);
 
     // cd
     int cd_cmd(shell_t *shell);

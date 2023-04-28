@@ -79,5 +79,5 @@ void add_alias(shell_t *shell, char *name)
     } else {
         node_alias(current, name, command);
     }
-    shell->first_alias = strdup(name);
+    shell->return_val = 0;
 }

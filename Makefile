@@ -25,6 +25,7 @@ SRC = 	src/main.c											\
 		src/utils/prompt.c 									\
 		src/commands/alias/alias.c							\
 		src/commands/alias/display_alias.c					\
+		src/commands/alias/exec_alias.c						\
 		src/commands/history/history.c 						\
 		src/commands/history/history_error_handling.c 		\
 		src/commands/history/print_history.c 				\
