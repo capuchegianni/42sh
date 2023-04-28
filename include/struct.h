@@ -37,6 +37,7 @@
         int cursor_pos;
         history_t *history;
         alias_t *alias;
+        char *first_alias;
     } shell_t;
 
 #endif /* !STRUCT_H_ */

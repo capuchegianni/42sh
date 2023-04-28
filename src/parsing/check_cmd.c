@@ -7,6 +7,23 @@
 
 #include "project.h"
 
+int check_alias_cmd(shell_t *shell)
+{
+    if (strcmp(shell->cmd[0], "alias") == 0 && my_tablen(shell->cmd) > 2) {
+        add_alias(shell, shell->cmd[1]);
+        return (1);
+    }
+    if (strcmp(shell->cmd[0], "alias") == 0 && my_tablen(shell->cmd) == 2) {
+        print_specify_alias(shell);
+        return (1);
+    }
+    if (strcmp(shell->cmd[0], "alias") == 0 && my_tablen(shell->cmd) == 1) {
+        print_alias(shell);
+        return (1);
+    }
+    return (0);
+}
+
 int check_cmd(shell_t *shell)
 {
     if (cd_cmd(shell) == 1)
@@ -22,8 +39,8 @@ int check_cmd(shell_t *shell)
     if (strcmp(shell->cmd[0], "history") == 0 ||
     strcmp(shell->cmd[0], "!") == 0)
         print_history(shell);
-    if (strcmp(shell->cmd[0], "alias") == 0)
-        add_alias(shell, shell->cmd[1], shell->cmd[2]);
+    if (check_alias_cmd(shell) == 1)
+        return (1);
     if (strcmp(shell->cmd[0], "unalias") == 0)
         return (1);
     if (strcmp(shell->cmd[0], "echo") == 0)
