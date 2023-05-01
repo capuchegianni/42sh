@@ -43,8 +43,8 @@ int open_terminal(shell_t *shell)
     for (int c = 0; (c = getchar());) {
         if (c == 4)
             break;
-        if (shell->return_val == 84 || shell->return_val == 10)
-            return (shell->return_val == 10 ? 0 : 84);
+        if (shell->return_val == 84)
+            return (shell->return_val);
         if (scan_input(c, shell))
             continue;
         if (exclude_arrow(shell, c))

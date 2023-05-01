@@ -76,7 +76,4 @@
     int my_unsetenv(shell_t *shell);
     int print_env(shell_t *shell);
 
-    // exit cmd
-    int exit_cmd(shell_t **ad_shell);
-
 #endif /* !PROJECT_H_ */
