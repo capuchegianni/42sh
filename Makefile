@@ -36,6 +36,7 @@ SRC = 	src/main.c											\
 		src/commands/env_cmds/unsetenv.c 					\
 		src/commands/execve_handling/basic_cmds.c 			\
 		src/commands/execve_handling/errors_printing.c 		\
+		src/commands/exit/exit.c 							\
 
 OBJ_DIR = ./obj/
 

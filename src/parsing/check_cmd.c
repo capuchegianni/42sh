@@ -48,8 +48,8 @@ int check_cmd(shell_t *shell)
         return (1);
     if (cd_cmd(shell) == 1)
         return (1);
-    if (my_cmp(shell->cmd[0], "exit") == 0)
-        exit(0);
+    if (my_exit(shell) == 1)
+        return (1);
     if (print_env(shell) == 1)
         return (1);
     if (my_setenv(shell) == 1)
