@@ -1,27 +1,26 @@
---------------------------------
-- HOW TO USE THIS BATCH TESTER -
---------------------------------
+--------------------------------------------
+- COMMENT UTILISER CE TESTEUR DE PROGRAMME -
+--------------------------------------------
 
-The directory must contain:
-  tests 	=> the file that describes all the tests to be executed
-  tester.sh	=> the test-executing script
-  42sh		=> your binary
+Le dossier doit contenir:
+  tests 	=> le fichier contenant tous les tests
+  tester.sh	=> le fichier exécutant les tests (ne pas modifier sauf si vous êtes sûr de ce que vous faites)
 
-'tests' file contains a series of numbered tests.
-Each test is placed between markers. For instance:
-	[42]		=> beginning of the test number 42
-	[42-END]	=> end of the test number 42
-In between those markers, the following instructions must be found:
-	SETUP="script"	=> script to be executed before launching the test
-	NAME="name"     => name of the test
-	CLEAN="script"  => script to be executed after launching the test
-	TESTS=...	=> series of commands to be sent to the shell
+Le fichier test contient des tests numérotés et fait à la main.
+Le fichier binaire doit se trouver à la racine du projet, de même pour le dossier tests.
+
+Chaque test est placé entre des marqueurs, par exemple:
+	[42]		=> début du test 42
+	[42-END]	=> fin du test numéro 42
+Les instructions suivantes doivent obligatoirement se trouver entre les deux marqueurs:
+	SETUP="script"	=> script à exécuter avant de lancer le test
+	NAME="name"     => nom du test
+	CLEAN="script"  => script à exécuter après avoir lancer le test
+	TESTS=...	=> série de une ou plusieurs commandes à envoyer dans le test
 
 Arguments :
-./tester.sh		=> no argument : all the tests are executed + debug mode for the KO tests only
-./tester.sh 42		=> 1 argument : only this one test is executed
-./tester.sh -d 42	=> debug mode : printing of the 42sh and tcsh outputs
+./tester.sh		=> aucun argument : tous les tests sont exécutés et le fichier d'output est donné pour les tests qui ne passent pas
+./tester.sh 42		=> 1 argument : exécuter uniquement le test donné
+./tester.sh -d 42	=> debug mode : exécuter uniquement le test donné et afficher l'output de tcsh et du 42sh
 
-The batch tester launches the tests with tcsh, then with 42sh and compare the results.
-
-Binary Name and Reference Shell can be setup in tester.sh script
+Ce tester lance les tests d'abord avec tcsh puis avec notre 42sh avant de comparer les outputs des deux programmes

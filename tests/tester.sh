@@ -18,6 +18,7 @@ MKDIR=`which mkdir`
 CP=`which cp`
 RED="\033[1;31m"
 GREEN="\033[1;32m"
+YELLOW="\033[1;33m"
 RESET="\033[0m"
 
 for i in `env | grep BASH_FUNC_ | cut -d= -f1`; do
@@ -93,23 +94,23 @@ load_test()
   then
     if [ $debug -ge 1 ]
     then
-      echo -e "Test $id ($NAME) : ${GREEN}OK${RESET}"
+      echo -e "${YELLOW}Test $id${RESET} ($NAME) : ${GREEN}OK${RESET}"
       if [ $debug -eq 2 ]
       then
         echo "Output $MYSHELL :"
         $CAT -e /tmp/.shell.$$
-        echo "" 
+        echo ""
         echo "Output $REFER :"
         $CAT -e /tmp/.refer.$$
         echo ""
       fi
     else
-      echo "OK"
+      echo -e "${YELLOW}Test $id${RESET} ($NAME) : ${GREEN}OK${RESET}"
     fi
   else
     if [ $debug -ge 1 ]
     then
-      echo -e "Test $id ($NAME) : ${RED}KO${RESET} - Check output in /tmp/test.$$/$id/" 
+      echo -e "${YELLOW}Test $id${RESET} ($NAME) : ${RED}KO${RESET} - Check output in /tmp/test.$$/$id/"
       $MKDIR -p /tmp/test.$$/$id 2>/dev/null
       $CP /tmp/.shell.$$ /tmp/test.$$/$id/mysh.out
       $CP /tmp/.refer.$$ /tmp/test.$$/$id/tcsh.out
@@ -117,13 +118,13 @@ load_test()
       then
         echo "Output $MYSHELL :"
         $CAT -e /tmp/.shell.$$
-        echo "" 
+        echo ""
         echo "Output $REFER :"
         $CAT -e /tmp/.refer.$$
         echo ""
       fi
     else
-      echo "KO"
+      echo -e "${YELLOW}Test $id${RESET} ($NAME) : ${RED}KO${RESET}"
     fi
   fi
 }
