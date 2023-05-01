@@ -113,6 +113,15 @@ load_test()
       $MKDIR -p /tmp/test.$$/$id 2>/dev/null
       $CP /tmp/.shell.$$ /tmp/test.$$/$id/mysh.out
       $CP /tmp/.refer.$$ /tmp/test.$$/$id/tcsh.out
+      if [ $debug -eq 2 ]
+      then
+        echo "Output $MYSHELL :"
+        $CAT -e /tmp/.shell.$$
+        echo "" 
+        echo "Output $REFER :"
+        $CAT -e /tmp/.refer.$$
+        echo ""
+      fi
     else
       echo "KO"
     fi

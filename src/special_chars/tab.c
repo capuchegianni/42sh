@@ -28,18 +28,29 @@ void auto_complete(shell_t *shell, DIR *dir)
     my_free_wordarray(tab);
 }
 
+void is_binary(struct dirent *dp, int i)
+{
+    if (i == my_strlen(dp->d_name))
+        printf("%s%s%s  ", YELLOW, dp->d_name, RESET);
+    else
+        printf("%s%s%s  ", GREEN, dp->d_name, RESET);
+}
+
 void print_curr_folder(shell_t *shell, DIR *dir)
 {
     struct dirent *dp;
+    int i = 0;
 
     printf("\n");
     while ((dp = readdir(dir))) {
+        i = 0;
+        for (; dp->d_name[i] && dp->d_name[i] != '.'; i++);
         if (dp->d_type == DT_DIR && dp->d_name[0] != '.') {
             printf("%s%s/%s  ", BLUE, dp->d_name, RESET);
             continue;
         }
         if (dp->d_type == DT_REG) {
-            printf("%s%s%s  ", GREEN, dp->d_name, RESET);
+            is_binary(dp, i);
             continue;
         }
     }
