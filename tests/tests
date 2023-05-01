@@ -197,3 +197,37 @@ CLEAN=""
 TESTS=
   echo 'history ozgiurg'
 [20-END]
+
+[21]
+NAME="Builtin command exit"
+SETUP=""
+CLEAN=""
+TESTS=
+  echo "exit"
+[21-END]
+
+[22]
+NAME="Builtin command exit 2"
+SETUP=""
+CLEAN=""
+TESTS=
+  echo "exit 69"
+[22-END]
+
+[23]
+NAME="Builtin command exit error handling"
+SETUP=""
+CLEAN=""
+TESTS=
+  echo "exit hvu"
+  echo "exit 69 69"
+  echo "exit rzg98"
+[23-END]
+
+[24]
+NAME="Execute multiple cmds using ; separators"
+SETUP=""
+CLEAN=""
+TESTS=
+  echo -e ";ls;cd       ; pwd;\t\t\t  cd - ; pwd;;;"
+[24-END]
