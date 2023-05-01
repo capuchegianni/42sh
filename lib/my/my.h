@@ -18,7 +18,6 @@
     #include <stdarg.h>
     #include <string.h>
     #include <errno.h>
-    #include <ncurses.h>
     #include <sys/types.h>
     #include <sys/wait.h>
     #include <sys/stat.h>
@@ -68,6 +67,16 @@
     *  @return int nb
     */
     int my_getnbr(char const *str);
+
+    /*
+    *  @function my_getenv
+    *
+    *  @brief Get the value of an environment variable
+    *  @param my_env env
+    *  @param str variable to get
+    *  @return char *value
+    */
+    char *my_getenv(char **my_env, char *str);
 
     /*
     *  @function my_isneg
@@ -205,6 +214,16 @@
     *  @param size size of the array
     */
     void my_sortintarray(int *tab, int size);
+
+    /*
+    *  @function my_searchintab
+    *
+    *  @brief Return the index of a string in a 2D array
+    *  @param tab array to search in
+    *  @param str string to compare
+    *  @return int index
+    */
+    int my_searchintab(char **tab, char *str);
 
     /*
     *  @function my_sqrt
@@ -351,8 +370,5 @@
     *  @return char **tab
     */
     char **my_wordarray(char *str, char *characters);
-
-    char *my_getenv(char **my_env, char *str);
-    int my_searchintab(char **tab, char *str);
 
 #endif /* MY_H_ */

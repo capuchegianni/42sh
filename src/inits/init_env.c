@@ -15,7 +15,7 @@ char **init_env(char **env)
     if (new_env == NULL)
         return (NULL);
     for (; env[i]; i++)
-        new_env[i] = my_strdup(env[i]);
+        new_env[i] = strdup(env[i]);
     new_env[i] = NULL;
     return (new_env);
 }

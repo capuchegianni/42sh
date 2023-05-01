@@ -19,6 +19,7 @@ char *get_date(void)
     sprintf(min, "%d", tm_struct->tm_min);
     date = strcat(hour, ":");
     date = strcat(date, min);
+    free(min);
     return (date);
 }
 
@@ -50,7 +51,7 @@ void add_command_history(shell_t *shell)
         }
         current = malloc(sizeof(history_t));
         current->id = prev_history->id + 1;
-        current->command = strdup(shell->buffer);
+        current->command = my_cleanstr(shell->buffer);
         current->date = get_date();
         current->next = NULL;
         current->prev = prev_history;

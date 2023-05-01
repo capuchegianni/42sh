@@ -10,19 +10,19 @@
 int my_newline(int c, shell_t *shell)
 {
     if (c == '\n') {
-        printw("\n");
-        if (shell->buffer == NULL) {
-            display_prompt(shell);
-            return 1;
+        printf("\n");
+        if (!shell->buffer[0]) {
+            display_prompt(shell, 1);
+            return (1);
         }
-        separate_all_commands(shell);
         add_command_history(shell);
-        display_prompt(shell);
+        separate_all_commands(shell);
         free(shell->buffer);
-        shell->buffer = NULL;
-        shell->row++;
-        shell->col = shell->prompt_len;
-        return 1;
+        display_prompt(shell, 1);
+        shell->buffer = calloc(1, 1);
+        shell->len = 0;
+        shell->cursor_pos = 0;
+        return (1);
     }
-    return 0;
+    return (0);
 }

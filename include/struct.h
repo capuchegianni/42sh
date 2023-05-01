@@ -23,17 +23,21 @@
     } alias_t;
 
     typedef struct shell_s {
+        struct termios term;
         char **env;
         char *buffer;
-        int row;
-        int col;
-        int cursor_y;
-        int cursor_x;
-        int prompt_len;
+        int len;
         int return_val;
         char **cmd;
+        char last_char;
+        char *a_up ;
+        char *a_down;
+        char *a_right;
+        char *a_left;
+        int cursor_pos;
         history_t *history;
         alias_t *alias;
+        char *first_alias;
     } shell_t;
 
 #endif /* !STRUCT_H_ */

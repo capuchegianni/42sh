@@ -68,8 +68,6 @@ char **my_wordarray(char *str, char *characters)
     char **tab = NULL;
     int words = 0;
 
-    if (tab != NULL)
-        return (tab);
     str2 = my_cleanstr(str);
     if (str2 == NULL)
         return (NULL);
