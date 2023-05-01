@@ -49,7 +49,7 @@ int check_cmd(shell_t *shell)
         return (1);
     if (cd_cmd(shell) == 1)
         return (1);
-    if (strcmp(shell->cmd[0], "exit") == 0)
+    if (exit_cmd(&shell) == 1)
         return (1);
     if (print_env(shell) == 1)
         return (1);
