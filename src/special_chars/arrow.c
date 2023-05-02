@@ -15,12 +15,14 @@ void clear_buffer_prompt(shell_t *shell)
         printf("\b \b");
 }
 
-void updown_arrow_mdvalue(shell_t *shell, history_t *hi)
+void updown_arrow_mdvalue(shell_t *shell)
 {
+    history_t *hi = shell->history;
+
     for (int x = 1; x < shell->arrow_v; x++)
         hi = hi->next;
     clear_buffer_prompt(shell);
-    shell->buffer = hi->command;
+    shell->buffer = strdup(hi->command);
     shell->len = my_strlen(shell->buffer);
     shell->cursor_pos = shell->len;
     printf("%s", shell->buffer);
@@ -29,7 +31,6 @@ void updown_arrow_mdvalue(shell_t *shell, history_t *hi)
 int print_updown_arrow(shell_t *shell)
 {
     int i = 0;
-    history_t *hi = shell->history;
 
     for (history_t *c = shell->history; c; c = c->next)
         i++;
@@ -43,9 +44,9 @@ int print_updown_arrow(shell_t *shell)
         shell->cursor_pos = 0;
         return (0);
     }
-    if (!hi)
+    if (!shell->history)
         return (1);
-    updown_arrow_mdvalue(shell, hi);
+    updown_arrow_mdvalue(shell);
     return (0);
 }
 
