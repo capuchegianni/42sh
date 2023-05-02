@@ -39,6 +39,7 @@
 
     void display_prompt(shell_t *shell, int n);
     void free_struct_shell(shell_t *shell);
+    void update_prompt_cmd(shell_t *shell);
 
     // Parsing
 
@@ -53,6 +54,7 @@
     int my_left(int c, shell_t *shell);
     int my_right(int c, shell_t *shell);
     int my_tab(int c, shell_t *shell);
+    int exclude_arrow(shell_t *shell, int c);
 
     // Execve handling
 

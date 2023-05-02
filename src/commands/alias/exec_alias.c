@@ -37,6 +37,7 @@ int exec_alias(shell_t *shell)
         }
         if (strcmp(current->name, shell->cmd[0]) == 0) {
             change_cmd(shell, current);
+            current = shell->alias;
         } else
             current = current->next;
         shell->return_val = 0;

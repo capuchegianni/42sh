@@ -7,6 +7,17 @@
 
 #include "project.h"
 
+void update_prompt_cmd(shell_t *shell)
+{
+    for (int i = shell->cursor_pos; i < shell->len; i++)
+        printf("\033[C");
+    for (int i = shell->len; i >= 0; i--)
+        printf("\b \b");
+    printf("%s", shell->buffer);
+    for (int i = shell->len; i > shell->cursor_pos; i--)
+        printf("\b");
+}
+
 void print_usr(shell_t *shell, int n)
 {
     char *usr = my_getenv(shell->env, "USER");

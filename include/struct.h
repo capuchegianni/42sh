@@ -27,17 +27,15 @@
         char **env;
         char *buffer;
         int len;
+        int prev_len;
         int return_val;
         char **cmd;
         char last_char;
-        char *a_up ;
-        char *a_down;
-        char *a_right;
-        char *a_left;
         int cursor_pos;
         history_t *history;
         alias_t *alias;
         char *first_alias;
+        int arrow_v;
     } shell_t;
 
 #endif /* !STRUCT_H_ */
