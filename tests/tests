@@ -186,7 +186,7 @@ CLEAN=""
 TESTS=
   echo 'ls'
   echo 'pwd'
-  echo 'cd ..; cd -'
+  echo 'cd ..'
   echo 'history'
 [19-END]
 
@@ -225,9 +225,73 @@ TESTS=
 [23-END]
 
 [24]
-NAME="Execute multiple cmds using ; separators"
+NAME="Execute multiple cmds using ; separator"
 SETUP=""
 CLEAN=""
 TESTS=
-  echo -e ";ls;cd       ; pwd;\t\t\t  cd - ; pwd;;;"
+  echo -e ";ls;cd       ; pwd;\t\t\t  cd - ; pwd"
 [24-END]
+
+[25]
+NAME="Execute multiple cmds using && separator"
+SETUP=""
+CLEAN=""
+TESTS=
+  echo -e "&&ls&&cd       && pwd&&\t\t\t  cd - && pwd"
+[25-END]
+
+[26]
+NAME="Simple pipe"
+SETUP=""
+CLEAN=""
+TESTS=
+  echo -e "ls | cat -e"
+[26-END]
+
+[27]
+NAME="Multiple pipes"
+SETUP=""
+CLEAN=""
+TESTS=
+  echo -e "cd ..; cat Makefile | grep -i 'all' | wc -w"
+[27-END]
+
+[28]
+NAME="Execute commands using || separator"
+SETUP=""
+CLEAN=""
+TESTS=
+  echo -e "ls ef || cd       || pwd ||\t\t\t  cd - || pwd"
+[28-END]
+
+[29]
+NAME="> redirection"
+SETUP=""
+CLEAN="rm -f .lst"
+TESTS=
+  echo -e "ls > .lst ; cat .lst"
+[29-END]
+
+[30]
+NAME="< redirection"
+SETUP=""
+CLEAN=""
+TESTS=
+  echo -e "cat < Makefile"
+[30-END]
+
+[31]
+NAME=">> redirection"
+SETUP=""
+CLEAN="rm -f .lst"
+TESTS=
+  echo -e "ls > .lst ; ls -l >> .lst ; cat .lst"
+[31-END]
+
+[32]
+NAME="<< redirection"
+SETUP=""
+CLEAN=""
+TESTS=
+  echo -e "cat << EOF\nls\npwd\nEOF"
+[32-END]
