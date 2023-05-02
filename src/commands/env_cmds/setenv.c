@@ -19,7 +19,8 @@ int is_alphanum(char *str)
 
     while (str[i]) {
         if ((str[i] < 'a' || str[i] > 'z') &&
-        (str[i] < 'A' || str[i] > 'Z') && (str[i] < '0' || str[i] > '9'))
+        (str[i] < 'A' || str[i] > 'Z') && (str[i] < '0' || str[i] > '9') &&
+        str[i] != '_')
             return 0;
         i++;
     }
@@ -51,6 +52,12 @@ int my_setenv(shell_t *shell)
         if (!shell->cmd[1]) {
             no_arg(shell);
             return 1;
+        }
+        if ((shell->cmd[1][0] < 'A' || shell->cmd[1][0] > 'Z') &&
+        (shell->cmd[1][0] < 'a' || shell->cmd[1][0] > 'z') &&
+        shell->cmd[1][0] != '_') {
+            dprintf(2, "setenv: Variable name must begin with a letter.\n");
+            return shell->return_val = 1;
         }
         if (is_alphanum(shell->cmd[1]) == 0) {
             dprintf(2, "setenv: Variable name must contain alphanumeric ");

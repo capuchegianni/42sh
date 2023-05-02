@@ -31,9 +31,8 @@ int check_cmd_split(shell_t *shell)
 {
     if (my_unsetenv(shell) == 1)
         return (1);
-    if (strcmp(shell->cmd[0], "history") == 0 ||
-    strcmp(shell->cmd[0], "!") == 0)
-        return (print_history(shell));
+    if (print_history(shell) == 1)
+        return (1);
     if (check_alias_cmd(shell) == 1)
         return (1);
     if (strcmp(shell->cmd[0], "unalias") == 0)
@@ -49,7 +48,7 @@ int check_cmd(shell_t *shell)
         return (1);
     if (cd_cmd(shell) == 1)
         return (1);
-    if (strcmp(shell->cmd[0], "exit") == 0)
+    if (my_exit(shell) == 1)
         return (1);
     if (print_env(shell) == 1)
         return (1);

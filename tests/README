@@ -1,0 +1,26 @@
+--------------------------------------------
+- COMMENT UTILISER CE TESTEUR DE PROGRAMME -
+--------------------------------------------
+
+Le dossier doit contenir:
+  tests 	=> le fichier contenant tous les tests
+  tester.sh	=> le fichier exécutant les tests (ne pas modifier sauf si vous êtes sûr de ce que vous faites)
+
+Le fichier test contient des tests numérotés et fait à la main.
+Le fichier binaire doit se trouver à la racine du projet, de même pour le dossier tests.
+
+Chaque test est placé entre des marqueurs, par exemple:
+	[42]		=> début du test 42
+	[42-END]	=> fin du test numéro 42
+Les instructions suivantes doivent obligatoirement se trouver entre les deux marqueurs:
+	SETUP="script"	=> script à exécuter avant de lancer le test
+	NAME="name"     => nom du test
+	CLEAN="script"  => script à exécuter après avoir lancer le test
+	TESTS=...	=> série de une ou plusieurs commandes à envoyer dans le test
+
+Arguments :
+./tester.sh		=> aucun argument : tous les tests sont exécutés et le fichier d'output est donné pour les tests qui ne passent pas
+./tester.sh 42		=> 1 argument : exécuter uniquement le test donné
+./tester.sh -d 42	=> debug mode : exécuter uniquement le test donné et afficher l'output de tcsh et du 42sh
+
+Ce tester lance les tests d'abord avec tcsh puis avec notre 42sh avant de comparer les outputs des deux programmes

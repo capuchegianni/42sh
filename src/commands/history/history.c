@@ -24,6 +24,8 @@ char *get_date(void)
     else
         sprintf(min, "%d", tm_struct->tm_min);
     sprintf(date, "%s:%s", hour, min);
+    free(hour);
+    free(min);
     return (date);
 }
 

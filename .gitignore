@@ -8,6 +8,5 @@
 *.a
 *.pdf
 .vscode
-test*
 obj*
 42sh

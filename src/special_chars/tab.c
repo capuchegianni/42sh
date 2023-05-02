@@ -7,20 +7,71 @@
 
 #include "project.h"
 
+void auto_complete(shell_t *shell, DIR *dir)
+{
+    struct dirent *dp;
+    char **tab = my_wordarray(shell->buffer, " ");
+    int i = my_tablen(tab);
+
+    if (shell->cursor_pos != shell->len)
+        return;
+    while ((dp = readdir(dir))) {
+        if (my_strncmp(dp->d_name, tab[i - 1], my_strlen(tab[i - 1])) == 0) {
+            shell->buffer = my_strcat(shell->buffer,
+            dp->d_name + my_strlen(tab[i - 1]));
+            printf("%s", dp->d_name + my_strlen(tab[i - 1]));
+            shell->len += my_strlen(dp->d_name + my_strlen(tab[i - 1]));
+            shell->cursor_pos += my_strlen(dp->d_name + my_strlen(tab[i - 1]));
+            break;
+        }
+    }
+    my_free_wordarray(tab);
+}
+
+void is_binary(struct dirent *dp, int i)
+{
+    if (i == my_strlen(dp->d_name))
+        printf("%s%s%s  ", YELLOW, dp->d_name, RESET);
+    else
+        printf("%s%s%s  ", GREEN, dp->d_name, RESET);
+}
+
+void print_curr_folder(shell_t *shell, DIR *dir)
+{
+    struct dirent *dp;
+    int i = 0;
+
+    printf("\n");
+    while ((dp = readdir(dir))) {
+        i = 0;
+        for (; dp->d_name[i] && dp->d_name[i] != '.'; i++);
+        if (dp->d_type == DT_DIR && dp->d_name[0] != '.') {
+            printf("%s%s/%s  ", BLUE, dp->d_name, RESET);
+            continue;
+        }
+        if (dp->d_type == DT_REG) {
+            is_binary(dp, i);
+            continue;
+        }
+    }
+    display_prompt(shell, 1);
+}
+
 int my_tab(int c, shell_t *shell)
 {
+    DIR *dir;
+
+    dir = opendir(".");
     if (c == 9) {
         if (shell->len == 0) {
-            printf("\n");
-            system("ls");
-            display_prompt(shell, 1);
+            print_curr_folder(shell, dir);
+            closedir(dir);
             return (1);
         }
-        shell->buffer = realloc(shell->buffer, shell->len + 5);
-        shell->buffer = my_strcat(shell->buffer, "    ");
-        shell->len += 4;
-        printf("    ");
+        auto_complete(shell, dir);
+        closedir(dir);
         return (1);
     }
+    closedir(dir);
     return (0);
 }
