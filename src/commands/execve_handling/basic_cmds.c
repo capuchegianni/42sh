@@ -20,8 +20,6 @@ int slash_cmd(shell_t *shell)
 
 int get_valid_path(shell_t *shell, char **tab)
 {
-    char *cmd = strdup(shell->cmd[0]);
-
     for (int i = 0; tab[i]; i++) {
         strcat(tab[i], "/");
         strcat(tab[i], shell->cmd[0]);
@@ -30,31 +28,40 @@ int get_valid_path(shell_t *shell, char **tab)
             return (shell->return_val);
         }
     }
-    shell->cmd[0] = strdup(cmd);
-    free(cmd);
     return (0);
+}
+
+int no_slashs(shell_t *shell, char *buff)
+{
+    char **tab = NULL;
+
+    tab = my_wordarray(buff, ":=");
+    if (!tab) {
+        dprintf(2, "%s: Command not found.\n", shell->cmd[0]);
+        return (shell->return_val = 1);
+    }
+    if (get_valid_path(shell, tab) == 0)
+        shell->return_val = execve(shell->cmd[0], shell->cmd, shell->env);
+    print_exec_errs(shell);
+    free(buff);
+    my_free_wordarray(tab);
+    return (shell->return_val = 1);
 }
 
 int check_all_paths(shell_t *shell)
 {
     char *buff = NULL;
-    char **tab = NULL;
 
     if (slash_cmd(shell) == 2)
         return (shell->return_val = 1);
     if (slash_cmd(shell) == 1)
         shell->return_val = execve(shell->cmd[0], shell->cmd, shell->env);
     buff = my_getenv(shell->env, "PATH");
-    if (!buff)
+    if (!buff) {
+        dprintf(2, "%s: Command not found.\n", shell->cmd[0]);
         return (shell->return_val = 1);
-    tab = my_wordarray(buff, ":=");
-    if (!tab)
-        return (shell->return_val = 1);
-    if (get_valid_path(shell, tab) == 0)
-        shell->return_val = execve(shell->cmd[0], shell->cmd, shell->env);
-    print_exec_errs(shell);
-    free(buff);
-    my_free_wordarray(tab);
+    }
+    no_slashs(shell, buff);
     return (shell->return_val = 1);
 }
 
