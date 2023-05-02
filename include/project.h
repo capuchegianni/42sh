@@ -77,6 +77,10 @@
     void print_specify_alias(shell_t *shell);
     int exec_alias(shell_t *shell);
 
+    // Unalias
+
+    int unalias_cmd(shell_t *shell);
+
     // cd
 
     int cd_cmd(shell_t *shell);

@@ -30,6 +30,7 @@ SRC = 	src/main.c											\
 		src/commands/history/history.c 						\
 		src/commands/history/history_error_handling.c 		\
 		src/commands/history/print_history.c 				\
+		src/commands/unalias/unalias.c 						\
 		src/commands/cd/change_pwd.c						\
 		src/commands/cd/cd_cmd.c 							\
 		src/commands/env_cmds/env.c 						\
