@@ -16,12 +16,15 @@ int print_history(shell_t *shell)
             printf("history: Badly formed number.\n");
             return (shell->return_val = 1);
         }
-        if (isatty(0) == 0)
+        if (isatty(0) == 0) {
+            shell->return_val = 0;
             return (1);
+        }
         while (c) {
             printf("     %d  %s   %s\n", c->id, c->date, c->command);
             c = c->next;
         }
+        shell->return_val = 0;
         return (1);
     }
     return (0);
