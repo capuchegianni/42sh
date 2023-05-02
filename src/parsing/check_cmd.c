@@ -33,7 +33,7 @@ int check_cmd_split(shell_t *shell)
         return (1);
     if (strcmp(shell->cmd[0], "history") == 0 ||
     strcmp(shell->cmd[0], "!") == 0)
-        print_history(shell);
+        return (print_history(shell));
     if (check_alias_cmd(shell) == 1)
         return (1);
     if (strcmp(shell->cmd[0], "unalias") == 0)

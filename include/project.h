@@ -56,7 +56,7 @@
 
     // History handling
     void add_command_history(shell_t *shell);
-    void print_history(shell_t *shell);
+    int print_history(shell_t *shell);
     void free_history(shell_t *shell);
     char *get_date(void);
 
