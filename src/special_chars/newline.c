@@ -7,6 +7,16 @@
 
 #include "project.h"
 
+void update_arrow_value(shell_t *shell)
+{
+    history_t *his = shell->history;
+    int i = 1;
+
+    for (; his; his = his->next)
+        i++;
+    shell->arrow_v = i + 1;
+}
+
 int my_newline(int c, shell_t *shell)
 {
     if (c == '\n') {
@@ -15,7 +25,7 @@ int my_newline(int c, shell_t *shell)
             display_prompt(shell, 1);
             return (1);
         }
-        shell->arrow_v++;
+        update_arrow_value(shell);
         add_command_history(shell);
         separate_all_commands(shell);
         display_prompt(shell, 1);
