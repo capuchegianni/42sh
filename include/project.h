@@ -93,4 +93,8 @@
 
     int my_exit(shell_t *shell);
 
+    // echo cmd
+
+    int echo_cmd(shell_t *shell);
+
 #endif /* !PROJECT_H_ */
