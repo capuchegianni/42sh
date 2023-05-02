@@ -14,29 +14,6 @@ int start_window(shell_t *shell)
     return (0);
 }
 
-int exclude_arrow(shell_t *shell, int c)
-{
-    if (c == 27 && shell->last_char == 27)
-        return (1);
-    if (c == 1 && shell->last_char == 91)
-        return (1);
-    if (c == 91 && shell->last_char == 91)
-        return (1);
-    if ((c == 'A' || c == 'B' || c == 'C' || c == 'D')
-    && shell->last_char == '[') {
-        if (c == 'D' && shell->cursor_pos > 0) {
-            printf("\b");
-            shell->cursor_pos--;
-        }
-        if (c == 'C' && shell->cursor_pos < shell->len) {
-            printf("\033[C");
-            shell->cursor_pos++;
-        }
-        return (1);
-    }
-    return (0);
-}
-
 int open_terminal(shell_t *shell)
 {
     start_window(shell);

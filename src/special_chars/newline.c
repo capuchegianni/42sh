@@ -15,9 +15,9 @@ int my_newline(int c, shell_t *shell)
             display_prompt(shell, 1);
             return (1);
         }
+        shell->arrow_v++;
         add_command_history(shell);
         separate_all_commands(shell);
-        free(shell->buffer);
         display_prompt(shell, 1);
         shell->buffer = calloc(1, 1);
         shell->len = 0;
