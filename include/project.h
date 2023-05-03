@@ -77,6 +77,10 @@
     void print_specify_alias(shell_t *shell);
     int exec_alias(shell_t *shell);
 
+    // Unalias
+
+    int unalias_cmd(shell_t *shell);
+
     // cd
 
     int cd_cmd(shell_t *shell);
@@ -92,5 +96,9 @@
     // exit cmd
 
     int my_exit(shell_t *shell);
+
+    // echo cmd
+
+    int echo_cmd(shell_t *shell);
 
 #endif /* !PROJECT_H_ */

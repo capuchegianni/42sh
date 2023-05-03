@@ -36,7 +36,7 @@ int check_cmd_split(shell_t *shell)
     if (check_alias_cmd(shell) == 1)
         return (1);
     if (strcmp(shell->cmd[0], "unalias") == 0)
-        return (1);
+        return (unalias_cmd(shell));
     if (strcmp(shell->cmd[0], "echo") == 0)
         return (1);
     return (0);
@@ -53,6 +53,8 @@ int check_cmd(shell_t *shell)
     if (print_env(shell) == 1)
         return (1);
     if (my_setenv(shell) == 1)
+        return (1);
+    if (echo_cmd(shell) == 1)
         return (1);
     if (check_cmd_split(shell) == 1)
         return (1);
