@@ -103,6 +103,6 @@
 
     // redirection
     int redirection(shell_t *shell);
-    void close_red(shell_t *shell);
+    void close_red(shell_t *shell, int index);
 
 #endif /* !PROJECT_H_ */
