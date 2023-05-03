@@ -40,6 +40,7 @@ SRC = 	src/main.c											\
 		src/commands/execve_handling/errors_printing.c 		\
 		src/commands/exit/exit.c 							\
 		src/commands/echo/echo.c							\
+		src/options/inhibitors/escape_char.c				\
 
 OBJ_DIR = ./obj/
 
