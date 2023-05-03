@@ -26,13 +26,13 @@ void stock_cmd(char *cmd, shell_t *shell)
 
     if (shell->cmd)
         my_free_wordarray(shell->cmd);
-    red = redirection(shell);
     shell->cmd = my_wordarray(cmd, " \t\n");
+    red = redirection(shell);
     if (shell->cmd)
         if (check_cmd(shell) != 1)
             execve_handling(shell);
     if (red == 1)
-        close_red(shell);
+        close_red(shell, 0);
 }
 
 void parse_pipes(char *cmd, shell_t *shell)
