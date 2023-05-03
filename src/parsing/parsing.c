@@ -21,7 +21,7 @@ void stock_cmd(char *cmd, shell_t *shell)
             execve_handling(shell);
         if (red == 1)
         close_red(shell, 0);
-}
+    }
 }
 
 void parse_pipes(char *cmd, shell_t *shell)
