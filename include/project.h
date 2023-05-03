@@ -45,6 +45,7 @@
 
     void separate_all_commands(shell_t *shell);
     int check_cmd(shell_t *shell);
+    char *getcmd(char *src, int s, int e);
 
     // Special chars handling
 
@@ -104,5 +105,9 @@
     // redirection
     int redirection(shell_t *shell);
     void close_red(shell_t *shell, int index);
+
+    // inhibitors
+
+    void inhibitor(shell_t *shell);
 
 #endif /* !PROJECT_H_ */
