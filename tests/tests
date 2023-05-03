@@ -229,7 +229,7 @@ NAME="Execute multiple cmds using ; separator"
 SETUP=""
 CLEAN=""
 TESTS=
-  echo -e ";ls;cd       ; pwd;\t\t\t  cd - ; pwd"
+  echo -e ";ls;cd       ; pwd;\t\t\t  cd - ; pwd;;;"
 [24-END]
 
 [25]
