@@ -54,6 +54,8 @@ int check_cmd(shell_t *shell)
         return (1);
     if (my_setenv(shell) == 1)
         return (1);
+    if (echo_cmd(shell) == 1)
+        return (1);
     if (check_cmd_split(shell) == 1)
         return (1);
     return (0);

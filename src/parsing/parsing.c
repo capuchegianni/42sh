@@ -7,19 +7,6 @@
 
 #include "project.h"
 
-char *getcmd(char *src, int s, int e)
-{
-    int n = 0;
-    char *cmd = malloc(sizeof(char) * (e - s + 1));
-
-    if (!cmd)
-        return (NULL);
-    for (; s < e ; s++, n++)
-        cmd[n] = src[s];
-    cmd[n] = '\0';
-    return (cmd);
-}
-
 void stock_cmd(char *cmd, shell_t *shell)
 {
     if (shell->cmd)
@@ -70,26 +57,34 @@ void parse_or(char *cmd, shell_t *shell)
     }
 }
 
-void separate_all_commands(shell_t *shell)
+void parse_sp(char *cmd, shell_t *shell)
 {
-    char *s_cmd = NULL;
+    char *sp_cmd = NULL;
 
-    for (int i = 0, s = 0; shell->buffer[i]; i++) {
-        if (shell->buffer[i] == ';')
-            s_cmd = getcmd(shell->buffer, s, i);
-        for (; shell->buffer[i] == ';'; i++);
-        if (shell->buffer[i + 1] && shell->buffer[i] == '&' &&
-        shell->buffer[i + 1] == '&') {
-            s_cmd = getcmd(shell->buffer, s, i);
+    for (int i = 0, s = 0; cmd[i]; i++) {
+        if (cmd[i + 1] && cmd[i] == '&' &&
+        cmd[i + 1] == '&') {
+            sp_cmd = getcmd(cmd, s, i);
             i += 2;
         }
-        if (i == my_strlen(shell->buffer) - 1)
-            s_cmd = getcmd(shell->buffer, s, i + 1);
-        if (s_cmd) {
-            parse_or(s_cmd, shell);
-            free(s_cmd);
-            s_cmd = NULL;
+        if (i == my_strlen(cmd) - 1)
+            sp_cmd = getcmd(cmd, s, i + 1);
+        if (sp_cmd) {
+            parse_or(sp_cmd, shell);
+            free(sp_cmd);
+            sp_cmd = NULL;
             s = i;
         }
+    }
+}
+
+void separate_all_commands(shell_t *shell)
+{
+    char **all_cmd = my_wordarray(shell->buffer, ";");
+
+    if (!all_cmd)
+        return;
+    for (int x = 0; all_cmd[x]; x++) {
+        parse_sp(all_cmd[x], shell);
     }
 }

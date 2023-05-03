@@ -45,6 +45,7 @@
 
     void separate_all_commands(shell_t *shell);
     int check_cmd(shell_t *shell);
+    char *getcmd(char *src, int s, int e);
 
     // Special chars handling
 
@@ -96,5 +97,9 @@
     // exit cmd
 
     int my_exit(shell_t *shell);
+
+    // echo cmd
+
+    int echo_cmd(shell_t *shell);
 
 #endif /* !PROJECT_H_ */
