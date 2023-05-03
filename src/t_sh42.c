@@ -34,7 +34,7 @@ int open_terminal(shell_t *shell)
         printf("%c", c);
         shell->cursor_pos++;
     }
-    printf("exit\n");
+    printf("exit\n\n");
     return (shell->return_val);
 }
 
