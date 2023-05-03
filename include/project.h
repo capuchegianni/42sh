@@ -101,4 +101,8 @@
 
     int echo_cmd(shell_t *shell);
 
+    // redirection
+    int redirection(shell_t *shell);
+    void close_red(shell_t *shell);
+
 #endif /* !PROJECT_H_ */
