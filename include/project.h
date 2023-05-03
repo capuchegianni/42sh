@@ -102,4 +102,8 @@
 
     int echo_cmd(shell_t *shell);
 
+    // inhibitors
+
+    void inhibitor(shell_t *shell);
+
 #endif /* !PROJECT_H_ */

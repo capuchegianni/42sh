@@ -17,6 +17,8 @@ static int my_echo(shell_t *shell, int nbr_arg)
             continue;
         }
         my_printf("%s", shell->cmd[i]);
+        if (shell->cmd[i + 1])
+            my_printf(" ");
     }
     if (option == 0)
         my_printf("\n");
