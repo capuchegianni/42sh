@@ -237,7 +237,7 @@ NAME="Execute multiple cmds using && separator"
 SETUP=""
 CLEAN=""
 TESTS=
-  echo -e "&&ls&&cd       && pwd&&\t\t\t  cd - && pwd"
+  echo -e "&&ls&&cd       && pwd&&\t\t\t  cd rger && pwd"
 [25-END]
 
 [26]
@@ -261,7 +261,7 @@ NAME="Execute commands using || separator"
 SETUP=""
 CLEAN=""
 TESTS=
-  echo -e "ls ef || cd       || pwd ||\t\t\t  cd - || pwd"
+  echo -e "ls ef || ls uzef       || cd ievzf ||\t\t\t  cd a -fe|| pwd"
 [28-END]
 
 [29]
