@@ -15,6 +15,8 @@ char *get_date(void)
     char *hour = malloc(sizeof(char) * 6);
     char *min = malloc(sizeof(char) * 6);
 
+    if (!date || !hour || !min)
+        return (NULL);
     if (tm_struct->tm_hour < 10)
         sprintf(hour, "0%d", tm_struct->tm_hour);
     else
@@ -27,20 +29,6 @@ char *get_date(void)
     free(hour);
     free(min);
     return (date);
-}
-
-void free_history(shell_t *shell)
-{
-    history_t *current = shell->history;
-    history_t *next = NULL;
-
-    while (current) {
-        next = current->next;
-        free(current->command);
-        free(current->date);
-        free(current);
-        current = next;
-    }
 }
 
 void add_command_history(shell_t *shell)
