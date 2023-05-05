@@ -12,7 +12,6 @@ void init_shell_split(shell_t *shell)
     shell->env = NULL;
     shell->buffer = NULL;
     shell->len = 0;
-    shell->prev_len = 0;
     shell->return_val = 0;
     shell->history = NULL;
     shell->alias = NULL;

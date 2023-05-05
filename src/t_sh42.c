@@ -29,10 +29,7 @@ int open_terminal(shell_t *shell)
         shell->buffer = realloc(shell->buffer, shell->len + 2);
         if (shell->buffer == NULL)
             return (shell->return_val = 84);
-        shell->buffer[shell->len++] = c;
-        shell->buffer[shell->len] = '\0';
-        printf("%c", c);
-        shell->cursor_pos++;
+        add_char(shell, c);
     }
     printf("exit\n\n");
     return (shell->return_val);
