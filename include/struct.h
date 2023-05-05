@@ -27,7 +27,6 @@
         char **env;
         char *buffer;
         int len;
-        int prev_len;
         int return_val;
         char **cmd;
         char last_char;

@@ -14,6 +14,7 @@ SRC = 	src/main.c											\
 		src/inits/init_env.c 								\
 		src/inits/init_history.c 							\
 		src/inits/init_alias.c 								\
+		src/special_chars/add_char.c 						\
 		src/special_chars/arrow.c 							\
 		src/special_chars/newline.c 						\
 		src/special_chars/delete.c 							\
