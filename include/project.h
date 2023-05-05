@@ -71,6 +71,9 @@
     int print_history(shell_t *shell);
     void free_history(shell_t *shell);
     char *get_date(void);
+    int history_error_handling(shell_t *shell);
+    void free_history(shell_t *shell);
+    int detect_flag(shell_t *shell);
 
     // Alias
 
