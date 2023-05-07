@@ -14,6 +14,7 @@ SRC = 	src/main.c											\
 		src/inits/init_env.c 								\
 		src/inits/init_history.c 							\
 		src/inits/init_alias.c 								\
+		src/special_chars/add_char.c 						\
 		src/special_chars/arrow.c 							\
 		src/special_chars/newline.c 						\
 		src/special_chars/delete.c 							\
@@ -28,8 +29,10 @@ SRC = 	src/main.c											\
 		src/commands/alias/alias.c							\
 		src/commands/alias/display_alias.c					\
 		src/commands/alias/exec_alias.c						\
-		src/commands/history/history.c 						\
+		src/commands/history/free_history.c					\
 		src/commands/history/history_error_handling.c 		\
+		src/commands/history/history_flag.c					\
+		src/commands/history/history.c 						\
 		src/commands/history/print_history.c 				\
 		src/commands/unalias/unalias.c 						\
 		src/commands/cd/change_pwd.c						\

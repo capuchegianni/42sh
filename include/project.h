@@ -40,6 +40,7 @@
     void display_prompt(shell_t *shell, int n);
     void free_struct_shell(shell_t *shell);
     void update_prompt_cmd(shell_t *shell);
+    void clear_buffer_prompt(shell_t *shell);
 
     // Parsing
 
@@ -56,6 +57,7 @@
     int my_right(int c, shell_t *shell);
     int my_tab(int c, shell_t *shell);
     int exclude_arrow(shell_t *shell, int c);
+    void add_char(shell_t *shell, int c);
 
     // Execve handling
 
@@ -69,6 +71,9 @@
     int print_history(shell_t *shell);
     void free_history(shell_t *shell);
     char *get_date(void);
+    int history_error_handling(shell_t *shell);
+    void free_history(shell_t *shell);
+    int detect_flag(shell_t *shell);
 
     // Alias
 

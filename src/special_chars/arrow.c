@@ -7,14 +7,6 @@
 
 #include "project.h"
 
-void clear_buffer_prompt(shell_t *shell)
-{
-    for (int i = shell->cursor_pos; i < shell->len; i++)
-        printf("\033[C");
-    for (int i = shell->len; i > 0; i--)
-        printf("\b \b");
-}
-
 void updown_arrow_mdvalue(shell_t *shell)
 {
     history_t *hi = shell->history;
