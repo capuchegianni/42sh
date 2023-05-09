@@ -111,6 +111,7 @@
     int redirection(shell_t *shell);
     int open_red(shell_t *shell, int index);
     void close_red(shell_t *shell);
+    int red_input(shell_t *shell, int index);
 
     // inhibitors
 
