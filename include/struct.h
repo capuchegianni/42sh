@@ -35,6 +35,7 @@
         alias_t *alias;
         char *first_alias;
         int arrow_v;
+        FILE *red;
     } shell_t;
 
 #endif /* !STRUCT_H_ */
