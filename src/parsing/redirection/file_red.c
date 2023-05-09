@@ -34,5 +34,5 @@ int open_red(shell_t *shell, int index)
     if (shell->cmd[index][0] == '>')
         return op_file(shell, index + 1);
     else
-        return op_file(shell, index - 1);
+        return red_input(shell, index + 1);
 }
