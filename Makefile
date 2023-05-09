@@ -46,6 +46,7 @@ SRC = 	src/main.c											\
 		src/commands/echo/echo.c							\
 		src/parsing/redirection/redirection.c				\
 		src/parsing/redirection/file_red.c					\
+		src/parsing/redirection/red_input.c					\
 		src/options/inhibitors/escape_char.c				\
 
 OBJ_DIR = ./obj/
