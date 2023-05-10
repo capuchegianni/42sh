@@ -11,6 +11,7 @@ void init_shell_split(shell_t *shell)
 {
     shell->env = NULL;
     shell->buffer = NULL;
+    shell->old_buff = NULL;
     shell->len = 0;
     shell->return_val = 0;
     shell->history = NULL;
@@ -19,7 +20,9 @@ void init_shell_split(shell_t *shell)
     shell->last_char = 0;
     shell->cursor_pos = 0;
     shell->first_alias = NULL;
+    shell->cpl = NULL;
     shell->arrow_v = 1;
+    shell->last_id = 0;
 }
 
 shell_t *init_shell(shell_t *shell, struct termios old_term)
