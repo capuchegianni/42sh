@@ -37,8 +37,6 @@ int check_cmd_split(shell_t *shell)
         return (1);
     if (strcmp(shell->cmd[0], "unalias") == 0)
         return (unalias_cmd(shell));
-    if (strcmp(shell->cmd[0], "echo") == 0)
-        return (1);
     return (0);
 }
 
