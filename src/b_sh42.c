@@ -7,16 +7,39 @@
 
 #include "project.h"
 
+void back_sn(char *cmd, shell_t *shell)
+{
+    char *sp_cmd = NULL;
+
+    for (int i = 0, s = 0; cmd[i]; i++) {
+        if (cmd[i + 1] && cmd[i] == '\\' && cmd[i + 1] == 'n') {
+            sp_cmd = getcmd(cmd, s, i);
+            i += 2;
+        }
+        if (i == my_strlen(cmd) - 1)
+            sp_cmd = getcmd(cmd, s, i + 1);
+        if (sp_cmd) {
+            shell->buffer = sp_cmd;
+            add_command_history(shell);
+            separate_all_commands(shell);
+            s = i;
+        }
+        if (shell->return_val != 0 && sp_cmd)
+            break;
+        if (sp_cmd)
+            sp_cmd = NULL;
+    }
+}
+
 int b_open_terminal(shell_t *shell)
 {
     size_t len;
+    char *cmd = NULL;
 
-    while (getline(&shell->buffer, &len, stdin) != -1) {
-        if (shell->buffer[0] == '\n' || !shell->buffer[0]) {
+    while (getline(&cmd, &len, stdin) != -1) {
+        if (cmd[0] == '\n' || !cmd[0])
             continue;
-        }
-        add_command_history(shell);
-        separate_all_commands(shell);
+        back_sn(cmd, shell);
     }
     return (shell->return_val);
 }
