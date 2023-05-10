@@ -24,8 +24,6 @@ void back_sn(char *cmd, shell_t *shell)
             separate_all_commands(shell);
             s = i;
         }
-        if (shell->return_val != 0 && sp_cmd)
-            break;
         if (sp_cmd)
             sp_cmd = NULL;
     }
@@ -39,6 +37,8 @@ int b_open_terminal(shell_t *shell)
     while (getline(&cmd, &len, stdin) != -1) {
         if (cmd[0] == '\n' || !cmd[0])
             continue;
+        if (cmd[strlen(cmd) - 3] == '\\' && cmd[strlen(cmd) - 2] == 'n')
+            cmd[strlen(cmd) - 3] = '\0';
         back_sn(cmd, shell);
     }
     return (shell->return_val);
