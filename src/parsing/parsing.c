@@ -35,6 +35,7 @@ void parse_pipes(char *cmd, shell_t *shell)
         stock_cmd(p_cmd[0], shell);
     for (int i = 0; p_cmd[i] && my_tablen(p_cmd) > 1; i++)
         stock_cmd(p_cmd[i], shell);
+    my_free_wordarray(p_cmd);
 }
 
 void parse_or(char *cmd, shell_t *shell)
@@ -58,6 +59,7 @@ void parse_or(char *cmd, shell_t *shell)
             o_cmd = NULL;
         }
     }
+    free(o_cmd);
 }
 
 void parse_sp(char *cmd, shell_t *shell)
@@ -92,4 +94,5 @@ void separate_all_commands(shell_t *shell)
         return;
     for (int x = 0; all_cmd[x]; x++)
         parse_sp(all_cmd[x], shell);
+    my_free_wordarray(all_cmd);
 }

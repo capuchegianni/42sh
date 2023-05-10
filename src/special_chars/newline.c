@@ -29,6 +29,7 @@ int my_newline(int c, shell_t *shell)
         add_command_history(shell);
         separate_all_commands(shell);
         display_prompt(shell, 1);
+        free(shell->buffer);
         shell->buffer = calloc(1, 1);
         shell->len = 0;
         shell->cursor_pos = 0;
