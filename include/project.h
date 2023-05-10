@@ -69,6 +69,7 @@
     // Auto completion
 
     void get_all_unix_cmds(shell_t *shell);
+    void free_cpl(auto_complete_t *cpl);
 
     // History handling
 

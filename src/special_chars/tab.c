@@ -9,19 +9,17 @@
 
 int replace_str(shell_t *shell, char **tab, int i)
 {
-    if (my_strncmp(shell->auto_cpl->name, tab[i - 1],
-    my_strlen(tab[i - 1])) == 0) {
-        if (shell->auto_cpl->id <= shell->last_id)
-            return (0);
+    if (my_strncmp(shell->cpl->name, tab[0],
+    my_strlen(tab[0])) == 0) {
         shell->old_buff = my_strdup(shell->buffer);
-        shell->last_id = shell->auto_cpl->id;
+        shell->last_id = shell->cpl->id;
         for (int i = shell->len; i > 0; i--) {
             printf("\b \b");
             shell->len--;
             shell->cursor_pos--;
             shell->buffer[i] = '\0';
         }
-        shell->buffer = my_strdup(shell->auto_cpl->name);
+        shell->buffer = my_strdup(shell->cpl->name);
         shell->len = my_strlen(shell->buffer);
         shell->cursor_pos = shell->len;
         printf("%s", shell->buffer);
@@ -34,15 +32,19 @@ void auto_complete(shell_t *shell, DIR *dir)
 {
     char **tab = my_wordarray(shell->buffer, " ");
     int i = my_tablen(tab);
-    auto_complete_t *head = shell->auto_cpl;
+    auto_complete_t *head = shell->cpl;
 
     if (shell->cursor_pos != shell->len)
         return;
-    for (; shell->auto_cpl->next; shell->auto_cpl = shell->auto_cpl->next) {
+    if (my_tablen(tab) > 1)
+        return;
+    for (; shell->cpl->id <= shell->last_id; shell->cpl = shell->cpl->next);
+    shell->cpl = shell->cpl->next;
+    for (; shell->cpl->next; shell->cpl = shell->cpl->next) {
         if (replace_str(shell, tab, i))
             break;
     }
-    shell->auto_cpl = head;
+    shell->cpl = head;
     my_free_wordarray(tab);
 }
 

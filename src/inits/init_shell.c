@@ -20,7 +20,7 @@ void init_shell_split(shell_t *shell)
     shell->last_char = 0;
     shell->cursor_pos = 0;
     shell->first_alias = NULL;
-    shell->auto_cpl = NULL;
+    shell->cpl = NULL;
     shell->arrow_v = 1;
     shell->last_id = 0;
 }

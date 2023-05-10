@@ -24,9 +24,9 @@ void node_autocpl(auto_complete_t *current, char *name, int id)
 
 void add_autocpl(shell_t *shell, char *name, int id)
 {
-    auto_complete_t *current = shell->auto_cpl;
+    auto_complete_t *current = shell->cpl;
 
-    if (!shell->auto_cpl) {
+    if (!shell->cpl) {
         init_autocpl(shell, name);
     } else {
         node_autocpl(current, name, id);

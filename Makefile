@@ -47,6 +47,7 @@ SRC = 	src/main.c											\
 		src/commands/echo/echo.c							\
 		src/options/inhibitors/escape_char.c				\
 		src/options/auto_completion/stock_cmds.c 			\
+		src/options/auto_completion/free_cpl.c 				\
 
 OBJ_DIR = ./obj/
 

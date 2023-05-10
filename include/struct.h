@@ -40,7 +40,7 @@
         int cursor_pos;
         history_t *history;
         alias_t *alias;
-        auto_complete_t *auto_cpl;
+        auto_complete_t *cpl;
         char *first_alias;
         int arrow_v;
         int last_id;
