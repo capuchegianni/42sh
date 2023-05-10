@@ -29,7 +29,7 @@
     char **init_env(char **env);
     void init_history(shell_t *shell);
     void init_alias(shell_t *shell, char *name, char *command);
-    void init_auto_cpl(shell_t *shell);
+    void init_autocpl(shell_t *shell, char *name);
 
     // Starting the terminal
 

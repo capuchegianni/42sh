@@ -24,7 +24,6 @@
 
     typedef struct auto_complete_s {
         char *name;
-        int id;
         struct auto_complete_s *next;
         struct auto_complete_s *last_cpl;
     } auto_complete_t;
