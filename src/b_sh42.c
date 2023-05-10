@@ -24,8 +24,6 @@ void back_sn(char *cmd, shell_t *shell)
             separate_all_commands(shell);
             s = i;
         }
-        if (shell->return_val != 0 && sp_cmd)
-            break;
         if (sp_cmd)
             sp_cmd = NULL;
     }

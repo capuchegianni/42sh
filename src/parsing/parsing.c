@@ -21,22 +21,20 @@ void stock_cmd(char *cmd, shell_t *shell)
 
 void parse_pipes(char *cmd, shell_t *shell)
 {
-    char *p_cmd = NULL;
+    char **p_cmd = my_wordarray(cmd, "|");
+    int pipefd[2];
 
-    for (int i = 0, s = 0; cmd[i]; i++) {
-        if (cmd[i] == '|') {
-            p_cmd = getcmd(cmd, s, i);
-            i++;
-            s = i;
-        }
-        if (i == my_strlen(cmd) - 1)
-            p_cmd = getcmd(cmd, s, i + 1);
-        if (p_cmd) {
-            stock_cmd(p_cmd, shell);
-            free(p_cmd);
-            p_cmd = NULL;
-        }
+    if (!p_cmd)
+        return;
+    if (pipe(pipefd) == -1) {
+        perror("pipe");
+        my_free_wordarray(p_cmd);
+        return;
     }
+    if (my_tablen(p_cmd) == 1)
+        stock_cmd(p_cmd[0], shell);
+    for (int i = 0; p_cmd[i] && my_tablen(p_cmd) > 1; i++)
+        stock_cmd(p_cmd[i], shell);
 }
 
 void parse_or(char *cmd, shell_t *shell)
