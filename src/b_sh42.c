@@ -37,6 +37,8 @@ int b_open_terminal(shell_t *shell)
     while (getline(&cmd, &len, stdin) != -1) {
         if (cmd[0] == '\n' || !cmd[0])
             continue;
+        if (cmd[strlen(cmd) - 3] == '\\' && cmd[strlen(cmd) - 2] == 'n')
+            cmd[strlen(cmd) - 3] = '\0';
         back_sn(cmd, shell);
     }
     return (shell->return_val);
