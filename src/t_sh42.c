@@ -23,6 +23,8 @@ int open_terminal(shell_t *shell)
             break;
         if (shell->return_val == 84)
             return (shell->return_val);
+        if (c != '\t' && c != 8 && c != 127)
+            shell->last_id = 0;
         if (scan_input(c, shell))
             continue;
         if (exclude_arrow(shell, c))

@@ -22,7 +22,7 @@ int replace_str(shell_t *shell, char **tab, int i)
             shell->buffer[i] = '\0';
         }
         shell->buffer = my_strdup(shell->auto_cpl->name);
-        shell->len = my_strlen(shell->auto_cpl->name);
+        shell->len = my_strlen(shell->buffer);
         shell->cursor_pos = shell->len;
         printf("%s", shell->buffer);
         return (1);
@@ -82,6 +82,7 @@ int my_tab(int c, shell_t *shell)
     dir = opendir(".");
     if (c == 9) {
         if (shell->len == 0) {
+            shell->last_id = 0;
             print_curr_folder(shell, dir);
             closedir(dir);
             return (1);
