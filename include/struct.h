@@ -24,14 +24,15 @@
 
     typedef struct auto_complete_s {
         char *name;
+        int id;
         struct auto_complete_s *next;
-        struct auto_complete_s *last_cpl;
     } auto_complete_t;
 
     typedef struct shell_s {
         struct termios term;
         char **env;
         char *buffer;
+        char *old_buff;
         int len;
         int return_val;
         char **cmd;
@@ -42,6 +43,7 @@
         auto_complete_t *auto_cpl;
         char *first_alias;
         int arrow_v;
+        int last_id;
     } shell_t;
 
 #endif /* !STRUCT_H_ */

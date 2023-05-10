@@ -14,4 +14,5 @@ void init_autocpl(shell_t *shell, char *name)
         return;
     shell->auto_cpl->name = strdup(name);
     shell->auto_cpl->next = NULL;
+    shell->auto_cpl->id = 0;
 }

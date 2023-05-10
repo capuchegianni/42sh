@@ -7,7 +7,7 @@
 
 #include "project.h"
 
-void node_autocpl(auto_complete_t *current, char *name)
+void node_autocpl(auto_complete_t *current, char *name, int id)
 {
     auto_complete_t *prev_auto_cpl = NULL;
 
@@ -17,18 +17,19 @@ void node_autocpl(auto_complete_t *current, char *name)
     }
     current = malloc(sizeof(auto_complete_t));
     current->name = strdup(name);
+    current->id = id;
     current->next = NULL;
     prev_auto_cpl->next = current;
 }
 
-void add_autocpl(shell_t *shell, char *name)
+void add_autocpl(shell_t *shell, char *name, int id)
 {
     auto_complete_t *current = shell->auto_cpl;
 
     if (!shell->auto_cpl) {
         init_autocpl(shell, name);
     } else {
-        node_autocpl(current, name);
+        node_autocpl(current, name, id);
     }
     shell->return_val = 0;
 }
@@ -39,20 +40,23 @@ void get_builtins(shell_t *shell)
     "alias", "unalias", "history", NULL};
 
     for (int i = 0; builtins[i]; i++)
-        add_autocpl(shell, builtins[i]);
+        add_autocpl(shell, builtins[i], i);
 }
 
 void get_all_unix_cmds(shell_t *shell)
 {
     DIR *dir;
     struct dirent *entry;
+    int id = 9;
 
     get_builtins(shell);
     dir = opendir("/usr/bin");
     if (!dir)
         return;
     while ((entry = readdir(dir))) {
-        if (entry->d_name[0] != '.')
-            add_autocpl(shell, entry->d_name);
+        if (entry->d_name[0] != '.') {
+            add_autocpl(shell, entry->d_name, id);
+            id++;
+        }
     }
 }

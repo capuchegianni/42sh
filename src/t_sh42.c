@@ -10,8 +10,6 @@
 int start_window(shell_t *shell)
 {
     get_all_unix_cmds(shell);
-    for (; shell->auto_cpl->next; shell->auto_cpl = shell->auto_cpl->next)
-        printf(": %s\n", shell->auto_cpl->name);
     display_prompt(shell, 0);
     shell->buffer = calloc(1, 1);
     return (0);
