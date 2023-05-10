@@ -29,6 +29,7 @@
     char **init_env(char **env);
     void init_history(shell_t *shell);
     void init_alias(shell_t *shell, char *name, char *command);
+    void init_auto_cpl(shell_t *shell);
 
     // Starting the terminal
 
@@ -64,6 +65,10 @@
     int execve_handling(shell_t *shell);
     void get_exceptions(int p, shell_t *shell);
     void print_exec_errs(shell_t *shell);
+
+    // Auto completion
+
+    void get_all_unix_cmds(shell_t *shell);
 
     // History handling
 

@@ -7,24 +7,36 @@
 
 #include "project.h"
 
+int replace_str(shell_t *shell, char **tab, int i)
+{
+    if (my_strncmp(shell->auto_cpl->name, tab[i - 1],
+    my_strlen(tab[i - 1])) == 0) {
+        shell->buffer = my_strcat(shell->buffer,
+        shell->auto_cpl->name + my_strlen(tab[i - 1]));
+        printf("%s", shell->auto_cpl->name + my_strlen(tab[i - 1]));
+        shell->len += my_strlen(shell->auto_cpl->name + my_strlen(tab[i - 1]));
+        shell->cursor_pos += my_strlen(shell->auto_cpl->name +
+        my_strlen(tab[i - 1]));
+        return (1);
+    }
+    return (0);
+}
+
 void auto_complete(shell_t *shell, DIR *dir)
 {
-    struct dirent *dp;
     char **tab = my_wordarray(shell->buffer, " ");
     int i = my_tablen(tab);
+    auto_complete_t *first_cmd = shell->auto_cpl;
 
     if (shell->cursor_pos != shell->len)
         return;
-    while ((dp = readdir(dir))) {
-        if (my_strncmp(dp->d_name, tab[i - 1], my_strlen(tab[i - 1])) == 0) {
-            shell->buffer = my_strcat(shell->buffer,
-            dp->d_name + my_strlen(tab[i - 1]));
-            printf("%s", dp->d_name + my_strlen(tab[i - 1]));
-            shell->len += my_strlen(dp->d_name + my_strlen(tab[i - 1]));
-            shell->cursor_pos += my_strlen(dp->d_name + my_strlen(tab[i - 1]));
+    shell->auto_cpl = shell->auto_cpl->next;
+    for (; shell->auto_cpl->next; shell->auto_cpl = shell->auto_cpl->next) {
+        if (replace_str(shell, tab, i))
             break;
-        }
     }
+    shell->auto_cpl->last_cpl = shell->auto_cpl;
+    shell->auto_cpl = first_cmd;
     my_free_wordarray(tab);
 }
 

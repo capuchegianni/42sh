@@ -22,6 +22,13 @@
         struct alias_s *next;
     } alias_t;
 
+    typedef struct auto_complete_s {
+        char *name;
+        int id;
+        struct auto_complete_s *next;
+        struct auto_complete_s *last_cpl;
+    } auto_complete_t;
+
     typedef struct shell_s {
         struct termios term;
         char **env;
@@ -33,6 +40,7 @@
         int cursor_pos;
         history_t *history;
         alias_t *alias;
+        auto_complete_t *auto_cpl;
         char *first_alias;
         int arrow_v;
     } shell_t;
