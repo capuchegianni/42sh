@@ -20,7 +20,7 @@ void stock_cmd(char *cmd, shell_t *shell)
         if (check_cmd(shell) != 1)
             execve_handling(shell);
         if (red == 1)
-        close_red(shell);
+            close_red(shell);
     }
 }
 
