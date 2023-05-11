@@ -9,13 +9,13 @@
 
 int red_input(shell_t *shell, int index)
 {
-    FILE *fd = fopen(shell->cmd[index], "r");
+    shell->red = fopen(shell->cmd[index], "r");
     char buffer[1000];
 
-    if (fd == NULL)
+    if (shell->red == NULL)
         return 0;
-    while (fgets(buffer, 1000, fd))
+    while (fgets(buffer, 1000, shell->red))
         my_printf("%s", buffer);
-    shell->red = fd;
+    shell->red = shell->red;
     return 1;
 }
