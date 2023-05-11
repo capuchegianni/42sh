@@ -22,6 +22,8 @@ void detect_backslash(shell_t *shell, int i, int j)
             shell->cmd[i][j] = '\b';
         if (shell->cmd[i][j + 1] == 'r')
             shell->cmd[i][j] = '\r';
+        if (shell->cmd[i][j + 1] == 'e')
+            shell->cmd[i][j] = '\e';
         for (; shell->cmd[i][k + 2]; k++)
             shell->cmd[i][k + 1] = shell->cmd[i][k + 2];
         shell->cmd[i][k + 1] = '\0';

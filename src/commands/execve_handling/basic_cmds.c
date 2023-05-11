@@ -67,23 +67,24 @@ int check_all_paths(shell_t *shell)
 
 int execve_handling(shell_t *shell)
 {
-    pid_t pid = fork();
+    pid_t pid;
+    int in = STDIN_FILENO;
+    int fd[2];
 
+    if (pipe(fd) == -1) {
+        dprintf(2, "Pipe: %s\n", strerror(errno));
+        return (shell->return_val = 84);
+    }
+    pid = fork();
     if (pid == -1) {
         dprintf(2, "fork: %s.\n", strerror(errno));
-        return (shell->return_val) = 84;
+        return (shell->return_val = 84);
     }
     if (pid == 0) {
-        check_all_paths(shell);
-        if (shell->return_val != 0)
-            exit(shell->return_val);
+        child_process(shell, in, fd);
     } else {
-        if (wait(&pid) == -1) {
-            dprintf(2, "wait: %s.\n", strerror(errno));
+        if (parent_process(shell, in, fd, pid) == 84)
             return (shell->return_val = 84);
-        }
-        shell->return_val = WEXITSTATUS(pid);
-        get_exceptions(pid, shell);
     }
     return (shell->return_val);
 }
