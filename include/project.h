@@ -13,6 +13,7 @@
     #include <dirent.h>
     #include <time.h>
     #include "struct.h"
+    #include <stdio.h>
 
     // defines
 
