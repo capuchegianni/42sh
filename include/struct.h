@@ -44,6 +44,7 @@
         char *first_alias;
         int arrow_v;
         int last_id;
+        FILE *red;
     } shell_t;
 
 #endif /* !STRUCT_H_ */

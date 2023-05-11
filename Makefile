@@ -45,6 +45,9 @@ SRC = 	src/main.c											\
 		src/commands/execve_handling/errors_printing.c 		\
 		src/commands/exit/exit.c 							\
 		src/commands/echo/echo.c							\
+		src/parsing/redirection/redirection.c				\
+		src/parsing/redirection/file_red.c					\
+		src/parsing/redirection/red_input.c					\
 		src/options/inhibitors/escape_char.c				\
 		src/options/auto_completion/stock_cmds.c 			\
 		src/options/auto_completion/free_cpl.c 				\
