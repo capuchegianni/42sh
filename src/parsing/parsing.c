@@ -40,6 +40,7 @@ void parse_pipes(char *cmd, shell_t *shell)
         shell->pipe->first_cmd = 0;
         shell->pipe->last_cmd = 0;
     }
+    my_free_wordarray(p_cmd);
 }
 
 void parse_or(char *cmd, shell_t *shell)
@@ -63,6 +64,7 @@ void parse_or(char *cmd, shell_t *shell)
             o_cmd = NULL;
         }
     }
+    free(o_cmd);
 }
 
 void parse_sp(char *cmd, shell_t *shell)
@@ -97,4 +99,5 @@ void separate_all_commands(shell_t *shell)
         return;
     for (int x = 0; all_cmd[x]; x++)
         parse_sp(all_cmd[x], shell);
+    my_free_wordarray(all_cmd);
 }
