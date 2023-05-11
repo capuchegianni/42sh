@@ -14,6 +14,7 @@ SRC = 	src/main.c											\
 		src/inits/init_env.c 								\
 		src/inits/init_history.c 							\
 		src/inits/init_alias.c 								\
+		src/inits/init_auto_completion.c 					\
 		src/special_chars/add_char.c 						\
 		src/special_chars/arrow.c 							\
 		src/special_chars/newline.c 						\
@@ -48,6 +49,8 @@ SRC = 	src/main.c											\
 		src/parsing/redirection/file_red.c					\
 		src/parsing/redirection/red_input.c					\
 		src/options/inhibitors/escape_char.c				\
+		src/options/auto_completion/stock_cmds.c 			\
+		src/options/auto_completion/free_cpl.c 				\
 
 OBJ_DIR = ./obj/
 

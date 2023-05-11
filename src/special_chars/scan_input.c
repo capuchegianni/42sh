@@ -7,8 +7,19 @@
 
 #include "project.h"
 
+int skipping(int c)
+{
+    if (c >= 1 && c <= 7)
+        return (1);
+    if (c >= 11 && c <= 31)
+        return (1);
+    return (0);
+}
+
 int scan_input(int c, shell_t *shell)
 {
+    if (skipping(c) == 1)
+        return (1);
     if (my_newline(c, shell) == 1)
         return (1);
     if (my_delete(c, shell) == 1)

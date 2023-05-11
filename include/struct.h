@@ -22,10 +22,17 @@
         struct alias_s *next;
     } alias_t;
 
+    typedef struct auto_complete_s {
+        char *name;
+        int id;
+        struct auto_complete_s *next;
+    } auto_complete_t;
+
     typedef struct shell_s {
         struct termios term;
         char **env;
         char *buffer;
+        char *old_buff;
         int len;
         int return_val;
         char **cmd;
@@ -33,8 +40,10 @@
         int cursor_pos;
         history_t *history;
         alias_t *alias;
+        auto_complete_t *cpl;
         char *first_alias;
         int arrow_v;
+        int last_id;
         FILE *red;
     } shell_t;
 
