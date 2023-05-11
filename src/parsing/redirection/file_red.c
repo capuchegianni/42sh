@@ -9,23 +9,38 @@
 
 void close_red(shell_t *shell)
 {
-    fclose(shell->red);
+    if (shell->red != NULL)
+        freopen("/dev/tty", "w", stdout);;
+    shell->red = NULL;
+}
+
+void save_file(shell_t *shell, int index)
+{
+    FILE *fd = fopen(shell->cmd[index], "r");
+    size_t size;
+    char *buffer = NULL;
+
+    while (getline(&buffer, &size, fd) != -1)
+        my_printf("%s", buffer);
+    fclose(fd);
 }
 
 int op_file(shell_t *shell, int index)
 {
-    FILE *fd = freopen(shell->cmd[index], "w", stdout);
+    char var[1];
 
-    if (fd == NULL) {
-        fd = fopen(shell->cmd[index], "w");
-        if (fd == NULL)
+    if (my_strlen(shell->cmd[index - 1]) == 2)
+        var[0] = 'a';
+    else
+        var[0] = 'w';
+    shell->red = freopen(shell->cmd[index], var, stdout);
+    if (shell->red == NULL) {
+        shell->red = fopen(shell->cmd[index], var);
+        if (shell->red == NULL)
             return 0;
-        fclose(fd);
     }
-    fd = freopen(shell->cmd[index], "w", stdout);
-    if (fd == NULL)
-        return 0;
-    shell->red = fd;
+    shell->cmd[index - 1] = NULL;
+    shell->cmd[index] = NULL;
     return 1;
 }
 
