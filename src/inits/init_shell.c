@@ -28,6 +28,7 @@ void init_shell_split(shell_t *shell)
 shell_t *init_shell(shell_t *shell, struct termios old_term)
 {
     shell = malloc(sizeof(shell_t));
+    shell->pipe = malloc(sizeof(pipe_handling_t));
     init_shell_split(shell);
     if (isatty(0)) {
         tcgetattr(0, &old_term);

@@ -28,6 +28,12 @@
         struct auto_complete_s *next;
     } auto_complete_t;
 
+    typedef struct pipe_handling_s {
+        int first_cmd;
+        int last_cmd;
+        int is_pipe;
+    } pipe_handling_t;
+
     typedef struct shell_s {
         struct termios term;
         char **env;
@@ -41,6 +47,7 @@
         history_t *history;
         alias_t *alias;
         auto_complete_t *cpl;
+        pipe_handling_t *pipe;
         char *first_alias;
         int arrow_v;
         int last_id;
