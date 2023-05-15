@@ -31,7 +31,7 @@ void print_usr(shell_t *shell, int n)
     char *usr = my_getenv(shell->env, "USER");
 
     if (usr == NULL)
-        usr = "";
+        usr = calloc(1, 1);
     if (n == 1)
         printf("\n");
     printf("┌──(%s%s%s)-%s[%s", BLUE, usr, RESET, YELLOW, RESET);

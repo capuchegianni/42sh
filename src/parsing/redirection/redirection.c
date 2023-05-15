@@ -38,7 +38,9 @@ int redirection(shell_t *shell)
     int nb_red = 0;
     int index = 0;
 
-    for (int i = 0; shell->cmd[i] != NULL; i++) {
+    if (!shell->cmd)
+        return 0;
+    for (int i = 0; shell->cmd[i]; i++) {
         if (find_spe_char(shell, i) != 0) {
             index = i;
             nb_red++;
