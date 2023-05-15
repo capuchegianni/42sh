@@ -13,7 +13,6 @@
     #include <dirent.h>
     #include <time.h>
     #include "struct.h"
-    #include <stdio.h>
 
     // defines
 
@@ -64,8 +63,11 @@
     // Execve handling
 
     int execve_handling(shell_t *shell);
+    int check_all_paths(shell_t *shell);
     void get_exceptions(int p, shell_t *shell);
     void print_exec_errs(shell_t *shell);
+    void child_process(shell_t *shell, int in, int fd[2]);
+    int parent_process(shell_t *shell, int in, int fd[2], pid_t pid);
 
     // Auto completion
 

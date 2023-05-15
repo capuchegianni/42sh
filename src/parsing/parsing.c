@@ -27,19 +27,24 @@ void stock_cmd(char *cmd, shell_t *shell)
 void parse_pipes(char *cmd, shell_t *shell)
 {
     char **p_cmd = my_wordarray(cmd, "|");
-    int pipefd[2];
 
     if (!p_cmd)
         return;
-    if (pipe(pipefd) == -1) {
-        perror("pipe");
-        my_free_wordarray(p_cmd);
-        return;
-    }
+    shell->pipe->is_pipe = 0;
+    shell->pipe->first_cmd = 0;
+    shell->pipe->last_cmd = 0;
     if (my_tablen(p_cmd) == 1)
         stock_cmd(p_cmd[0], shell);
-    for (int i = 0; p_cmd[i] && my_tablen(p_cmd) > 1; i++)
+    for (int i = 0; p_cmd[i] && my_tablen(p_cmd) > 1; i++) {
+        shell->pipe->is_pipe = 1;
+        if (i == 0)
+            shell->pipe->first_cmd = 1;
+        if (i == my_tablen(p_cmd) - 1)
+            shell->pipe->last_cmd = 1;
         stock_cmd(p_cmd[i], shell);
+        shell->pipe->first_cmd = 0;
+        shell->pipe->last_cmd = 0;
+    }
     my_free_wordarray(p_cmd);
 }
 
