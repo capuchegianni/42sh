@@ -35,12 +35,13 @@ int b_open_terminal(shell_t *shell)
     char *cmd = NULL;
 
     while (getline(&cmd, &len, stdin) != -1) {
-        if (cmd[0] == '\n' || !cmd[0])
+        if (cmd[0] == '\n' || !cmd[0] || cmd[0] == '\t')
             continue;
         if (cmd[strlen(cmd) - 3] == '\\' && cmd[strlen(cmd) - 2] == 'n')
             cmd[strlen(cmd) - 3] = '\0';
         back_sn(cmd, shell);
     }
+    free(cmd);
     return (shell->return_val);
 }
 
