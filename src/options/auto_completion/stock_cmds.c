@@ -59,4 +59,5 @@ void get_all_unix_cmds(shell_t *shell)
             id++;
         }
     }
+    closedir(dir);
 }
