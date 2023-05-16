@@ -19,7 +19,7 @@ int open_terminal(shell_t *shell)
 {
     start_window(shell);
     for (int c = 0; (c = getchar());) {
-        if (c == 4)
+        if (c == 4 || c == 3)
             break;
         if (shell->return_val == 84)
             return (shell->return_val);
