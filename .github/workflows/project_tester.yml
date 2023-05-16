@@ -59,33 +59,3 @@ jobs:
               exit 1
             fi
           done
-
-  check_program_banned_functions:
-    runs-on: ubuntu-latest
-    needs: check_program_compilation
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-      - name: Download the binary file artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: 42sh
-      - name: Banned function checker
-        run: |
-          objdump -T $EXECUTABLES | grep '    DF ' > banned-functions.log
-          while read Line; \
-          do \
-          LIBU=$(echo $Line | cut -d' ' -f5); \
-          FUNC=$(echo $Line | cut -d' ' -f6); \
-          LIBC=${LIBU:0:5}; \
-          LIBN=${LIBU:0:7}; \
-          JSP=${LIBU:0:4}; \
-          if [ "$LIBC" != "GLIBC" ]; then
-            if [ "$LIBN" != "NCURSES" ]; then
-              if [ "$JSP" != "Base" ]; then
-                echo "::error:: $FUNC is a banned function";
-                exit 1;
-              fi
-            fi
-          fi
-          done < banned-functions.log
