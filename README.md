@@ -18,6 +18,7 @@
 - [🧐 About ](#-about-)
 - [💻 Features ](#-features-)
 - [➕ To be added ](#-to-be-added-)
+- [🤖 Tester ](#-tester-)
 - [📆 Conclusion ](#-conclusion-)
 - [✍️ Authors ](#️-authors-)
 
@@ -60,6 +61,10 @@ We achieved to implement a lot of features in this project:
   - Globbings (\*, ? or !)
   - Improve our inhibitors (only detect basic characters as \n or \t for example)
   - Local variables
+
+## 🤖 Tester <a name="tester"></a>
+
+In the repository you can find a <b>tests</b> folder that will help you testing your project. This is the tester given by Epitech but with more tests availables. I also changed the tester.sh file to be more efficient but I'm not the best with scripting so do not hesitate to make it further!
 
 ## 📆 Conclusion <a name="conclusion"></a>
 
