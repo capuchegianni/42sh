@@ -3,12 +3,12 @@
  <img width=200px height=200px src="https://fymyte.com/pictures/unix_shell.png" alt="Project logo"></a>
 </p>
 
-<h3 align="center">42sh - Shell Programming</h3>
+<h3 align="center"><strong>42sh</strong> - Shell Programming</h3>
 
 ---
 
 <p align="center"> 
-    42sh is one of the three big projects ending the 1st year at Epitech. It follows the Minishell 1 and 2 that were introducing us to the baiscs of a shell.
+    <strong>42sh</strong> is one of the three big projects ending the 1st year at Epitech. It follows the Minishell 1 and 2 that were introducing us to the baiscs of a shell.
     <br> 
 </p>
 
